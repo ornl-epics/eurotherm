@@ -25,6 +25,7 @@ record(ai, "$(S):SE:Loop$(L):Output:High")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
+  field(PREC, "1")
 }
 
 record(ai, "$(S):SE:Loop$(L):Output:Low")
@@ -35,6 +36,7 @@ record(ai, "$(S):SE:Loop$(L):Output:Low")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
+  field(PREC, "1")
 }
 
 record(ai, "$(S):SE:Loop$(L):Output:Rate")
@@ -45,6 +47,7 @@ record(ai, "$(S):SE:Loop$(L):Output:Rate")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
+  field(PREC, "1")
 }
 
 record(ai, "$(S):SE:Loop$(L):Output:Manual")
@@ -55,43 +58,41 @@ record(ai, "$(S):SE:Loop$(L):Output:Manual")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
+  field(PREC, "1")
 }
 
 ############################################################
 # Write records
 ############################################################
 
-# NOTE: this didn't work in testing
 record(ao, "$(S):SE:Loop$(L):Output:HighSet")
 {
   field(DESC, "Set Loop$(L) Output High")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,0,1)")
-  field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
+  field(PREC, "1")
 }
 
-# NOTE: this didn't work in testing
 record(ao, "$(S):SE:Loop$(L):Output:LowSet")
 {
   field(DESC, "Set Loop$(L) Output Low")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,1,1)")
-  field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
+  field(PREC, "1")
 }
 
-# NOTE: this didn't work in testing
 record(ao, "$(S):SE:Loop$(L):Output:RateSet")
 {
   field(DESC, "Set Loop$(L) Output Rate")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,3,1)")
-  field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
+  field(PREC, "1")
 }
 
 record(ao, "$(S):SE:Loop$(L):Output:ManualSet")
@@ -101,5 +102,6 @@ record(ao, "$(S):SE:Loop$(L):Output:ManualSet")
   field(OUT, "@asyn($(PORT)w,19,1)")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
+  field(PREC, "1")
 }
 
