@@ -1,0 +1,59 @@
+
+#############################################################
+#
+# Database template to read and write loop 1 or 2 variables from the 
+# eurotherm nanodac.  
+# 
+# S - base PV name
+# L - loop number
+# PORT - asyn port name for loop data
+# PV_OFFSET - word offset for $(PORT) to read the PV
+# SP_OFFSET - word offset for $(PORT) to read the setpoint
+# AUTO_OFFSET - word offset for $(PORT) to read the auto/man setting
+# OUTPUT_OFFSET - word offset for $(PORT) to read the working output
+#
+############################################################
+
+record(ai, "$(S):SE:Loop$(L):PV")
+{
+  field(DESC, "Loop$(L) Process Variable")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(PV_OFFSET),1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+
+record(ai, "$(S):SE:Loop$(L):SP")
+{
+  field(DESC, "Loop$(L) Process Variable")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(SP_OFFSET),1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+
+record(bi, "$(S):SE:Loop$(L):Auto")
+{
+  field(DESC, "Loop$(L) Auto/Man")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(AUTO_OFFSET),1)")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "Auto")
+  field(ONAM, "Manual")
+}
+
+record(ai, "$(S):SE:Loop$(L):Output")
+{
+  field(DESC, "Loop$(L) Output")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(OUTPUT_OFFSET),1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+
+
+
+

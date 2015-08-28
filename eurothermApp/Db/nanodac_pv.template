@@ -10,7 +10,6 @@
 # C - channel name
 # PORT - asyn port name for channel data
 # PORT_RES - asyn port name for the PV resolution 
-# PORT_STR - asyn port name for the PV desc and units strings
 # PV_OFFSET - word offset for $(PORT) to read the PV
 # STAT_OFFSET - word offset for $(PORT) to read the status
 # ALARM1_OFFSET - word offset for $(PORT) to read the alarm1

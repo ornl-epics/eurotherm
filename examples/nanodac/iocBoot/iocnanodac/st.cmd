@@ -56,6 +56,12 @@ drvModbusAsynConfigure("n1vch4res", "n1ip", 1, 4, 7554, 1, 4, 10000, 0)
 drvModbusAsynConfigure("n1vch5res", "n1ip", 1, 4, 7682, 1, 4, 10000, 0)
 drvModbusAsynConfigure("n1vch6res", "n1ip", 1, 4, 7810, 1, 4, 10000, 0)
 
+# Read the loop 1 params
+drvModbusAsynConfigure("n1loop1", "n1ip", 1, 4, 512, 6, 4, 1000, 0)
+# Read the loop 2 params
+#drvModbusAsynConfigure("n1loop2", "n1ip", 1, 4, 640, 6, 4, 1000, 0)
+
+
 ####################################################################
 
 ## Load record instances
