@@ -26,7 +26,7 @@ drvAsynIPPortConfigure("n1ip","192.168.200.177:502",0,0,1)
 # arg 2: linkType
 # arg 3: timeoutMsec
 # arg 4: writeDelayMsec
-modbusInterposeConfig("n1ip", 0, 2000, 0)
+modbusInterposeConfig("n1ip", 0, 2000, 100)
 
 # drvModbusAsynConfigure
 # arg 1: portName

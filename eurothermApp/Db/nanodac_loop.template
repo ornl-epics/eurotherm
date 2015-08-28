@@ -26,9 +26,19 @@ record(ai, "$(S):SE:Loop$(L):PV")
 
 record(ai, "$(S):SE:Loop$(L):SP")
 {
-  field(DESC, "Loop$(L) Process Variable")
+  field(DESC, "Loop$(L) Setpoint")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),$(SP_OFFSET),1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+
+record(ai, "$(S):SE:Loop$(L):WSP")
+{
+  field(DESC, "Loop$(L) Working Setpoint")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(WSP_OFFSET),1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
