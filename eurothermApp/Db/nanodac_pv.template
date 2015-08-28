@@ -1,0 +1,46 @@
+
+#############################################################
+#
+# Database template to read a 2s compliment 16 bit number
+# from the eurotherm nanoDac with a decimal point read
+# from another register.
+# 
+# S - base PV name 
+#
+############################################################
+
+record(ai, "$(S):SE:CH1:PV")
+{
+  field(DESC, "Process Variable CH1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn(n1,0,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+}
+
+record(ai, "$(S):SE:CH1:PV_Res")
+{
+  field(DESC, "Process Variable CH1 Res")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn(n1R,0,1)")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "$(S):SE:CH1:PV_ResSetCalc")
+}
+
+record(calcout, "$(S):SE:CH1:PV_ResSetCalc")
+{
+  field(INPA, "$(S):SE:CH1:PV_Res.VAL NPP MS")
+  field(CALC, "1/(10**A)")
+  field(OUT, "$(S):SE:CH1:PV.ESLO PP")
+  field(FLNK, "$(S):SE:CH1:PV_ResSetPrec")
+}
+
+record(dfanout, "$(S):SE:CH1:PV_ResSetPrec")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S):SE:CH1:PV_Res.VAL NPP MS")
+  field(OUTA, "$(S):SE:CH1:PV.PREC PP")
+}
+
+
+
