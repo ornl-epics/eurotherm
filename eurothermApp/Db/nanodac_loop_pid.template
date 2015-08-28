@@ -58,6 +58,27 @@ record(ai, "$(S):SE:Loop$(L):PID:PB1")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S):SE:Loop$(L):PID:Ti1")
+{
+  field(DESC, "Loop$(L) Ti1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),7,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
+}
+
+record(ai, "$(S):SE:Loop$(L):PID:Td1")
+{
+  field(DESC, "Loop$(L) Td1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),8,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
 }
 
 ############################################################
@@ -100,6 +121,25 @@ record(ao, "$(S):SE:Loop$(L):PID:PB1Set")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S):SE:Loop$(L):PID:Ti1Set")
+{
+  field(DESC, "Set Loop$(L) Ti1")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,7,1)")
+  field(PREC, "0")
+  field(EGU, "sec")
+}
+
+record(ao, "$(S):SE:Loop$(L):PID:Td1Set")
+{
+  field(DESC, "Set Loop$(L) Td1")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,8,1)")
+  field(PREC, "0")
+  field(EGU, "sec")
 }
 
 

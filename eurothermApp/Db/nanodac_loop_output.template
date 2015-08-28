@@ -26,6 +26,7 @@ record(ai, "$(S):SE:Loop$(L):Output:High")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  field(EGU, "%")
 }
 
 record(ai, "$(S):SE:Loop$(L):Output:Low")
@@ -37,6 +38,7 @@ record(ai, "$(S):SE:Loop$(L):Output:Low")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  field(EGU, "%")
 }
 
 record(ai, "$(S):SE:Loop$(L):Output:Rate")
@@ -59,6 +61,7 @@ record(ai, "$(S):SE:Loop$(L):Output:Manual")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  field(EGU, "%")
 }
 
 ############################################################
@@ -73,6 +76,7 @@ record(ao, "$(S):SE:Loop$(L):Output:HighSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  field(EGU, "%")
 }
 
 record(ao, "$(S):SE:Loop$(L):Output:LowSet")
@@ -83,6 +87,7 @@ record(ao, "$(S):SE:Loop$(L):Output:LowSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  field(EGU, "%")
 }
 
 record(ao, "$(S):SE:Loop$(L):Output:RateSet")
@@ -103,5 +108,6 @@ record(ao, "$(S):SE:Loop$(L):Output:ManualSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  field(EGU, "%")
 }
 
