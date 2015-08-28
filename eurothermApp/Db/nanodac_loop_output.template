@@ -5,6 +5,7 @@
 # for the eurotherm nanodac.  
 # 
 # S - base PV name
+# ND - name for this nanodac
 # L - loop number
 # PORT - asyn port name for loop output data
 #
@@ -17,7 +18,7 @@
 # Read records
 ############################################################
 
-record(ai, "$(S):SE:Loop$(L):Output:High")
+record(ai, "$(S)$(ND)Loop$(L):Output:High")
 {
   field(DESC, "Loop$(L) Output High")
   field(DTYP, "asynInt32")
@@ -29,7 +30,7 @@ record(ai, "$(S):SE:Loop$(L):Output:High")
   field(EGU, "%")
 }
 
-record(ai, "$(S):SE:Loop$(L):Output:Low")
+record(ai, "$(S)$(ND)Loop$(L):Output:Low")
 {
   field(DESC, "Loop$(L) Output Low")
   field(DTYP, "asynInt32")
@@ -41,7 +42,7 @@ record(ai, "$(S):SE:Loop$(L):Output:Low")
   field(EGU, "%")
 }
 
-record(ai, "$(S):SE:Loop$(L):Output:Rate")
+record(ai, "$(S)$(ND)Loop$(L):Output:Rate")
 {
   field(DESC, "Loop$(L) Output Rate")
   field(DTYP, "asynInt32")
@@ -52,7 +53,7 @@ record(ai, "$(S):SE:Loop$(L):Output:Rate")
   field(PREC, "1")
 }
 
-record(ai, "$(S):SE:Loop$(L):Output:Manual")
+record(ai, "$(S)$(ND)Loop$(L):Output:Manual")
 {
   field(DESC, "Loop$(L) Output Man Setting")
   field(DTYP, "asynInt32")
@@ -68,7 +69,7 @@ record(ai, "$(S):SE:Loop$(L):Output:Manual")
 # Write records
 ############################################################
 
-record(ao, "$(S):SE:Loop$(L):Output:HighSet")
+record(ao, "$(S)$(ND)Loop$(L):Output:HighSet")
 {
   field(DESC, "Set Loop$(L) Output High")
   field(DTYP, "asynInt32")
@@ -79,7 +80,7 @@ record(ao, "$(S):SE:Loop$(L):Output:HighSet")
   field(EGU, "%")
 }
 
-record(ao, "$(S):SE:Loop$(L):Output:LowSet")
+record(ao, "$(S)$(ND)Loop$(L):Output:LowSet")
 {
   field(DESC, "Set Loop$(L) Output Low")
   field(DTYP, "asynInt32")
@@ -90,7 +91,7 @@ record(ao, "$(S):SE:Loop$(L):Output:LowSet")
   field(EGU, "%")
 }
 
-record(ao, "$(S):SE:Loop$(L):Output:RateSet")
+record(ao, "$(S)$(ND)Loop$(L):Output:RateSet")
 {
   field(DESC, "Set Loop$(L) Output Rate")
   field(DTYP, "asynInt32")
@@ -100,7 +101,7 @@ record(ao, "$(S):SE:Loop$(L):Output:RateSet")
   field(PREC, "1")
 }
 
-record(ao, "$(S):SE:Loop$(L):Output:ManualSet")
+record(ao, "$(S)$(ND)Loop$(L):Output:ManualSet")
 {
   field(DESC, "Set Loop$(L) Output Man Setting")
   field(DTYP, "asynInt32")

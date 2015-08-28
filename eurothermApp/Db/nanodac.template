@@ -1,0 +1,22 @@
+
+############################################################
+#
+# Top level nanodac template.
+#
+# S - base PV name
+# ND - PV name for this Nanodac
+# PORT - asyn port name for IP port (not modbus port name)
+#
+############################################################
+
+# ///
+# /// Generic Asyn record.
+# /// Not useful to modbus params, but we can see the 
+# /// socket connect status via the CNCT field
+# ///
+record(asyn,"$(S)$(ND)Asyn")
+{
+    field(DTYP,"asynRecordDevice")
+    field(PORT,"$(PORT)")
+    field(ADDR,"0")
+}

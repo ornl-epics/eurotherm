@@ -5,6 +5,7 @@
 # for the eurotherm nanodac.  
 # 
 # S - base PV name
+# ND - name for this nanodac
 # L - loop number
 # PORT - asyn port name for loop main data
 #
@@ -17,7 +18,7 @@
 # Read records
 ############################################################
 
-record(ai, "$(S):SE:Loop$(L):PV")
+record(ai, "$(S)$(ND)Loop$(L):PV")
 {
   field(DESC, "Loop$(L) Process Variable")
   field(DTYP, "asynInt32")
@@ -28,7 +29,7 @@ record(ai, "$(S):SE:Loop$(L):PV")
   field(PREC, "1")
 }
 
-record(ai, "$(S):SE:Loop$(L):SP")
+record(ai, "$(S)$(ND)Loop$(L):SP")
 {
   field(DESC, "Loop$(L) Setpoint")
   field(DTYP, "asynInt32")
@@ -39,7 +40,7 @@ record(ai, "$(S):SE:Loop$(L):SP")
   field(PREC, "1")
 }
 
-record(ai, "$(S):SE:Loop$(L):WSP")
+record(ai, "$(S)$(ND)Loop$(L):WSP")
 {
   field(DESC, "Loop$(L) Working Setpoint")
   field(DTYP, "asynInt32")
@@ -50,7 +51,7 @@ record(ai, "$(S):SE:Loop$(L):WSP")
   field(PREC, "1")
 }
 
-record(bi, "$(S):SE:Loop$(L):Auto")
+record(bi, "$(S)$(ND)Loop$(L):Auto")
 {
   field(DESC, "Loop$(L) Auto/Man")
   field(DTYP, "asynInt32")
@@ -60,7 +61,7 @@ record(bi, "$(S):SE:Loop$(L):Auto")
   field(ONAM, "Manual")
 }
 
-record(ai, "$(S):SE:Loop$(L):Output")
+record(ai, "$(S)$(ND)Loop$(L):Output")
 {
   field(DESC, "Loop$(L) Output")
   field(DTYP, "asynInt32")
@@ -75,7 +76,7 @@ record(ai, "$(S):SE:Loop$(L):Output")
 # Write records
 ############################################################
 
-record(ao, "$(S):SE:Loop$(L):SPSet")
+record(ao, "$(S)$(ND)Loop$(L):SPSet")
 {
   field(DESC, "Set Loop$(L) Setpoint")
   field(DTYP, "asynInt32")
