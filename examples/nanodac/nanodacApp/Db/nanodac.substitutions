@@ -30,4 +30,5 @@ file nanodac_loop.db
 {
 pattern {S, L, PORT, PV_OFFSET, SP_OFFSET, AUTO_OFFSET, OUTPUT_OFFSET}
 	{BL99, 1, n1loop1, 0, 2, 1, 4}
+	{BL99, 2, n1loop2, 0, 2, 1, 4}
 }
