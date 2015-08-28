@@ -75,6 +75,16 @@ drvModbusAsynConfigure("n1l1ow", "n1ip", 1, 6, 5741, 36, 4, 1000, 0)
 # Write function for loop 2 output params
 drvModbusAsynConfigure("n1l2ow", "n1ip", 1, 6, 5997, 36, 4, 1000, 0)
 
+# Read functions for loop 1 PID params (5685 to )
+drvModbusAsynConfigure("n1l1p", "n1ip", 1, 4, 5685, 1, 4, 1000, 0)
+# Read functions for loop 2 PID params (5941 to )
+drvModbusAsynConfigure("n1l2p", "n1ip", 1, 4, 5941, 1, 4, 1000, 0)
+# Write function for loop 1 PID params
+drvModbusAsynConfigure("n1l1pw", "n1ip", 1, 6, 5685, 1, 4, 1000, 0)
+# Write function for loop 2 PID params
+drvModbusAsynConfigure("n1l2pw", "n1ip", 1, 6, 5941, 1, 4, 1000, 0)
+
+
 ####################################################################
 
 ## Load record instances

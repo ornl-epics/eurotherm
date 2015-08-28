@@ -40,4 +40,11 @@ pattern {S, L, PORT}
 	{BL99, 2, n1l2o}
 }
 
+file nanodac_loop_pid.db
+{
+pattern {S, L, PORT}
+	{BL99, 1, n1l1p}
+	{BL99, 2, n1l2p}
+}
+
 

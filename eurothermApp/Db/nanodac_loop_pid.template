@@ -1,0 +1,69 @@
+
+#############################################################
+#
+# Database template to read and write loop PID variables 
+# for the eurotherm nanodac. The PID set parameters
+# are dealt with in a seperate template, instantiated in
+# this one.
+# 
+# S - base PV name
+# L - loop number
+# PORT - asyn port name for loop PID data
+#
+# Note: By convention the port name for the writeable parameters
+# is the same as the read parameters, but with a 'w' on the end.
+# 
+############################################################
+
+############################################################
+# Read records
+############################################################
+
+record(mbbi, "$(S):SE:Loop$(L):PID:Type")
+{
+  field(DESC, "Loop$(L) PID Type")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),0,1)")
+  field(SCAN, "I/O Intr")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(ZRST, "Off")
+  field(ONST, "Set")
+  field(TWST, "Setpoint")
+  field(THST, "PV")
+  field(FRST, "Error")
+  field(FVST, "Output")
+  field(SXST, "Remote")
+}
+
+############################################################
+# Write records
+############################################################
+
+record(mbbo, "$(S):SE:Loop$(L):PID:TypeSet")
+{
+  field(DESC, "Set Loop$(L) PID Type")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,0,1)")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(ZRST, "Off")
+  field(ONST, "Set")
+  field(TWST, "Setpoint")
+  field(THST, "PV")
+  field(FRST, "Error")
+  field(FVST, "Output")
+  field(SXST, "Remote")  
+}
+
+
