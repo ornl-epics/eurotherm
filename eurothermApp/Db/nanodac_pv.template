@@ -9,7 +9,12 @@
 # S - base PV name
 # C - channel name
 # PORT - asyn port name for channel data
-# PORT_RES - asyn port name for PV resolution 
+# PORT_RES - asyn port name for the PV resolution 
+# PORT_STR - asyn port name for the PV desc and units strings
+# PV_OFFSET - word offset for $(PORT) to read the PV
+# STAT_OFFSET - word offset for $(PORT) to read the status
+# ALARM1_OFFSET - word offset for $(PORT) to read the alarm1
+# ALARM2_OFFSET - word offset for $(PORT) to read the alarm2
 #
 ############################################################
 
@@ -105,7 +110,7 @@ record(mbbi, "$(S):SE:CH$(C):Alarm2")
 
 record(ai, "$(S):SE:CH$(C):PV_Res")
 {
-  field(DESC, "Process Variable CH$(C) Res")
+  field(DESC, "CH$(C) Resolution")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT_RES),0,1)")
   field(SCAN, "I/O Intr")
