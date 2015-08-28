@@ -14,6 +14,10 @@
 #
 ############################################################
 
+############################################################
+# Read records
+############################################################
+
 record(ai, "$(S):SE:Loop$(L):PV")
 {
   field(DESC, "Loop$(L) Process Variable")
@@ -64,6 +68,16 @@ record(ai, "$(S):SE:Loop$(L):Output")
   field(ESLO, "0.1")
 }
 
+############################################################
+# Write records
+############################################################
 
-
+record(ao, "$(S):SE:Loop$(L):SPSet")
+{
+  field(DESC, "Set Loop$(L) Setpoint")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,0,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
 

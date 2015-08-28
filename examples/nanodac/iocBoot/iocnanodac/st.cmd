@@ -61,6 +61,10 @@ drvModbusAsynConfigure("n1loop1", "n1ip", 1, 4, 512, 6, 4, 1000, 0)
 # Read the loop 2 params
 drvModbusAsynConfigure("n1loop2", "n1ip", 1, 4, 640, 6, 4, 1000, 0)
 
+# Write function for loop 1 setpoint
+drvModbusAsynConfigure("n1loop1w", "n1ip", 1, 6, 514, 1, 4, 1000, 0)
+# Write function for loop 2 setpoint
+drvModbusAsynConfigure("n1loop2w", "n1ip", 1, 6, 542, 1, 4, 1000, 0)
 
 ####################################################################
 
