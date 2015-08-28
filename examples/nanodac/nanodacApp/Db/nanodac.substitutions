@@ -13,7 +13,16 @@ pattern {IOCNAME}
 
 file nanodac_pv.db
 {
-pattern {S}
-        {BL99}
+pattern {S, C, PORT, PV_OFFSET, STAT_OFFSET, ALARM_OFFSET, ALARM2_OFFSET, PORT_RES}
+        {BL99, 1, n1ch, 0, 1, 2, 3, n1ch1res}
+	{BL99, 2, n1ch, 4, 5, 6, 7, n1ch2res}
+	{BL99, 3, n1ch, 8, 9, 10, 11, n1ch3res}
+	{BL99, 4, n1ch, 12, 13, 14, 15, n1ch4res}
+	{BL99, V1, n1vch, 0, 1, 2, 3, n1vch1res}
+	{BL99, V2, n1vch, 4, 5, 6, 7, n1vch2res}
+	{BL99, V3, n1vch, 8, 9, 10, 11, n1vch3res}
+	{BL99, V4, n1vch, 12, 13, 14, 15, n1vch4res}
+	{BL99, V5, n1vch, 16, 17, 18, 19, n1vch5res}
+	{BL99, V6, n1vch, 20, 21, 22, 23, n1vch6res}
 }
 

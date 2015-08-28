@@ -38,9 +38,23 @@ modbusInterposeConfig("n1ip", 0, 2000, 0)
 # arg 7: default dataType
 # arg 8: pollMsec 
 # arg 9: plcType
-#drvModbusAsynConfigure("n1", "n1ip", 1, 4, 288, 2, 4, 1000, 0)
-drvModbusAsynConfigure("n1", "n1ip", 1, 4, 264, 2, 4, 100, 0)
-drvModbusAsynConfigure("n1R", "n1ip", 1, 4, 6401, 1, 4, 10000, 0)
+
+# Read channels 1-4 and virtual channels 1-6 (PV value, status and alarm).
+drvModbusAsynConfigure("n1ch", "n1ip", 1, 4, 256, 16, 4, 100, 0)
+drvModbusAsynConfigure("n1vch", "n1ip", 1, 4, 288, 24, 4, 100, 0)
+
+# Read the resolutions values for each channel every 10s
+drvModbusAsynConfigure("n1ch1res", "n1ip", 1, 4, 6145, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n1ch2res", "n1ip", 1, 4, 6273, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n1ch3res", "n1ip", 1, 4, 6401, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n1ch4res", "n1ip", 1, 4, 6529, 1, 4, 10000, 0)
+
+drvModbusAsynConfigure("n1vch1res", "n1ip", 1, 4, 7170, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n1vch2res", "n1ip", 1, 4, 7298, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n1vch3res", "n1ip", 1, 4, 7426, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n1vch4res", "n1ip", 1, 4, 7554, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n1vch5res", "n1ip", 1, 4, 7682, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n1vch6res", "n1ip", 1, 4, 7810, 1, 4, 10000, 0)
 
 ####################################################################
 

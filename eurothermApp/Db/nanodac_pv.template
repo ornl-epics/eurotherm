@@ -1,45 +1,130 @@
 
 #############################################################
 #
-# Database template to read a 2s compliment 16 bit number
-# from the eurotherm nanoDac with a decimal point read
-# from another register.
+# Database template to read a real or virtual channel from the 
+# eurotherm nanodac. The PV data is in 2s compliment 16 bit number
+# with a decimal point read from another register. The status 
+# word and alarm word are in adjacent memory addresses. 
 # 
-# S - base PV name 
+# S - base PV name
+# C - channel name
+# PORT - asyn port name for channel data
+# PORT_RES - asyn port name for PV resolution 
 #
 ############################################################
 
-record(ai, "$(S):SE:CH1:PV")
+record(ai, "$(S):SE:CH$(C):PV")
 {
-  field(DESC, "Process Variable CH1")
+  field(DESC, "CH$(C) Process Variable")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn(n1,0,1)")
+  field(INP, "@asyn($(PORT),$(PV_OFFSET),1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
 }
 
-record(ai, "$(S):SE:CH1:PV_Res")
+record(mbbi, "$(S):SE:CH$(C):Status")
 {
-  field(DESC, "Process Variable CH1 Res")
-  field(DTYP, "asynFloat64")
-  field(INP, "@asyn(n1R,0,1)")
+  field(DESC, "CH$(C) Status")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(STAT_OFFSET),1)")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(S):SE:CH1:PV_ResSetCalc")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(SVVL, "7")
+  field(EIVL, "8")
+  field(NIVL, "9")
+  field(TEVL, "12")
+  field(ZRST, "Good")
+  field(ONST, "Off")
+  field(TWST, "Over Range")
+  field(THST, "Under Range")
+  field(FRST, "Hardware Error")
+  field(FVST, "Ranging")
+  field(SXST, "Overflow")
+  field(SVST, "Bad")
+  field(EIST, "Hardware Exceeded")
+  field(NIST, "No Data")
+  field(TEST, "Comm Channel Error")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "MAJOR")
+  field(TWSV, "MAJOR")
+  field(THSV, "MAJOR")
+  field(FRSV, "MAJOR")
+  field(FVSV, "MAJOR")
+  field(SXSV, "MAJOR")
+  field(SVSV, "MAJOR")
+  field(EISV, "MAJOR")
+  field(NISV, "MAJOR")
+  field(TESV, "MAJOR")
 }
 
-record(calcout, "$(S):SE:CH1:PV_ResSetCalc")
+record(mbbi, "$(S):SE:CH$(C):Alarm")
 {
-  field(INPA, "$(S):SE:CH1:PV_Res.VAL NPP MS")
-  field(CALC, "1/(10**A)")
-  field(OUT, "$(S):SE:CH1:PV.ESLO PP")
-  field(FLNK, "$(S):SE:CH1:PV_ResSetPrec")
+  field(DESC, "CH$(C) Alarm")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(ALARM_OFFSET),1)")
+  field(SCAN, "I/O Intr")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "Off")
+  field(ONST, "Active")
+  field(TWST, "Safe Not Acknowledged")
+  field(THST, "Active Not Acknowledged")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "MINOR")
+  field(TWSV, "MINOR")
+  field(THSV, "MAJOR")
 }
 
-record(dfanout, "$(S):SE:CH1:PV_ResSetPrec")
+record(mbbi, "$(S):SE:CH$(C):Alarm2")
+{
+  field(DESC, "CH$(C) Alarm2")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(ALARM2_OFFSET),1)")
+  field(SCAN, "I/O Intr")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "Off")
+  field(ONST, "Active")
+  field(TWST, "Safe Not Acknowledged")
+  field(THST, "Active Not Acknowledged")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "MINOR")
+  field(TWSV, "MINOR")
+  field(THSV, "MAJOR")
+}
+
+record(ai, "$(S):SE:CH$(C):PV_Res")
+{
+  field(DESC, "Process Variable CH$(C) Res")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT_RES),0,1)")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "$(S):SE:CH$(C):PV_ResSetCalc")
+}
+
+record(calcout, "$(S):SE:CH$(C):PV_ResSetCalc")
+{
+  field(INPA, "$(S):SE:CH$(C):PV_Res.VAL NPP MS")
+  field(CALC, "1/(10**A)")
+  field(OUT, "$(S):SE:CH$(C):PV.ESLO PP")
+  field(FLNK, "$(S):SE:CH$(C):PV_ResSetPrec")
+}
+
+record(dfanout, "$(S):SE:CH$(C):PV_ResSetPrec")
 {
   field(OMSL, "closed_loop")
-  field(DOL, "$(S):SE:CH1:PV_Res.VAL NPP MS")
-  field(OUTA, "$(S):SE:CH1:PV.PREC PP")
+  field(DOL, "$(S):SE:CH$(C):PV_Res.VAL NPP MS")
+  field(OUTA, "$(S):SE:CH$(C):PV.PREC PP")
 }
 
 
