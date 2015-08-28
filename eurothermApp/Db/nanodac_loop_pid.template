@@ -41,6 +41,25 @@ record(mbbi, "$(S):SE:Loop$(L):PID:Type")
   field(SXST, "Remote")
 }
 
+record(ai, "$(S):SE:Loop$(L):PID:NumSets")
+{
+  field(DESC, "Loop$(L) Output Num Sets")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),1,1)")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(S):SE:Loop$(L):PID:PB1")
+{
+  field(DESC, "Loop$(L) PB1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),6,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+}
+
 ############################################################
 # Write records
 ############################################################
@@ -64,6 +83,23 @@ record(mbbo, "$(S):SE:Loop$(L):PID:TypeSet")
   field(FRST, "Error")
   field(FVST, "Output")
   field(SXST, "Remote")  
+}
+
+record(ao, "$(S):SE:Loop$(L):PID:NumSetsSet")
+{
+  field(DESC, "Set Loop$(L) Output Num Sets")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,1,1)")
+}
+
+record(ao, "$(S):SE:Loop$(L):PID:PB1Set")
+{
+  field(DESC, "Set Loop$(L) PB1")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,6,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
 }
 
 
