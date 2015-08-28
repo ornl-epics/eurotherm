@@ -12,6 +12,7 @@ include $(TOP)/configure/CONFIG
 # databases, templates, substitutions like this
 DB += nanodac_pv.db
 DB += nanodac_loop_main.db
+DB += nanodac_loop_output.db
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

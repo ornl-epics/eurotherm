@@ -1,0 +1,105 @@
+
+#############################################################
+#
+# Database template to read and write loop output variables 
+# for the eurotherm nanodac.  
+# 
+# S - base PV name
+# L - loop number
+# PORT - asyn port name for loop output data
+#
+# Note: By convention the port name for the writeable parameters
+# is the same as the read parameters, but with a 'w' on the end.
+# 
+############################################################
+
+############################################################
+# Read records
+############################################################
+
+record(ai, "$(S):SE:Loop$(L):Output:High")
+{
+  field(DESC, "Loop$(L) Output High")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),0,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+
+record(ai, "$(S):SE:Loop$(L):Output:Low")
+{
+  field(DESC, "Loop$(L) Output Low")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),1,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+
+record(ai, "$(S):SE:Loop$(L):Output:Rate")
+{
+  field(DESC, "Loop$(L) Output Rate")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),3,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+
+record(ai, "$(S):SE:Loop$(L):Output:Manual")
+{
+  field(DESC, "Loop$(L) Output Man Setting")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),19,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+
+############################################################
+# Write records
+############################################################
+
+# NOTE: this didn't work in testing
+record(ao, "$(S):SE:Loop$(L):Output:HighSet")
+{
+  field(DESC, "Set Loop$(L) Output High")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,0,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+
+# NOTE: this didn't work in testing
+record(ao, "$(S):SE:Loop$(L):Output:LowSet")
+{
+  field(DESC, "Set Loop$(L) Output Low")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,1,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+
+# NOTE: this didn't work in testing
+record(ao, "$(S):SE:Loop$(L):Output:RateSet")
+{
+  field(DESC, "Set Loop$(L) Output Rate")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,3,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+
+record(ao, "$(S):SE:Loop$(L):Output:ManualSet")
+{
+  field(DESC, "Set Loop$(L) Output Man Setting")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,19,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+}
+

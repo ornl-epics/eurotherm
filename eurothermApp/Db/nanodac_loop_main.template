@@ -1,16 +1,15 @@
 
 #############################################################
 #
-# Database template to read and write loop 1 or 2 variables from the 
-# eurotherm nanodac.  
+# Database template to read and write loop main variables 
+# for the eurotherm nanodac.  
 # 
 # S - base PV name
 # L - loop number
-# PORT - asyn port name for loop data
-# PV_OFFSET - word offset for $(PORT) to read the PV
-# SP_OFFSET - word offset for $(PORT) to read the setpoint
-# AUTO_OFFSET - word offset for $(PORT) to read the auto/man setting
-# OUTPUT_OFFSET - word offset for $(PORT) to read the working output
+# PORT - asyn port name for loop main data
+#
+# Note: By convention the port name for the writeable parameters
+# is the same as the read parameters, but with a 'w' on the end.
 #
 ############################################################
 
@@ -22,7 +21,7 @@ record(ai, "$(S):SE:Loop$(L):PV")
 {
   field(DESC, "Loop$(L) Process Variable")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),$(PV_OFFSET),1)")
+  field(INP, "@asyn($(PORT),0,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
@@ -32,7 +31,7 @@ record(ai, "$(S):SE:Loop$(L):SP")
 {
   field(DESC, "Loop$(L) Setpoint")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),$(SP_OFFSET),1)")
+  field(INP, "@asyn($(PORT),2,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
@@ -42,7 +41,7 @@ record(ai, "$(S):SE:Loop$(L):WSP")
 {
   field(DESC, "Loop$(L) Working Setpoint")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),$(WSP_OFFSET),1)")
+  field(INP, "@asyn($(PORT),3,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
@@ -52,7 +51,7 @@ record(bi, "$(S):SE:Loop$(L):Auto")
 {
   field(DESC, "Loop$(L) Auto/Man")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),$(AUTO_OFFSET),1)")
+  field(INP, "@asyn($(PORT),1,1)")
   field(SCAN, "I/O Intr")
   field(ZNAM, "Auto")
   field(ONAM, "Manual")
@@ -62,7 +61,7 @@ record(ai, "$(S):SE:Loop$(L):Output")
 {
   field(DESC, "Loop$(L) Output")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),$(OUTPUT_OFFSET),1)")
+  field(INP, "@asyn($(PORT),4,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")

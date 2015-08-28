@@ -28,7 +28,16 @@ pattern {S, C, PORT, PV_OFFSET, STAT_OFFSET, ALARM_OFFSET, ALARM2_OFFSET, PORT_R
 
 file nanodac_loop_main.db
 {
-pattern {S, L, PORT, PV_OFFSET, AUTO_OFFSET, SP_OFFSET, WSP_OFFSET, OUTPUT_OFFSET}
-	{BL99, 1, n1loop1, 0, 1, 2, 3, 4}
-	{BL99, 2, n1loop2, 0, 1, 2, 3, 4}
+pattern {S, L, PORT}
+	{BL99, 1, n1l1}
+	{BL99, 2, n1l2}
 }
+
+file nanodac_loop_output.db
+{
+pattern {S, L, PORT}
+	{BL99, 1, n1l1o}
+	{BL99, 2, n1l2o}
+}
+
+
