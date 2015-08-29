@@ -50,6 +50,30 @@ record(ai, "$(S)$(ND)Loop$(L):PID:NumSets")
   field(SCAN, "I/O Intr")
 }
 
+record(longin, "$(S)$(ND)Loop$(L):PID:ActiveSet")
+{
+  field(DESC, "Loop$(L) Output Num Sets")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),3,1)")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:Boundary12")
+{
+  field(DESC, "Loop$(L) PID Boundary12")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),4,1)")
+  field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:Boundary23")
+{
+  field(DESC, "Loop$(L) PID Boundary23")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),5,1)")
+  field(SCAN, "I/O Intr")
+}
+
 record(ai, "$(S)$(ND)Loop$(L):PID:PB1")
 {
   field(DESC, "Loop$(L) PB1")
@@ -82,6 +106,78 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Td1")
   field(EGU, "sec")
 }
 
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh1")
+{
+  field(DESC, "Loop$(L) Output High 1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),30,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow1")
+{
+  field(DESC, "Loop$(L) Output Low 1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),31,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh2")
+{
+  field(DESC, "Loop$(L) Output High 2")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),32,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow2")
+{
+  field(DESC, "Loop$(L) Output Low 2")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),33,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh3")
+{
+  field(DESC, "Loop$(L) Output High 3")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),34,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow3")
+{
+  field(DESC, "Loop$(L) Output Low 3")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),35,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
 ############################################################
 # Write records
 ############################################################
@@ -109,9 +205,30 @@ record(mbbo, "$(S)$(ND)Loop$(L):PID:TypeSet")
 
 record(ao, "$(S)$(ND)Loop$(L):PID:NumSetsSet")
 {
-  field(DESC, "Set Loop$(L) Output Num Sets")
+  field(DESC, "Set Loop$(L) PID Num Sets")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,1,1)")
+}
+
+record(longout, "$(S)$(ND)Loop$(L):PID:ActiveSetSet")
+{
+  field(DESC, "Set Loop$(L) PID Active Set")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,3,1)")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:Boundary12Set")
+{
+  field(DESC, "Set Loop$(L) PID Boundary12")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,4,1)")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:Boundary23Set")
+{
+  field(DESC, "Set Loop$(L) PID Boundary23")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,5,1)")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:PB1Set")
@@ -142,5 +259,73 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Td1Set")
   field(PREC, "0")
   field(EGU, "sec")
 }
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh1Set")
+{
+  field(DESC, "Set Loop$(L) Output High 1")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,30,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow1Set")
+{
+  field(DESC, "Set Loop$(L) Output Low 1")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,31,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh2Set")
+{
+  field(DESC, "Set Loop$(L) Output High 2")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,32,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow2Set")
+{
+  field(DESC, "Set Loop$(L) Output Low 2")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,33,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh3Set")
+{
+  field(DESC, "Set Loop$(L) Output High 3")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,34,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow3Set")
+{
+  field(DESC, "Set Loop$(L) Output Low 3")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,35,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+
 
 
