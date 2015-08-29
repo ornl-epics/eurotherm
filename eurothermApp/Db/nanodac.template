@@ -1,11 +1,14 @@
 
 ############################################################
 #
-# Top level nanodac template.
+# Top level nanodac template. 
+# This instantiates the other nanodac templates. The Asyn modbus
+# port names defined in this file must match those setup in the 
+# st.cmd template files.
 #
 # S - base PV name
 # ND - PV name for this Nanodac
-# PORT - asyn port name for IP port (not modbus port name)
+# NI - index number for this Nanodac (default 1)
 #
 ############################################################
 
@@ -17,6 +20,128 @@
 record(asyn,"$(S)$(ND)Asyn")
 {
     field(DTYP,"asynRecordDevice")
-    field(PORT,"$(PORT)")
+    field(PORT,"n$(NI)ip")
     field(ADDR,"0")
 }
+
+# ///
+# /// Set up the channels (4 real ones and 6 virtual ones)
+# ///
+
+substitute "PORT=n1ch"
+
+substitute "C=CH1"
+substitute "CI=1"
+substitute "PV_OFFSET=0"
+substitute "STAT_OFFSET=1"
+substitute "ALARM_OFFSET=2"
+substitute "ALARM2_OFFSET=3"
+include "nanodac_pv.template"
+
+substitute "C=CH2"
+substitute "CI=2"
+substitute "PV_OFFSET=4"
+substitute "STAT_OFFSET=5"
+substitute "ALARM_OFFSET=6"
+substitute "ALARM2_OFFSET=7"
+include "nanodac_pv.template"
+
+substitute "C=CH3"
+substitute "CI=3"
+substitute "PV_OFFSET=8"
+substitute "STAT_OFFSET=9"
+substitute "ALARM_OFFSET=10"
+substitute "ALARM2_OFFSET=11"
+include "nanodac_pv.template"
+
+substitute "C=CH4"
+substitute "CI=4"
+substitute "PV_OFFSET=12"
+substitute "STAT_OFFSET=13"
+substitute "ALARM_OFFSET=14"
+substitute "ALARM2_OFFSET=15"
+include "nanodac_pv.template"
+
+substitute "PORT=n1cv"
+
+substitute "C=VCH1"
+substitute "CI=1"
+substitute "PV_OFFSET=0"
+substitute "STAT_OFFSET=1"
+substitute "ALARM_OFFSET=2"
+substitute "ALARM2_OFFSET=3"
+include "nanodac_pv.template"
+
+substitute "C=VCH2"
+substitute "CI=2"
+substitute "PV_OFFSET=4"
+substitute "STAT_OFFSET=5"
+substitute "ALARM_OFFSET=6"
+substitute "ALARM2_OFFSET=7"
+include "nanodac_pv.template"
+
+substitute "C=VCH3"
+substitute "CI=3"
+substitute "PV_OFFSET=8"
+substitute "STAT_OFFSET=9"
+substitute "ALARM_OFFSET=10"
+substitute "ALARM2_OFFSET=11"
+include "nanodac_pv.template"
+
+substitute "C=VCH4"
+substitute "CI=4"
+substitute "PV_OFFSET=12"
+substitute "STAT_OFFSET=13"
+substitute "ALARM_OFFSET=14"
+substitute "ALARM2_OFFSET=15"
+include "nanodac_pv.template"
+
+substitute "C=VCH5"
+substitute "CI=5"
+substitute "PV_OFFSET=16"
+substitute "STAT_OFFSET=17"
+substitute "ALARM_OFFSET=18"
+substitute "ALARM2_OFFSET=19"
+include "nanodac_pv.template"
+
+substitute "C=VCH6"
+substitute "CI=6"
+substitute "PV_OFFSET=20"
+substitute "STAT_OFFSET=21"
+substitute "ALARM_OFFSET=22"
+substitute "ALARM2_OFFSET=23"
+include "nanodac_pv.template"
+
+# ///
+# /// Set up the loop control (loops 1 & 2)
+# ///
+
+substitute "L=1"
+substitute "PORT=n1l1"
+include "nanodac_loop_main.template"
+substitute "L=2"
+substitute "PORT=n1l2"
+include "nanodac_loop_main.template"
+
+substitute "L=1"
+substitute "PORT=n1l1o"
+include "nanodac_loop_output.template"
+substitute "L=2"
+substitute "PORT=n1l2o"
+include "nanodac_loop_output.template"
+
+substitute "L=1"
+substitute "PORT=n1l1p"
+include "nanodac_loop_pid.template"
+substitute "L=2"
+substitute "PORT=n1l2p"
+include "nanodac_loop_pid.template"
+
+substitute "L=1"
+substitute "PORT=n1l1o"
+include "nanodac_loop_setpoint.template"
+substitute "L=2"
+substitute "PORT=n1l2o"
+include "nanodac_loop_setpoint.template"
+
+

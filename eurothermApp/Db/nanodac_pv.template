@@ -7,28 +7,31 @@
 # word and alarm word are in adjacent memory addresses. 
 # 
 # S - base PV name
+# ND - name of this nanodac
 # C - channel name
+# CI - channel index number (1-4 or 1-32 for virtual channels)
 # PORT - asyn port name for channel data
-# PORT_RES - asyn port name for the PV resolution 
 # PV_OFFSET - word offset for $(PORT) to read the PV
 # STAT_OFFSET - word offset for $(PORT) to read the status
 # ALARM1_OFFSET - word offset for $(PORT) to read the alarm1
 # ALARM2_OFFSET - word offset for $(PORT) to read the alarm2
 #
+# NOTE: the asyn port name for the PV resolution must be $(PORT)res
+#
 ############################################################
 
-record(ai, "$(S)$(ND)CH$(C):PV")
+record(ai, "$(S)$(ND)$(C):PV")
 {
-  field(DESC, "CH$(C) Process Variable")
+  field(DESC, "$(C) Process Variable")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),$(PV_OFFSET),1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
 }
 
-record(mbbi, "$(S)$(ND)CH$(C):Status")
+record(mbbi, "$(S)$(ND)$(C):Status")
 {
-  field(DESC, "CH$(C) Status")
+  field(DESC, "$(C) Status")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),$(STAT_OFFSET),1)")
   field(SCAN, "I/O Intr")
@@ -67,9 +70,9 @@ record(mbbi, "$(S)$(ND)CH$(C):Status")
   field(TESV, "MAJOR")
 }
 
-record(mbbi, "$(S)$(ND)CH$(C):Alarm")
+record(mbbi, "$(S)$(ND)$(C):Alarm")
 {
-  field(DESC, "CH$(C) Alarm")
+  field(DESC, "$(C) Alarm")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),$(ALARM_OFFSET),1)")
   field(SCAN, "I/O Intr")
@@ -87,9 +90,9 @@ record(mbbi, "$(S)$(ND)CH$(C):Alarm")
   field(THSV, "MAJOR")
 }
 
-record(mbbi, "$(S)$(ND)CH$(C):Alarm2")
+record(mbbi, "$(S)$(ND)$(C):Alarm2")
 {
-  field(DESC, "CH$(C) Alarm2")
+  field(DESC, "$(C) Alarm2")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),$(ALARM2_OFFSET),1)")
   field(SCAN, "I/O Intr")
@@ -107,28 +110,28 @@ record(mbbi, "$(S)$(ND)CH$(C):Alarm2")
   field(THSV, "MAJOR")
 }
 
-record(ai, "$(S)$(ND)CH$(C):PV_Res")
+record(ai, "$(S)$(ND)$(C):PV_Res")
 {
-  field(DESC, "CH$(C) Resolution")
+  field(DESC, "$(C) Resolution")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT_RES),0,1)")
+  field(INP, "@asyn($(PORT)$(CI)res,0,1)")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(S)$(ND)CH$(C):PV_ResSetCalc")
+  field(FLNK, "$(S)$(ND)$(C):PV_ResSetCalc")
 }
 
-record(calcout, "$(S)$(ND)CH$(C):PV_ResSetCalc")
+record(calcout, "$(S)$(ND)$(C):PV_ResSetCalc")
 {
-  field(INPA, "$(S)$(ND)CH$(C):PV_Res.VAL NPP MS")
+  field(INPA, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
   field(CALC, "1/(10**A)")
-  field(OUT, "$(S)$(ND)CH$(C):PV.ESLO PP")
-  field(FLNK, "$(S)$(ND)CH$(C):PV_ResSetPrec")
+  field(OUT, "$(S)$(ND)$(C):PV.ESLO PP")
+  field(FLNK, "$(S)$(ND)$(C):PV_ResSetPrec")
 }
 
-record(dfanout, "$(S)$(ND)CH$(C):PV_ResSetPrec")
+record(dfanout, "$(S)$(ND)$(C):PV_ResSetPrec")
 {
   field(OMSL, "closed_loop")
-  field(DOL, "$(S)$(ND)CH$(C):PV_Res.VAL NPP MS")
-  field(OUTA, "$(S)$(ND)CH$(C):PV.PREC PP")
+  field(DOL, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
+  field(OUTA, "$(S)$(ND)$(C):PV.PREC PP")
 }
 
 
