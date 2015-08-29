@@ -1,13 +1,13 @@
 
 # Asyn IP port 
-drvAsynIPPortConfigure("n1ip","$(IP_ADDR)",0,0,1)
+drvAsynIPPortConfigure("n$(NI)ip","$(IP_ADDR)",0,0,1)
         
 # modbusInterposeConfig
 # arg 1: portName
 # arg 2: linkType
 # arg 3: timeoutMsec
 # arg 4: writeDelayMsec
-modbusInterposeConfig("n1ip", 0, 2000, 100)
+modbusInterposeConfig("n$(NI)ip", 0, 2000, 100)
 
 # drvModbusAsynConfigure
 # arg 1: portName
@@ -21,19 +21,19 @@ modbusInterposeConfig("n1ip", 0, 2000, 100)
 # arg 9: plcType
 
 # Read channels 1-4 and virtual channels 1-6 (PV value, status and alarm).
-drvModbusAsynConfigure("n1ch", "n1ip", 1, 4, 256, 16, 4, 200, 0)
-drvModbusAsynConfigure("n1cv", "n1ip", 1, 4, 288, 24, 4, 200, 0)
+drvModbusAsynConfigure("n$(NI)ch", "n$(NI)ip", 1, 4, 256, 16, 4, 200, 0)
+drvModbusAsynConfigure("n$(NI)cv", "n$(NI)ip", 1, 4, 288, 24, 4, 200, 0)
 
 # Read the resolutions values for each channel every 10s
-drvModbusAsynConfigure("n1ch1res", "n1ip", 1, 4, 6145, 1, 4, 10000, 0)
-drvModbusAsynConfigure("n1ch2res", "n1ip", 1, 4, 6273, 1, 4, 10000, 0)
-drvModbusAsynConfigure("n1ch3res", "n1ip", 1, 4, 6401, 1, 4, 10000, 0)
-drvModbusAsynConfigure("n1ch4res", "n1ip", 1, 4, 6529, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)ch1res", "n$(NI)ip", 1, 4, 6145, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)ch2res", "n$(NI)ip", 1, 4, 6273, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)ch3res", "n$(NI)ip", 1, 4, 6401, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)ch4res", "n$(NI)ip", 1, 4, 6529, 1, 4, 10000, 0)
 
-drvModbusAsynConfigure("n1cv1res", "n1ip", 1, 4, 7170, 1, 4, 10000, 0)
-drvModbusAsynConfigure("n1cv2res", "n1ip", 1, 4, 7298, 1, 4, 10000, 0)
-drvModbusAsynConfigure("n1cv3res", "n1ip", 1, 4, 7426, 1, 4, 10000, 0)
-drvModbusAsynConfigure("n1cv4res", "n1ip", 1, 4, 7554, 1, 4, 10000, 0)
-drvModbusAsynConfigure("n1cv5res", "n1ip", 1, 4, 7682, 1, 4, 10000, 0)
-drvModbusAsynConfigure("n1cv6res", "n1ip", 1, 4, 7810, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv1res", "n$(NI)ip", 1, 4, 7170, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv2res", "n$(NI)ip", 1, 4, 7298, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv3res", "n$(NI)ip", 1, 4, 7426, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv4res", "n$(NI)ip", 1, 4, 7554, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv5res", "n$(NI)ip", 1, 4, 7682, 1, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv6res", "n$(NI)ip", 1, 4, 7810, 1, 4, 10000, 0)
 

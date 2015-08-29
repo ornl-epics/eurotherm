@@ -28,7 +28,7 @@ record(asyn,"$(S)$(ND)Asyn")
 # /// Set up the channels (4 real ones and 6 virtual ones)
 # ///
 
-substitute "PORT=n1ch"
+substitute "PORT=n$(NI)ch"
 
 substitute "C=CH1"
 substitute "CI=1"
@@ -62,7 +62,7 @@ substitute "ALARM_OFFSET=14"
 substitute "ALARM2_OFFSET=15"
 include "nanodac_pv.template"
 
-substitute "PORT=n1cv"
+substitute "PORT=n$(NI)cv"
 
 substitute "C=VCH1"
 substitute "CI=1"
@@ -117,31 +117,31 @@ include "nanodac_pv.template"
 # ///
 
 substitute "L=1"
-substitute "PORT=n1l1"
+substitute "PORT=n$(NI)l1"
 include "nanodac_loop_main.template"
 substitute "L=2"
-substitute "PORT=n1l2"
+substitute "PORT=n$(NI)l2"
 include "nanodac_loop_main.template"
 
 substitute "L=1"
-substitute "PORT=n1l1o"
+substitute "PORT=n$(NI)l1o"
 include "nanodac_loop_output.template"
 substitute "L=2"
-substitute "PORT=n1l2o"
+substitute "PORT=n$(NI)l2o"
 include "nanodac_loop_output.template"
 
 substitute "L=1"
-substitute "PORT=n1l1p"
+substitute "PORT=n$(NI)l1p"
 include "nanodac_loop_pid.template"
 substitute "L=2"
-substitute "PORT=n1l2p"
+substitute "PORT=n$(NI)l2p"
 include "nanodac_loop_pid.template"
 
 substitute "L=1"
-substitute "PORT=n1l1o"
+substitute "PORT=n$(NI)l1o"
 include "nanodac_loop_setpoint.template"
 substitute "L=2"
-substitute "PORT=n1l2o"
+substitute "PORT=n$(NI)l2o"
 include "nanodac_loop_setpoint.template"
 
 

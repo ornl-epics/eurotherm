@@ -21,6 +21,8 @@ epicsEnvSet("IP_ADDR","192.168.200.177:502")
 ####################################################################
 # Set up modbus TCP support for Eurotherm
 
+epicsEnvSet("NI","1")
+
 < $(EUROTHERM)/st.cmd.main
 
 < $(EUROTHERM)/st.cmd.loop1

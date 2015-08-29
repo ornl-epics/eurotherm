@@ -1,8 +1,8 @@
 
 # Read the loop 1 main params (512 to 533)
-drvModbusAsynConfigure("n1l1", "n1ip", 1, 4, 512, 22, 4, 1000, 0)
+drvModbusAsynConfigure("n$(NI)l1", "n$(NI)ip", 1, 4, 512, 22, 4, 1000, 0)
 # Write function for loop 1 main (512 to 517)
-drvModbusAsynConfigure("n1l1w", "n1ip", 1, 6, 512, 6, 4, 1000, 0)
+drvModbusAsynConfigure("n$(NI)l1w", "n$(NI)ip", 1, 6, 512, 6, 4, 1000, 0)
 
 # NOTE: loop prams for output, PID and setpoint are in 
 # contiguous memory regions so could be read in one block.
@@ -12,11 +12,11 @@ drvModbusAsynConfigure("n1l1w", "n1ip", 1, 6, 512, 6, 4, 1000, 0)
 # These are the loop setpoint range high and low params. 
 
 # Read functions for loop 1 PID params (5685 to 5720)
-drvModbusAsynConfigure("n1l1p", "n1ip", 1, 4, 5685, 36, 4, 1000, 0)
+drvModbusAsynConfigure("n$(NI)l1p", "n$(NI)ip", 1, 4, 5685, 36, 4, 1000, 0)
 # Write function for loop 1 PID params (5685 to 5720)
-drvModbusAsynConfigure("n1l1pw", "n1ip", 1, 6, 5685, 36, 4, 1000, 0)
+drvModbusAsynConfigure("n$(NI)l1pw", "n$(NI)ip", 1, 6, 5685, 36, 4, 1000, 0)
 
 # Read functions for loop 1 output and setpoint params (5724 to 5787)
-drvModbusAsynConfigure("n1l1o", "n1ip", 1, 4, 5724, 64, 4, 1000, 0)
+drvModbusAsynConfigure("n$(NI)l1o", "n$(NI)ip", 1, 4, 5724, 64, 4, 1000, 0)
 # Write function for loop 1 output and setpoint params (5724 to 5776)
-drvModbusAsynConfigure("n1l1ow", "n1ip", 1, 6, 5724, 52, 4, 1000, 0)
+drvModbusAsynConfigure("n$(NI)l1ow", "n$(NI)ip", 1, 6, 5724, 52, 4, 1000, 0)
