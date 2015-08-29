@@ -133,6 +133,33 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:OutHigh")
   field(EGU, "%")
 }
 
+record(ai, "$(S)$(ND)Loop$(L):Diag:POut")
+{
+  field(DESC, "Loop$(L) Prop. Output")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),16,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):Diag:IOut")
+{
+  field(DESC, "Loop$(L) Integral Output")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),17,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):Diag:DOut")
+{
+  field(DESC, "Loop$(L) Deriv. Output")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),18,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+}
+
 ############################################################
 # Write records
 ############################################################
