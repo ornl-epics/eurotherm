@@ -17,7 +17,7 @@
 #
 ############################################################
 
-record(ai, "$(S):SE:CH$(C):PV")
+record(ai, "$(S)$(ND)CH$(C):PV")
 {
   field(DESC, "CH$(C) Process Variable")
   field(DTYP, "asynInt32")
@@ -26,7 +26,7 @@ record(ai, "$(S):SE:CH$(C):PV")
   field(LINR, "LINEAR")
 }
 
-record(mbbi, "$(S):SE:CH$(C):Status")
+record(mbbi, "$(S)$(ND)CH$(C):Status")
 {
   field(DESC, "CH$(C) Status")
   field(DTYP, "asynInt32")
@@ -67,7 +67,7 @@ record(mbbi, "$(S):SE:CH$(C):Status")
   field(TESV, "MAJOR")
 }
 
-record(mbbi, "$(S):SE:CH$(C):Alarm")
+record(mbbi, "$(S)$(ND)CH$(C):Alarm")
 {
   field(DESC, "CH$(C) Alarm")
   field(DTYP, "asynInt32")
@@ -87,7 +87,7 @@ record(mbbi, "$(S):SE:CH$(C):Alarm")
   field(THSV, "MAJOR")
 }
 
-record(mbbi, "$(S):SE:CH$(C):Alarm2")
+record(mbbi, "$(S)$(ND)CH$(C):Alarm2")
 {
   field(DESC, "CH$(C) Alarm2")
   field(DTYP, "asynInt32")
@@ -107,28 +107,28 @@ record(mbbi, "$(S):SE:CH$(C):Alarm2")
   field(THSV, "MAJOR")
 }
 
-record(ai, "$(S):SE:CH$(C):PV_Res")
+record(ai, "$(S)$(ND)CH$(C):PV_Res")
 {
   field(DESC, "CH$(C) Resolution")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT_RES),0,1)")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(S):SE:CH$(C):PV_ResSetCalc")
+  field(FLNK, "$(S)$(ND)CH$(C):PV_ResSetCalc")
 }
 
-record(calcout, "$(S):SE:CH$(C):PV_ResSetCalc")
+record(calcout, "$(S)$(ND)CH$(C):PV_ResSetCalc")
 {
-  field(INPA, "$(S):SE:CH$(C):PV_Res.VAL NPP MS")
+  field(INPA, "$(S)$(ND)CH$(C):PV_Res.VAL NPP MS")
   field(CALC, "1/(10**A)")
-  field(OUT, "$(S):SE:CH$(C):PV.ESLO PP")
-  field(FLNK, "$(S):SE:CH$(C):PV_ResSetPrec")
+  field(OUT, "$(S)$(ND)CH$(C):PV.ESLO PP")
+  field(FLNK, "$(S)$(ND)CH$(C):PV_ResSetPrec")
 }
 
-record(dfanout, "$(S):SE:CH$(C):PV_ResSetPrec")
+record(dfanout, "$(S)$(ND)CH$(C):PV_ResSetPrec")
 {
   field(OMSL, "closed_loop")
-  field(DOL, "$(S):SE:CH$(C):PV_Res.VAL NPP MS")
-  field(OUTA, "$(S):SE:CH$(C):PV.PREC PP")
+  field(DOL, "$(S)$(ND)CH$(C):PV_Res.VAL NPP MS")
+  field(OUTA, "$(S)$(ND)CH$(C):PV.PREC PP")
 }
 
 

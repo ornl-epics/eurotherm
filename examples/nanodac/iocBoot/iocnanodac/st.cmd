@@ -40,8 +40,8 @@ modbusInterposeConfig("n1ip", 0, 2000, 100)
 # arg 9: plcType
 
 # Read channels 1-4 and virtual channels 1-6 (PV value, status and alarm).
-drvModbusAsynConfigure("n1ch", "n1ip", 1, 4, 256, 16, 4, 100, 0)
-drvModbusAsynConfigure("n1vch", "n1ip", 1, 4, 288, 24, 4, 100, 0)
+drvModbusAsynConfigure("n1ch", "n1ip", 1, 4, 256, 16, 4, 200, 0)
+drvModbusAsynConfigure("n1vch", "n1ip", 1, 4, 288, 24, 4, 200, 0)
 
 # Read the resolutions values for each channel every 10s
 drvModbusAsynConfigure("n1ch1res", "n1ip", 1, 4, 6145, 1, 4, 10000, 0)
@@ -56,32 +56,44 @@ drvModbusAsynConfigure("n1vch4res", "n1ip", 1, 4, 7554, 1, 4, 10000, 0)
 drvModbusAsynConfigure("n1vch5res", "n1ip", 1, 4, 7682, 1, 4, 10000, 0)
 drvModbusAsynConfigure("n1vch6res", "n1ip", 1, 4, 7810, 1, 4, 10000, 0)
 
-# Read the loop 1 params
+# Read the loop 1 main params (512 to 518)
 drvModbusAsynConfigure("n1l1", "n1ip", 1, 4, 512, 6, 4, 1000, 0)
-# Read the loop 2 params
+# Read the loop 2 main params (640 to 646)
 drvModbusAsynConfigure("n1l2", "n1ip", 1, 4, 640, 6, 4, 1000, 0)
-# Write function for loop 1 main
+# Write function for loop 1 main (512 to 518)
 drvModbusAsynConfigure("n1l1w", "n1ip", 1, 6, 512, 6, 4, 1000, 0)
-# Write function for loop 2 main
+# Write function for loop 2 main (640 to 646)
 drvModbusAsynConfigure("n1l2w", "n1ip", 1, 6, 540, 6, 4, 1000, 0)
+
+#NOTE: loop prams for output, PID and setpoint are in 
+#contiguous memory regions so could be read in one block
 
 # Read functions for loop 1 output params (5741 to 5776)
 drvModbusAsynConfigure("n1l1o", "n1ip", 1, 4, 5741, 36, 4, 1000, 0)
 # Read functions for loop 2 output params (5997 to 6032)
 drvModbusAsynConfigure("n1l2o", "n1ip", 1, 4, 5997, 36, 4, 1000, 0)
-# Write function for loop 1 output params
+# Write function for loop 1 output params (5741 to 5776)
 drvModbusAsynConfigure("n1l1ow", "n1ip", 1, 6, 5741, 36, 4, 1000, 0)
-# Write function for loop 2 output params
+# Write function for loop 2 output params (5997 to 6032)
 drvModbusAsynConfigure("n1l2ow", "n1ip", 1, 6, 5997, 36, 4, 1000, 0)
 
 # Read functions for loop 1 PID params (5685 to 5720)
 drvModbusAsynConfigure("n1l1p", "n1ip", 1, 4, 5685, 36, 4, 1000, 0)
 # Read functions for loop 2 PID params (5941 to 5976)
 drvModbusAsynConfigure("n1l2p", "n1ip", 1, 4, 5941, 36, 4, 1000, 0)
-# Write function for loop 1 PID params
+# Write function for loop 1 PID params (5685 to 5720)
 drvModbusAsynConfigure("n1l1pw", "n1ip", 1, 6, 5685, 36, 4, 1000, 0)
-# Write function for loop 2 PID params
+# Write function for loop 2 PID params (5941 to 5976)
 drvModbusAsynConfigure("n1l2pw", "n1ip", 1, 6, 5941, 36, 4, 1000, 0)
+
+# Read functions for loop 1 setpoint params (5721 to 5740)
+drvModbusAsynConfigure("n1l1s", "n1ip", 1, 4, 5721, 20, 4, 1000, 0)
+# Read functions for loop 2 setpoint params (5977 to 5996)
+drvModbusAsynConfigure("n1l2s", "n1ip", 1, 4, 5977, 20, 4, 1000, 0)
+# Write function for loop 1 setpoint params (5721 to 5740)
+drvModbusAsynConfigure("n1l1sw", "n1ip", 1, 6, 5721, 20, 4, 1000, 0)
+# Write function for loop 2 setpoint params (5977 to 5996)
+drvModbusAsynConfigure("n1l2sw", "n1ip", 1, 6, 5977, 20, 4, 1000, 0)
 
 ####################################################################
 
