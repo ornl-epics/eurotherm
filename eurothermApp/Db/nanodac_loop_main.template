@@ -111,6 +111,8 @@ record(bi, "$(S)$(ND)Loop$(L):Diag:SensorBreak")
   field(SCAN, "I/O Intr")
   field(ZNAM, "No")
   field(ONAM, "Yes")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MAJOR")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:OutLow")

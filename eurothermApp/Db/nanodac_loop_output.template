@@ -68,6 +68,62 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Manual")
   field(EGU, "%")
 }
 
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchPB")
+{
+  field(DESC, "Loop$(L) Sched PB")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),54,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchTi")
+{
+  field(DESC, "Loop$(L) Sched Ti")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),55,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchTd")
+{
+  field(DESC, "Loop$(L) Sched Td")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),56,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutHigh")
+{
+  field(DESC, "Loop$(L) Sched High Lim")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),62,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutLow")
+{
+  field(DESC, "Loop$(L) Sched Low Lim")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),63,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
 ############################################################
 # Write records
 ############################################################
