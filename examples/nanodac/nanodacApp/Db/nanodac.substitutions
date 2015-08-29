@@ -55,9 +55,9 @@ pattern {S, ND, L, PORT}
 
 file nanodac_loop_setpoint.db
 {
-pattern {S, ND, L, PORT, PREC}
-	{BL99:, SE:ND1:, 1, n1l1s, BL99:SE:ND1:CH1:PV_Res}
-	{BL99:, SE:ND1:, 2, n1l2s, BL99:SE:ND1:CH2:PV_Res}
+pattern {S, ND, L, PORT}
+	{BL99:, SE:ND1:, 1, n1l1o}
+	{BL99:, SE:ND1:, 2, n1l2o}
 }
 
 

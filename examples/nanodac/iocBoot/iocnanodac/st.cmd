@@ -65,17 +65,12 @@ drvModbusAsynConfigure("n1l1w", "n1ip", 1, 6, 512, 6, 4, 1000, 0)
 # Write function for loop 2 main (640 to 646)
 drvModbusAsynConfigure("n1l2w", "n1ip", 1, 6, 540, 6, 4, 1000, 0)
 
-#NOTE: loop prams for output, PID and setpoint are in 
-#contiguous memory regions so could be read in one block
-
-# Read functions for loop 1 output params (5741 to 5776)
-drvModbusAsynConfigure("n1l1o", "n1ip", 1, 4, 5741, 36, 4, 1000, 0)
-# Read functions for loop 2 output params (5997 to 6032)
-drvModbusAsynConfigure("n1l2o", "n1ip", 1, 4, 5997, 36, 4, 1000, 0)
-# Write function for loop 1 output params (5741 to 5776)
-drvModbusAsynConfigure("n1l1ow", "n1ip", 1, 6, 5741, 36, 4, 1000, 0)
-# Write function for loop 2 output params (5997 to 6032)
-drvModbusAsynConfigure("n1l2ow", "n1ip", 1, 6, 5997, 36, 4, 1000, 0)
+# NOTE: loop prams for output, PID and setpoint are in 
+# contiguous memory regions so could be read in one block.
+# However, there is a problem accessing some registers
+# so we split the PID block out.
+# Cannot access registers 5721-5722 or 5977-5978.
+# These are the loop setpoint range high and low params. 
 
 # Read functions for loop 1 PID params (5685 to 5720)
 drvModbusAsynConfigure("n1l1p", "n1ip", 1, 4, 5685, 36, 4, 1000, 0)
@@ -86,17 +81,14 @@ drvModbusAsynConfigure("n1l1pw", "n1ip", 1, 6, 5685, 36, 4, 1000, 0)
 # Write function for loop 2 PID params (5941 to 5976)
 drvModbusAsynConfigure("n1l2pw", "n1ip", 1, 6, 5941, 36, 4, 1000, 0)
 
-#NOTE: Cannot access registers 5721-5722 or 5977-5978.
-#      These are the loop setpoint range high and low params. 
-
-# Read functions for loop 1 setpoint params (5724 to 5740)
-drvModbusAsynConfigure("n1l1s", "n1ip", 1, 4, 5724, 17, 4, 1000, 0)
-# Read functions for loop 2 setpoint params (5980 to 5996)
-drvModbusAsynConfigure("n1l2s", "n1ip", 1, 4, 5980, 17, 4, 1000, 0)
-# Write function for loop 1 setpoint params (5724 to 5740)
-drvModbusAsynConfigure("n1l1sw", "n1ip", 1, 6, 5724, 17, 4, 1000, 0)
-# Write function for loop 2 setpoint params (5980 to 5996)
-drvModbusAsynConfigure("n1l2sw", "n1ip", 1, 6, 5980, 17, 4, 1000, 0)
+# Read functions for loop 1 output and setpoint params (5724 to 5776)
+drvModbusAsynConfigure("n1l1o", "n1ip", 1, 4, 5724, 52, 4, 1000, 0)
+# Read functions for loop 2 output and setpoint params (5980 to 6032)
+drvModbusAsynConfigure("n1l2o", "n1ip", 1, 4, 5980, 52, 4, 1000, 0)
+# Write function for loop 1 output and setpoint params (5724 to 5776)
+drvModbusAsynConfigure("n1l1ow", "n1ip", 1, 6, 5724, 52, 4, 1000, 0)
+# Write function for loop 2 output and setpoint params (5980 to 6032)
+drvModbusAsynConfigure("n1l2ow", "n1ip", 1, 6, 5980, 52, 4, 1000, 0)
 
 ####################################################################
 

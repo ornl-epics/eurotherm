@@ -11,6 +11,9 @@
 #
 # Note: By convention the port name for the writeable parameters
 # is the same as the read parameters, but with a 'w' on the end.
+#
+# The loop output params are offset by 17 words from the start
+# of the loop setpoint params.
 # 
 ############################################################
 
@@ -22,7 +25,7 @@ record(ai, "$(S)$(ND)Loop$(L):Output:High")
 {
   field(DESC, "Loop$(L) Output High")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),0,1)")
+  field(INP, "@asyn($(PORT),17,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
@@ -34,7 +37,7 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Low")
 {
   field(DESC, "Loop$(L) Output Low")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),1,1)")
+  field(INP, "@asyn($(PORT),18,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
@@ -46,7 +49,7 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Rate")
 {
   field(DESC, "Loop$(L) Output Rate")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),3,1)")
+  field(INP, "@asyn($(PORT),20,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
@@ -57,7 +60,7 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Manual")
 {
   field(DESC, "Loop$(L) Output Man Setting")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),19,1)")
+  field(INP, "@asyn($(PORT),36,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
@@ -73,7 +76,7 @@ record(ao, "$(S)$(ND)Loop$(L):Output:HighSet")
 {
   field(DESC, "Set Loop$(L) Output High")
   field(DTYP, "asynInt32")
-  field(OUT, "@asyn($(PORT)w,0,1)")
+  field(OUT, "@asyn($(PORT)w,17,1)")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
@@ -84,7 +87,7 @@ record(ao, "$(S)$(ND)Loop$(L):Output:LowSet")
 {
   field(DESC, "Set Loop$(L) Output Low")
   field(DTYP, "asynInt32")
-  field(OUT, "@asyn($(PORT)w,1,1)")
+  field(OUT, "@asyn($(PORT)w,18,1)")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
@@ -95,7 +98,7 @@ record(ao, "$(S)$(ND)Loop$(L):Output:RateSet")
 {
   field(DESC, "Set Loop$(L) Output Rate")
   field(DTYP, "asynInt32")
-  field(OUT, "@asyn($(PORT)w,3,1)")
+  field(OUT, "@asyn($(PORT)w,20,1)")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
@@ -105,7 +108,7 @@ record(ao, "$(S)$(ND)Loop$(L):Output:ManualSet")
 {
   field(DESC, "Set Loop$(L) Output Man Setting")
   field(DTYP, "asynInt32")
-  field(OUT, "@asyn($(PORT)w,19,1)")
+  field(OUT, "@asyn($(PORT)w,36,1)")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
