@@ -72,6 +72,16 @@ record(ai, "$(S)$(ND)Loop$(L):Output")
   field(PREC, "1")
 }
 
+record(bi, "$(S)$(ND)Loop$(L):Inhibit")
+{
+  field(DESC, "Loop$(L) Inhibit")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),5,1)")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+}
+
 ############################################################
 # Write records
 ############################################################
@@ -80,9 +90,18 @@ record(ao, "$(S)$(ND)Loop$(L):SPSet")
 {
   field(DESC, "Set Loop$(L) Setpoint")
   field(DTYP, "asynInt32")
-  field(OUT, "@asyn($(PORT)w,0,1)")
+  field(OUT, "@asyn($(PORT)w,2,1)")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+}
+
+record(bo, "$(S)$(ND)Loop$(L):InhibitSet")
+{
+  field(DESC, "Set Loop$(L) Inhibit")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,5,1)")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
 }
 
