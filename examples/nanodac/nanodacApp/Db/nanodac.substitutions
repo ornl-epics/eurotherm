@@ -32,26 +32,26 @@ pattern {S, ND, C, PORT, PV_OFFSET, STAT_OFFSET, ALARM_OFFSET, ALARM2_OFFSET, PO
 	{BL99:, SE:ND1:, V6, n1vch, 20, 21, 22, 23, n1vch6res}
 }
 
-#file nanodac_loop_main.db
-#{
-#pattern {S, ND, L, PORT}
-#	{BL99:, SE:ND1:, 1, n1l1}
-#	{BL99:, SE:ND1:, 2, n1l2}
-#}
+file nanodac_loop_main.db
+{
+pattern {S, ND, L, PORT}
+	{BL99:, SE:ND1:, 1, n1l1}
+	{BL99:, SE:ND1:, 2, n1l2}
+}
 
-#file nanodac_loop_output.db
-#{
-#pattern {S, ND, L, PORT}
-#	{BL99:, SE:ND1:, 1, n1l1o}
-#	{BL99:, SE:ND1:, 2, n1l2o}
-#}
+file nanodac_loop_output.db
+{
+pattern {S, ND, L, PORT}
+	{BL99:, SE:ND1:, 1, n1l1o}
+	{BL99:, SE:ND1:, 2, n1l2o}
+}
 
-#file nanodac_loop_pid.db
-#{
-#pattern {S, ND, L, PORT}
-#	{BL99:, SE:ND1:, 1, n1l1p}
-#	{BL99:, SE:ND1:, 2, n1l2p}
-#}
+file nanodac_loop_pid.db
+{
+pattern {S, ND, L, PORT}
+	{BL99:, SE:ND1:, 1, n1l1p}
+	{BL99:, SE:ND1:, 2, n1l2p}
+}
 
 file nanodac_loop_setpoint.db
 {

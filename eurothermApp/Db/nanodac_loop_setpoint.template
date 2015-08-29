@@ -8,44 +8,11 @@
 # ND - name for this nanodac
 # L - loop number
 # PORT - asyn port name for loop setpoint data
-# PREC - PV name to read PREC value from
 #
 # Note: By convention the port name for the writeable parameters
 # is the same as the read parameters, but with a 'w' on the end.
 # 
 ############################################################
-
-############################################################
-# Records to read the precision and set ESLO and PREC for the 
-# setpoint records.
-############################################################
-
-record(calcout, "$(S)$(ND)Loop$(L):SP_ResSetCalc")
-{
-  field(INPA, "$(PREC).VAL CP MS")
-  field(CALC, "1/(10**A)")
-  field(OUT, "$(S)$(ND)Loop$(L):SP_ResSetEslo.VAL PP")
-}
-
-record(dfanout, "$(S)$(ND)Loop$(L):SP_ResSetEslo")
-{
-  field(OMSL, "supervisory")
-  field(OUTA, "$(S)$(ND)Loop$(L):SP:HighLimit.ESLO PP")
-  field(OUTB, "$(S)$(ND)Loop$(L):SP:LowLimit.ESLO PP")
-  field(OUTC, "$(S)$(ND)Loop$(L):SP:HighLimitSet.ESLO PP")
-  field(OUTD, "$(S)$(ND)Loop$(L):SP:LowLimitSet.ESLO PP")
-  field(FLNK, "$(S)$(ND)Loop$(L):SP_ResSetPrec")
-}
-
-record(dfanout, "$(S)$(ND)Loop$(L):SP_ResSetPrec")
-{
-  field(OMSL, "closed_loop")
-  field(DOL, "$(PREC).VAL NPP MS")
-  field(OUTA, "$(S)$(ND)Loop$(L):SP:HighLimit.PREC PP")
-  field(OUTB, "$(S)$(ND)Loop$(L):SP:LowLimit.PREC PP")
-  field(OUTC, "$(S)$(ND)Loop$(L):SP:HighLimitSet.PREC PP")
-  field(OUTD, "$(S)$(ND)Loop$(L):SP:LowLimitSet.PREC PP")
-}
 
 ############################################################
 # Read records
@@ -58,6 +25,8 @@ record(ai, "$(S)$(ND)Loop$(L):SP:HighLimit")
   field(INP, "@asyn($(PORT),2,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):SP:LowLimit")
@@ -66,6 +35,19 @@ record(ai, "$(S)$(ND)Loop$(L):SP:LowLimit")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),3,1)")
   field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SP:Rate")
+{
+  field(DESC, "Loop$(L) SP Rate")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),6,1)")
+  field(SCAN, "I/O Intr")
+  field(ESLO, "0.1")
+  field(PREC, "1")
   field(LINR, "LINEAR")
 }
 
@@ -81,6 +63,8 @@ record(ao, "$(S)$(ND)Loop$(L):SP:HighLimitSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,2,1)")
   field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):SP:LowLimitSet")
@@ -89,4 +73,16 @@ record(ao, "$(S)$(ND)Loop$(L):SP:LowLimitSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,3,1)")
   field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SP:RateSet")
+{
+  field(DESC, "Set Loop$(L) SP Rate")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,6,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
 }
