@@ -82,6 +82,57 @@ record(bi, "$(S)$(ND)Loop$(L):Inhibit")
   field(ONAM, "Yes")
 }
 
+record(bi, "$(S)$(ND)Loop$(L):SP:RateDone")
+{
+  field(DESC, "Loop$(L) SP Rate Done")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),10,1)")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):Diag:Error")
+{
+  field(DESC, "Loop$(L) Error")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),13,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+}
+
+record(bi, "$(S)$(ND)Loop$(L):Diag:SensorBreak")
+{
+  field(DESC, "Loop$(L) Sensor Break")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),19,1)")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):Diag:OutLow")
+{
+  field(DESC, "Loop$(L) Working Low Lim")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),20,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):Diag:OutHigh")
+{
+  field(DESC, "Loop$(L) Working High Lim")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),21,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "%")
+}
+
 ############################################################
 # Write records
 ############################################################

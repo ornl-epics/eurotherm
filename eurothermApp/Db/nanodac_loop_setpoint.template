@@ -55,8 +55,6 @@ record(ai, "$(S)$(ND)Loop$(L):SP:Rate")
 # Write records
 ############################################################
 
-#NOTE: These are not working yet.
-
 record(ao, "$(S)$(ND)Loop$(L):SP:HighLimitSet")
 {
   field(DESC, "Set Loop$(L) SP High Limit")
@@ -86,3 +84,4 @@ record(ao, "$(S)$(ND)Loop$(L):SP:RateSet")
   field(ESLO, "0.1")
   field(PREC, "1")
 }
+
