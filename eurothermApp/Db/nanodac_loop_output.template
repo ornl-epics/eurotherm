@@ -31,6 +31,7 @@ record(ai, "$(S)$(ND)Loop$(L):Output:High")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Output:Low")
@@ -43,6 +44,7 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Low")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Output:Rate")
@@ -54,6 +56,7 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Rate")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Output:Manual")
@@ -66,6 +69,7 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Manual")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:SchPB")
@@ -78,6 +82,7 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchPB")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:SchTi")
@@ -88,6 +93,7 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchTi")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
   field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:SchTd")
@@ -98,6 +104,7 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchTd")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
   field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutHigh")
@@ -110,6 +117,7 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutHigh")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutLow")
@@ -122,6 +130,7 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutLow")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 ############################################################
@@ -137,6 +146,7 @@ record(ao, "$(S)$(ND)Loop$(L):Output:HighSet")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):Output:LowSet")
@@ -148,6 +158,7 @@ record(ao, "$(S)$(ND)Loop$(L):Output:LowSet")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):Output:RateSet")
@@ -158,6 +169,7 @@ record(ao, "$(S)$(ND)Loop$(L):Output:RateSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):Output:ManualSet")
@@ -169,5 +181,6 @@ record(ao, "$(S)$(ND)Loop$(L):Output:ManualSet")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 

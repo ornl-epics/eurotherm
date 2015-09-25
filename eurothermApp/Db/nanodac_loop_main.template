@@ -27,6 +27,7 @@ record(ai, "$(S)$(ND)Loop$(L):PV")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):SP")
@@ -38,6 +39,7 @@ record(ai, "$(S)$(ND)Loop$(L):SP")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):WSP")
@@ -49,6 +51,7 @@ record(ai, "$(S)$(ND)Loop$(L):WSP")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(bi, "$(S)$(ND)Loop$(L):Auto")
@@ -59,6 +62,7 @@ record(bi, "$(S)$(ND)Loop$(L):Auto")
   field(SCAN, "I/O Intr")
   field(ZNAM, "Auto")
   field(ONAM, "Manual")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Output")
@@ -70,6 +74,7 @@ record(ai, "$(S)$(ND)Loop$(L):Output")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(bi, "$(S)$(ND)Loop$(L):Inhibit")
@@ -80,6 +85,7 @@ record(bi, "$(S)$(ND)Loop$(L):Inhibit")
   field(SCAN, "I/O Intr")
   field(ZNAM, "No")
   field(ONAM, "Yes")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(bi, "$(S)$(ND)Loop$(L):SP:RateDone")
@@ -90,6 +96,7 @@ record(bi, "$(S)$(ND)Loop$(L):SP:RateDone")
   field(SCAN, "I/O Intr")
   field(ZNAM, "No")
   field(ONAM, "Yes")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:Error")
@@ -101,6 +108,7 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:Error")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(bi, "$(S)$(ND)Loop$(L):Diag:SensorBreak")
@@ -113,6 +121,7 @@ record(bi, "$(S)$(ND)Loop$(L):Diag:SensorBreak")
   field(ONAM, "Yes")
   field(ZSV, "NO_ALARM")
   field(OSV, "MAJOR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:OutLow")
@@ -123,6 +132,7 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:OutLow")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:OutHigh")
@@ -133,6 +143,7 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:OutHigh")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:POut")
@@ -142,6 +153,7 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:POut")
   field(INP, "@asyn($(PORT),16,1)")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:IOut")
@@ -151,6 +163,7 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:IOut")
   field(INP, "@asyn($(PORT),17,1)")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):Diag:DOut")
@@ -160,6 +173,7 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:DOut")
   field(INP, "@asyn($(PORT),18,1)")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 ############################################################
@@ -174,6 +188,7 @@ record(ao, "$(S)$(ND)Loop$(L):SPSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(bo, "$(S)$(ND)Loop$(L):InhibitSet")
@@ -183,5 +198,6 @@ record(bo, "$(S)$(ND)Loop$(L):InhibitSet")
   field(OUT, "@asyn($(PORT)w,5,1)")
   field(ZNAM, "No")
   field(ONAM, "Yes")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
