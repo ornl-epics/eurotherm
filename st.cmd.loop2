@@ -2,7 +2,7 @@
 # Read the loop 2 main params (640 to 661)
 drvModbusAsynConfigure("n$(NI)l2", "n$(NI)ip", 1, 4, 640, 22, 4, 1000, 0)
 # Write function for loop 2 main (640 to 645)
-drvModbusAsynConfigure("n$(NI)l2w", "n$(NI)ip", 1, 6, 540, 6, 4, 1000, 0)
+drvModbusAsynConfigure("n$(NI)l2w", "n$(NI)ip", 1, 6, 640, 6, 4, 1000, 0)
 
 # NOTE: loop prams for output, PID and setpoint are in 
 # contiguous memory regions so could be read in one block.
