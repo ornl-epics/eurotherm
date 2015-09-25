@@ -37,16 +37,19 @@ drvModbusAsynConfigure("n$(NI)cv4res", "n$(NI)ip", 1, 4, 7554, 1, 4, 10000, 0)
 drvModbusAsynConfigure("n$(NI)cv5res", "n$(NI)ip", 1, 4, 7682, 1, 4, 10000, 0)
 drvModbusAsynConfigure("n$(NI)cv6res", "n$(NI)ip", 1, 4, 7810, 1, 4, 10000, 0)
 
-# The channel description (and units string) seem to occupy 28 words.
-drvModbusAsynConfigure("n$(NI)ch1str", "n$(NI)ip", 1, 4, 18688, 28, 4, 10000, 0)
-drvModbusAsynConfigure("n$(NI)ch2str", "n$(NI)ip", 1, 4, 18715, 28, 4, 10000, 0)
-drvModbusAsynConfigure("n$(NI)ch3str", "n$(NI)ip", 1, 4, 18742, 28, 4, 10000, 0)
-drvModbusAsynConfigure("n$(NI)ch4str", "n$(NI)ip", 1, 4, 18769, 28, 4, 10000, 0)
+# The channel description (and units string) seem to occupy 25 words.
+# 20 registers for the description
+# 5 registers for the units
+# 1 char per register, stored in the high order byte.
+drvModbusAsynConfigure("n$(NI)ch1str", "n$(NI)ip", 1, 4, 18688, 25, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)ch2str", "n$(NI)ip", 1, 4, 18715, 25, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)ch3str", "n$(NI)ip", 1, 4, 18742, 25, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)ch4str", "n$(NI)ip", 1, 4, 18769, 25, 4, 10000, 0)
 
-drvModbusAsynConfigure("n$(NI)cv1str", "n$(NI)ip", 1, 4, 19200, 28, 4, 10000, 0)
-drvModbusAsynConfigure("n$(NI)cv2str", "n$(NI)ip", 1, 4, 19227, 28, 4, 10000, 0)
-drvModbusAsynConfigure("n$(NI)cv3str", "n$(NI)ip", 1, 4, 19254, 28, 4, 10000, 0)
-drvModbusAsynConfigure("n$(NI)cv4str", "n$(NI)ip", 1, 4, 19281, 28, 4, 10000, 0)
-drvModbusAsynConfigure("n$(NI)cv5str", "n$(NI)ip", 1, 4, 19308, 28, 4, 10000, 0)
-drvModbusAsynConfigure("n$(NI)cv6str", "n$(NI)ip", 1, 4, 19335, 28, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv1str", "n$(NI)ip", 1, 4, 19200, 25, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv2str", "n$(NI)ip", 1, 4, 19227, 25, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv3str", "n$(NI)ip", 1, 4, 19254, 25, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv4str", "n$(NI)ip", 1, 4, 19281, 25, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv5str", "n$(NI)ip", 1, 4, 19308, 25, 4, 10000, 0)
+drvModbusAsynConfigure("n$(NI)cv6str", "n$(NI)ip", 1, 4, 19335, 25, 4, 10000, 0)
 
