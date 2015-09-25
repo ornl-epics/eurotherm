@@ -56,12 +56,18 @@ record(mbbi, "$(S)$(ND)Loop$(L):PID:NumSets")
   field(TWST, "3 Sets")
 }
 
-record(longin, "$(S)$(ND)Loop$(L):PID:ActiveSet")
+record(mbbi, "$(S)$(ND)Loop$(L):PID:ActiveSet")
 {
   field(DESC, "Loop$(L) Output Num Sets")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),3,1)")
   field(SCAN, "I/O Intr")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "Set 1")
+  field(ONST, "Set 2")
+  field(TWST, "Set 3")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Boundary12")
@@ -286,11 +292,17 @@ record(mbbo, "$(S)$(ND)Loop$(L):PID:NumSetsSet")
   field(TWST, "3 Sets")
 }
 
-record(longout, "$(S)$(ND)Loop$(L):PID:ActiveSetSet")
+record(mbbo, "$(S)$(ND)Loop$(L):PID:ActiveSetSet")
 {
   field(DESC, "Set Loop$(L) PID Active Set")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,3,1)")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "Set 1")
+  field(ONST, "Set 2")
+  field(TWST, "Set 3")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:Boundary12Set")
