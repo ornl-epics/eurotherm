@@ -42,12 +42,18 @@ record(mbbi, "$(S)$(ND)Loop$(L):PID:Type")
   field(SXST, "Remote")
 }
 
-record(ai, "$(S)$(ND)Loop$(L):PID:NumSets")
+record(mbbi, "$(S)$(ND)Loop$(L):PID:NumSets")
 {
-  field(DESC, "Loop$(L) Output Num Sets")
+  field(DESC, "Loop$(L) PID Num Sets")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),1,1)")
   field(SCAN, "I/O Intr")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "1 Set")
+  field(ONST, "2 Sets")
+  field(TWST, "3 Sets")
 }
 
 record(longin, "$(S)$(ND)Loop$(L):PID:ActiveSet")
@@ -267,11 +273,17 @@ record(mbbo, "$(S)$(ND)Loop$(L):PID:TypeSet")
   field(SXST, "Remote")  
 }
 
-record(ao, "$(S)$(ND)Loop$(L):PID:NumSetsSet")
+record(mbbo, "$(S)$(ND)Loop$(L):PID:NumSetsSet")
 {
   field(DESC, "Set Loop$(L) PID Num Sets")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,1,1)")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "1 Set")
+  field(ONST, "2 Sets")
+  field(TWST, "3 Sets")
 }
 
 record(longout, "$(S)$(ND)Loop$(L):PID:ActiveSetSet")
