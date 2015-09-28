@@ -8,13 +8,13 @@
 #
 # S - base PV name
 # ND - PV name for this Nanodac
-# NI - index number for this Nanodac (default 1)
+# NI - index number for this Nanodac
 #
 ############################################################
 
 # ///
 # /// Generic Asyn record.
-# /// Not useful to modbus params, but we can see the 
+# /// Not useful for modbus params, but we can see the 
 # /// socket connect status via the CNCT field
 # ///
 record(asyn,"$(S)$(ND)Asyn")

@@ -20,6 +20,9 @@
 # Read records
 ############################################################
 
+# /// 
+# /// Read the PID type  
+# ///
 record(mbbi, "$(S)$(ND)Loop$(L):PID:Type")
 {
   field(DESC, "Loop$(L) PID Type")
@@ -42,6 +45,9 @@ record(mbbi, "$(S)$(ND)Loop$(L):PID:Type")
   field(SXST, "Remote")
 }
 
+# /// 
+# /// Read the number of PID sets in use 
+# ///
 record(mbbi, "$(S)$(ND)Loop$(L):PID:NumSets")
 {
   field(DESC, "Loop$(L) PID Num Sets")
@@ -56,6 +62,9 @@ record(mbbi, "$(S)$(ND)Loop$(L):PID:NumSets")
   field(TWST, "3 Sets")
 }
 
+# /// 
+# /// Read the currently active PID set 
+# ///
 record(mbbi, "$(S)$(ND)Loop$(L):PID:ActiveSet")
 {
   field(DESC, "Loop$(L) Output Num Sets")
@@ -70,6 +79,9 @@ record(mbbi, "$(S)$(ND)Loop$(L):PID:ActiveSet")
   field(TWST, "Set 3")
 }
 
+# /// 
+# /// Read the PV boundary between set 1 ad 2 
+# ///
 record(ai, "$(S)$(ND)Loop$(L):PID:Boundary12")
 {
   field(DESC, "Loop$(L) PID Boundary12")
@@ -78,6 +90,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Boundary12")
   field(SCAN, "I/O Intr")
 }
 
+# /// 
+# /// Read the PV boundary between set 2 ad 3 
+# ///
 record(ai, "$(S)$(ND)Loop$(L):PID:Boundary23")
 {
   field(DESC, "Loop$(L) PID Boundary23")
@@ -86,6 +101,10 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Boundary23")
   field(SCAN, "I/O Intr")
 }
 
+# /// 
+# /// The below records read the P, I and D values for 
+# /// sets 1 to 3. 
+# ///
 record(ai, "$(S)$(ND)Loop$(L):PID:PB1")
 {
   field(DESC, "Loop$(L) PB1")
@@ -182,6 +201,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Td3")
   field(EGU, "sec")
 }
 
+# ///
+# /// The below records read the output limits for each PID set.
+# ///
 record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh1")
 {
   field(DESC, "Loop$(L) Output High 1")
@@ -258,6 +280,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow3")
 # Write records
 ############################################################
 
+# ///
+# /// Set the PID type
+# ///
 record(mbbo, "$(S)$(ND)Loop$(L):PID:TypeSet")
 {
   field(DESC, "Set Loop$(L) PID Type")
@@ -279,6 +304,9 @@ record(mbbo, "$(S)$(ND)Loop$(L):PID:TypeSet")
   field(SXST, "Remote")  
 }
 
+# /// 
+# /// Set the number of sets in use (1, 2 or 3). 
+# ///
 record(mbbo, "$(S)$(ND)Loop$(L):PID:NumSetsSet")
 {
   field(DESC, "Set Loop$(L) PID Num Sets")
@@ -292,6 +320,10 @@ record(mbbo, "$(S)$(ND)Loop$(L):PID:NumSetsSet")
   field(TWST, "3 Sets")
 }
 
+# ///
+# /// Set the PID set to use
+# /// This only works if we are in 'Set' PID Type. 
+# ///
 record(mbbo, "$(S)$(ND)Loop$(L):PID:ActiveSetSet")
 {
   field(DESC, "Set Loop$(L) PID Active Set")
@@ -305,6 +337,9 @@ record(mbbo, "$(S)$(ND)Loop$(L):PID:ActiveSetSet")
   field(TWST, "Set 3")
 }
 
+# ///
+# /// Set the PV boundary between set 1 and 2 
+# ///
 record(ao, "$(S)$(ND)Loop$(L):PID:Boundary12Set")
 {
   field(DESC, "Set Loop$(L) PID Boundary12")
@@ -312,12 +347,20 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Boundary12Set")
   field(OUT, "@asyn($(PORT)w,4,1)")
 }
 
+# /// 
+# /// Set the PV boundary between set 2 and 3 
+# ///
 record(ao, "$(S)$(ND)Loop$(L):PID:Boundary23Set")
 {
   field(DESC, "Set Loop$(L) PID Boundary23")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,5,1)")
 }
+
+# ///
+# /// The following records allow setting of the 
+# /// PID parameters for each set.
+# ///
 
 record(ao, "$(S)$(ND)Loop$(L):PID:PB1Set")
 {
@@ -405,6 +448,11 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Td3Set")
   field(PREC, "0")
   field(EGU, "sec")
 }
+
+# ///
+# /// The following records allow setting of the 
+# /// lower and high limits for the set output power.
+# ///
 
 record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh1Set")
 {

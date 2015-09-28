@@ -21,6 +21,9 @@
 # Read records
 ############################################################
 
+# ///
+# /// Read the output high limit
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Output:High")
 {
   field(DESC, "Loop$(L) Output High")
@@ -34,6 +37,9 @@ record(ai, "$(S)$(ND)Loop$(L):Output:High")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Read the output low limit
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Output:Low")
 {
   field(DESC, "Loop$(L) Output Low")
@@ -47,6 +53,10 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Low")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Read the output ramp rate.
+# /// This limits how fast the PID output can change.
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Output:Rate")
 {
   field(DESC, "Loop$(L) Output Rate")
@@ -59,6 +69,9 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Rate")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Read the manual output power setting 
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Output:Manual")
 {
   field(DESC, "Loop$(L) Output Man Setting")
@@ -72,6 +85,10 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Manual")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Read the proportional gain parameter used now 
+# /// for the current PID set.
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Diag:SchPB")
 {
   field(DESC, "Loop$(L) Sched PB")
@@ -85,6 +102,10 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchPB")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Read the integral gain parameter used now 
+# /// for the current PID set.
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Diag:SchTi")
 {
   field(DESC, "Loop$(L) Sched Ti")
@@ -96,6 +117,10 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchTi")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Read the derivative gain parameter used now 
+# /// for the current PID set.
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Diag:SchTd")
 {
   field(DESC, "Loop$(L) Sched Td")
@@ -107,6 +132,10 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchTd")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Read the output high limit used now 
+# /// for the current PID set.
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutHigh")
 {
   field(DESC, "Loop$(L) Sched High Lim")
@@ -120,6 +149,10 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutHigh")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Read the output low limit used now 
+# /// for the current PID set.
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutLow")
 {
   field(DESC, "Loop$(L) Sched Low Lim")
@@ -137,6 +170,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutLow")
 # Write records
 ############################################################
 
+# ///
+# /// Set the high limit for the output power
+# ///
 record(ao, "$(S)$(ND)Loop$(L):Output:HighSet")
 {
   field(DESC, "Set Loop$(L) Output High")
@@ -149,6 +185,9 @@ record(ao, "$(S)$(ND)Loop$(L):Output:HighSet")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Set the low limit for the output power
+# ///
 record(ao, "$(S)$(ND)Loop$(L):Output:LowSet")
 {
   field(DESC, "Set Loop$(L) Output Low")
@@ -161,6 +200,10 @@ record(ao, "$(S)$(ND)Loop$(L):Output:LowSet")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Set the ramp rate for the output power
+# /// This limits how fast the PID output can change.
+# ///
 record(ao, "$(S)$(ND)Loop$(L):Output:RateSet")
 {
   field(DESC, "Set Loop$(L) Output Rate")
@@ -172,6 +215,9 @@ record(ao, "$(S)$(ND)Loop$(L):Output:RateSet")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Set the manual output power setting 
+# ///
 record(ao, "$(S)$(ND)Loop$(L):Output:ManualSet")
 {
   field(DESC, "Set Loop$(L) Output Man Setting")

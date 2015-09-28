@@ -18,6 +18,10 @@
 # Read records
 ############################################################
 
+# ///
+# /// Read the process variable used in this loop.
+# /// This is usually set up on the controller.
+# ///
 record(ai, "$(S)$(ND)Loop$(L):PV")
 {
   field(DESC, "Loop$(L) Process Variable")
@@ -30,6 +34,9 @@ record(ai, "$(S)$(ND)Loop$(L):PV")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the setpoint
+# ///
 record(ai, "$(S)$(ND)Loop$(L):SP")
 {
   field(DESC, "Loop$(L) Setpoint")
@@ -42,6 +49,9 @@ record(ai, "$(S)$(ND)Loop$(L):SP")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the working setpoint
+# ///
 record(ai, "$(S)$(ND)Loop$(L):WSP")
 {
   field(DESC, "Loop$(L) Working Setpoint")
@@ -54,6 +64,9 @@ record(ai, "$(S)$(ND)Loop$(L):WSP")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the auto/manual setting
+# ///
 record(bi, "$(S)$(ND)Loop$(L):Auto")
 {
   field(DESC, "Loop$(L) Auto/Man")
@@ -65,6 +78,9 @@ record(bi, "$(S)$(ND)Loop$(L):Auto")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the working loop output 
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Output")
 {
   field(DESC, "Loop$(L) Output")
@@ -78,6 +94,9 @@ record(ai, "$(S)$(ND)Loop$(L):Output")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the loop inhibit status 
+# ///
 record(bi, "$(S)$(ND)Loop$(L):Inhibit")
 {
   field(DESC, "Loop$(L) Inhibit")
@@ -89,6 +108,9 @@ record(bi, "$(S)$(ND)Loop$(L):Inhibit")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the if the setpoint ramp has been completed 
+# ///
 record(bi, "$(S)$(ND)Loop$(L):SP:RateDone")
 {
   field(DESC, "Loop$(L) SP Rate Done")
@@ -100,6 +122,9 @@ record(bi, "$(S)$(ND)Loop$(L):SP:RateDone")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the loop error status 
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Diag:Error")
 {
   field(DESC, "Loop$(L) Error")
@@ -112,6 +137,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:Error")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the loop sensor break status 
+# ///
 record(bi, "$(S)$(ND)Loop$(L):Diag:SensorBreak")
 {
   field(DESC, "Loop$(L) Sensor Break")
@@ -125,6 +153,9 @@ record(bi, "$(S)$(ND)Loop$(L):Diag:SensorBreak")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the loop output low limit 
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Diag:OutLow")
 {
   field(DESC, "Loop$(L) Working Low Lim")
@@ -136,6 +167,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:OutLow")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the loop output high limit
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Diag:OutHigh")
 {
   field(DESC, "Loop$(L) Working High Lim")
@@ -147,6 +181,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:OutHigh")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the proportional gain loop contribution 
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Diag:POut")
 {
   field(DESC, "Loop$(L) Prop. Output")
@@ -157,6 +194,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:POut")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the integral gain loop contribution 
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Diag:IOut")
 {
   field(DESC, "Loop$(L) Integral Output")
@@ -167,6 +207,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:IOut")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Read the derivative gain loop contribution 
+# ///
 record(ai, "$(S)$(ND)Loop$(L):Diag:DOut")
 {
   field(DESC, "Loop$(L) Deriv. Output")
@@ -181,6 +224,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:DOut")
 # Write records
 ############################################################
 
+# /// 
+# /// Set the loop auto/manual mode 
+# ///
 record(bo, "$(S)$(ND)Loop$(L):AutoSet")
 {
   field(DESC, "Loop$(L) Auto/Man")
@@ -191,6 +237,9 @@ record(bo, "$(S)$(ND)Loop$(L):AutoSet")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Set the loop setpoint demand value 
+# ///
 record(ao, "$(S)$(ND)Loop$(L):SPSet")
 {
   field(DESC, "Set Loop$(L) Setpoint")
@@ -202,6 +251,9 @@ record(ao, "$(S)$(ND)Loop$(L):SPSet")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Inhibit the loop output 
+# ///
 record(bo, "$(S)$(ND)Loop$(L):InhibitSet")
 {
   field(DESC, "Set Loop$(L) Inhibit")

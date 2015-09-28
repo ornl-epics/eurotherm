@@ -18,6 +18,9 @@
 # Read records
 ############################################################
 
+# ///
+# /// Read the high limit on the setpoint
+# ///
 record(ai, "$(S)$(ND)Loop$(L):SP:HighLimit")
 {
   field(DESC, "Loop$(L) SP High Limit")
@@ -29,6 +32,9 @@ record(ai, "$(S)$(ND)Loop$(L):SP:HighLimit")
   field(PREC, "1")
 }
 
+# ///
+# /// Read the low limit on the setpoint
+# ///
 record(ai, "$(S)$(ND)Loop$(L):SP:LowLimit")
 {
   field(DESC, "Loop$(L) SP Low Limit")
@@ -40,6 +46,10 @@ record(ai, "$(S)$(ND)Loop$(L):SP:LowLimit")
   field(PREC, "1")
 }
 
+# ///
+# /// Read the rate limit on the setpoint change
+# /// This affects how fast the working setpoint can change.
+# ///
 record(ai, "$(S)$(ND)Loop$(L):SP:Rate")
 {
   field(DESC, "Loop$(L) SP Rate")
@@ -55,6 +65,9 @@ record(ai, "$(S)$(ND)Loop$(L):SP:Rate")
 # Write records
 ############################################################
 
+# ///
+# /// Set the high limit on the setpoint
+# ///
 record(ao, "$(S)$(ND)Loop$(L):SP:HighLimitSet")
 {
   field(DESC, "Set Loop$(L) SP High Limit")
@@ -65,6 +78,9 @@ record(ao, "$(S)$(ND)Loop$(L):SP:HighLimitSet")
   field(PREC, "1")
 }
 
+# ///
+# /// Set the low limit on the setpoint
+# ///
 record(ao, "$(S)$(ND)Loop$(L):SP:LowLimitSet")
 {
   field(DESC, "Set Loop$(L) SP Low Limit")
@@ -75,6 +91,10 @@ record(ao, "$(S)$(ND)Loop$(L):SP:LowLimitSet")
   field(PREC, "1")
 }
 
+# ///
+# /// Set the rate limit on the setpoint change.
+# /// This affects how fast the working setpoint can change.
+# ///
 record(ao, "$(S)$(ND)Loop$(L):SP:RateSet")
 {
   field(DESC, "Set Loop$(L) SP Rate")
