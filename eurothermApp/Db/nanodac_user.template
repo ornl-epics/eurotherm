@@ -58,7 +58,7 @@ record(ai, "$(S)$(ND)User$(U):Val")
 # /// 
 # /// Read the user $(U) status
 # ///
-record(bi, "$(S)$(ND)User$(L):Status")
+record(bi, "$(S)$(ND)User$(U):Status")
 {
   field(DESC, "User $(U) Status")
   field(DTYP, "asynInt32")
@@ -114,7 +114,38 @@ record(dfanout, "$(S)$(ND)User$(U):ResSetPrec")
   field(OUTD, "$(S)$(ND)User$(U):HighLimSet.PREC NPP")
   field(OUTE, "$(S)$(ND)User$(U):LowLimSet.PREC NPP")
   field(OUTF, "$(S)$(ND)User$(U):ValSet.PREC NPP")
+  field(FLNK, "$(S)$(ND)User$(U):SyncVal")
 }
+
+# ///
+# /// The following records read the readback and set the 
+# /// set records. We need to do this because we can only
+# /// set ESLO and PREC on the set records after IOC init, 
+# /// which means the set records typically are initialized 
+# /// with PREC=0. So the set field can be out of sync with
+# /// the readback. This solves that issue, but it's not nice.
+# ///
+record(seq, "$(S)$(ND)User$(U):SyncVal")
+{
+  field(DLY1, "2")
+  field(DOL1, "$(S)$(ND)User$(U):Val.VAL NPP MS")
+  field(LNK1, "$(S)$(ND)User$(U):ValSet NPP")
+  field(FLNK, "$(S)$(ND)User$(U):SyncHigh")
+}
+record(dfanout, "$(S)$(ND)User$(U):SyncHigh")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)User$(U):HighLim.VAL NPP MS")
+  field(OUTA, "$(S)$(ND)User$(U):HighLimSet NPP")
+  field(FLNK, "$(S)$(ND)User$(U):SyncLow")
+}
+record(dfanout, "$(S)$(ND)User$(U):SyncLow")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)User$(U):LowLim.VAL NPP MS")
+  field(OUTA, "$(S)$(ND)User$(U):LowLimSet NPP")
+}
+
 
 ############################################################
 # Write records
