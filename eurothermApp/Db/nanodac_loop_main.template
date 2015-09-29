@@ -248,8 +248,71 @@ record(ao, "$(S)$(ND)Loop$(L):SPSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  field(FLNK, "$(S)$(ND)Loop$(L):SPBusySet.PROC")
   info(archive, "Monitor, 00:00:01, VAL")
 }
+
+############################################################
+# A few records to support put_callback on the setpoint. 
+# We use the busy record. A PV window is used. 
+# The PV must be within the window, before the callback is done.
+############################################################
+	
+record(dfanout, "$(S)$(ND)Loop$(L):SPBusySet")
+{
+  field(VAL, "0")
+  field(OUTA, "$(S)$(ND)Loop$(L):InWindow.VAL PP")
+  field(FLNK, "$(S)$(ND)Loop$(L):SPBusySet2")
+}
+record(dfanout, "$(S)$(ND)Loop$(L):SPBusySet2")
+{
+   field(VAL, "1")
+   field(OUTA, "$(S)$(ND)Loop$(L):SPBusy PP")
+   field(FLNK, "$(S)$(ND)Loop$(L):CalcInWindow")
+}
+record(busy, "$(S)$(ND)Loop$(L):SPBusy")
+{
+}
+record(calcout, "$(S)$(ND)Loop$(L):CalcInWindow") {
+  field(PINI, "YES")
+  field(INPA, "$(S)$(ND)Loop$(L):Tolerance.VAL")
+  field(INPB, "$(S)$(ND)Loop$(L):PV.VAL")
+  field(INPC, "$(S)$(ND)Loop$(L):SPSet.VAL")
+  field(CALC, "((B>=(C-A))&&(B<=(C+A)))?1:0")
+  field(OOPT, "Every Time")
+  field(OUT, "$(S)$(ND)Loop$(L):InWindow.VAL PP")
+  field(DOPT, "Use CALC")
+  field(SCAN, "1 second")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, A B C VAL")   
+}
+record(ai, "$(S)$(ND)Loop$(L):Tolerance")
+{
+  field(PINI, "YES")
+  field(VAL, "$(TOLERANCE=1)")
+  info(autosaveFields, "VAL")
+  info(archive, "Monitor, 00:00:01, VAL")   
+}
+record(bo, "$(S)$(ND)Loop$(L):InWindow") {
+  field(DESC, "PV In Window")
+  field(VAL, "0")
+  field(PINI, "YES")
+  field(OMSL, "supervisory")
+  field(ZNAM, "Not In Window")
+  field(ONAM, "In Window")
+  info(archive, "Monitor, 00:00:01, VAL")   
+}
+# ///
+# /// Set busy record 'done' when $(S)$(ND)Loop$(L):InWindow=1
+# ///
+record(calcout, "$(S)$(ND)Loop$(L):SPBusyDone") {
+  field(INPA, "$(S)$(ND)Loop$(L):InWindow.VAL CP")
+  field(CALC, "(A=1)?0:1")
+  field(OOPT, "Every Time")
+  field(OUT, "$(S)$(ND)Loop$(L):SPBusy.VAL PP")
+}
+
+############################################################
 
 # /// 
 # /// Inhibit the loop output 
