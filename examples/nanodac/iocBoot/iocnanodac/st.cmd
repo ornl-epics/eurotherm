@@ -29,6 +29,8 @@ epicsEnvSet("NI","1")
 
 < $(EUROTHERM)/st.cmd.loop2
 
+< $(EUROTHERM)/st.cmd.user
+
 ####################################################################
 
 ## Load record instances

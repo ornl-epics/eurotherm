@@ -1,0 +1,6 @@
+
+# Read the user value 1 params (11916 to 11920)
+drvModbusAsynConfigure("n$(NI)u1", "n$(NI)ip", 1, 4, 11916, 5, 4, 1000, 0)
+# Write function for user value 1 params (11916 to 11920)
+drvModbusAsynConfigure("n$(NI)u1w", "n$(NI)ip", 1, 6, 11916, 5, 4, 1000, 0)
+

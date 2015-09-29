@@ -1,0 +1,157 @@
+
+#############################################################
+#
+# Database template to read and write user variables
+# for the eurotherm nanodac.  
+# 
+# S - base PV name
+# ND - name for this nanodac
+# U - user variable ID number (1 to 12)
+# PORT - asyn port name for user data
+#
+# Note: By convention the port name for the writeable parameters
+# is the same as the read parameters, but with a 'w' on the end.
+#
+############################################################
+
+############################################################
+# Read records
+############################################################
+
+# /// 
+# /// Read the user $(U) high limit
+# ///
+record(ai, "$(S)$(ND)User$(U):HighLim")
+{
+  field(DESC, "User $(U) High Limit")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),0,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+}
+
+# /// 
+# /// Read the user $(U) low limit
+# ///
+record(ai, "$(S)$(ND)User$(U):LowLim")
+{
+  field(DESC, "User $(U) Low Limit")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),1,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+}
+
+# ///
+# /// Read the user $(U) value
+# ///
+record(ai, "$(S)$(ND)User$(U):Val")
+{
+  field(DESC, "User $(U) Value")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),2,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the user $(U) status
+# ///
+record(bi, "$(S)$(ND)User$(L):Status")
+{
+  field(DESC, "User $(U) Status")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),3,1)")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "Ok")
+  field(ONAM, "Error")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the user $(U) resolution
+# /// Based on this, set the PREC and ESLO fields
+# /// in the various records.
+# ///
+record(ai, "$(S)$(ND)User$(U):Res")
+{
+  field(DESC, "User $(U) Resolution")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),4,1)")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "$(S)$(ND)User$(U):ResSetCalc")
+}
+
+record(calcout, "$(S)$(ND)User$(U):ResSetCalc")
+{
+  field(INPA, "$(S)$(ND)User$(U):Res.VAL NPP MS")
+  field(CALC, "1/(10**A)")
+  field(DOPT, "Use CALC")
+  field(OOPT, "On Change")
+  field(OUT, "$(S)$(ND)User$(U):EsloSetPrec.VAL PP")
+}
+
+record(dfanout, "$(S)$(ND)User$(U):EsloSetPrec")
+{
+  field(OMSL, "supervisory")
+  field(OUTA, "$(S)$(ND)User$(U):HighLim.ESLO PP")
+  field(OUTB, "$(S)$(ND)User$(U):LowLim.ESLO PP")
+  field(OUTC, "$(S)$(ND)User$(U):Val.ESLO PP")
+  field(OUTD, "$(S)$(ND)User$(U):HighLimSet.ESLO NPP")
+  field(OUTE, "$(S)$(ND)User$(U):LowLimSet.ESLO NPP")
+  field(OUTF, "$(S)$(ND)User$(U):ValSet.ESLO NPP")
+  field(FLNK, "$(S)$(ND)User$(U):ResSetPrec")
+}
+
+record(dfanout, "$(S)$(ND)User$(U):ResSetPrec")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)User$(U):Res.VAL NPP MS")
+  field(OUTA, "$(S)$(ND)User$(U):HighLim.PREC PP")
+  field(OUTB, "$(S)$(ND)User$(U):LowLim.PREC PP")
+  field(OUTC, "$(S)$(ND)User$(U):Val.PREC PP")
+  field(OUTD, "$(S)$(ND)User$(U):HighLimSet.PREC NPP")
+  field(OUTE, "$(S)$(ND)User$(U):LowLimSet.PREC NPP")
+  field(OUTF, "$(S)$(ND)User$(U):ValSet.PREC NPP")
+}
+
+############################################################
+# Write records
+############################################################
+
+# /// 
+# /// Set the user $(U) high limit
+# ///
+record(ao, "$(S)$(ND)User$(U):HighLimSet")
+{
+  field(DESC, "Set User $(U) High Limit")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,0,1)")
+  field(LINR, "LINEAR")
+}
+
+# /// 
+# /// Set the user $(U) low limit
+# ///
+record(ao, "$(S)$(ND)User$(U):LowLimSet")
+{
+  field(DESC, "Set User $(U) Low Limit")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,1,1)")
+  field(LINR, "LINEAR")
+}
+
+# /// 
+# /// Set the user $(U) value
+# ///
+record(ao, "$(S)$(ND)User$(U):ValSet")
+{
+  field(DESC, "Set User $(U) Value")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,2,1)")
+  field(LINR, "LINEAR")
+}
+
+
+

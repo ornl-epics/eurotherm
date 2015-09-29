@@ -144,4 +144,10 @@ substitute "L=2"
 substitute "PORT=n$(NI)l2o"
 include "nanodac_loop_setpoint.template"
 
+# ///
+# /// Instantiate the user variables
+# ///
 
+substitute "U=1"
+substitute "PORT=n$(NI)u1"
+include "nanodac_user.template"
