@@ -1,6 +1,7 @@
 
-# Read the user value 1 params (11916 to 11920)
-drvModbusAsynConfigure("n$(NI)u1", "n$(NI)ip", 1, 4, 11916, 5, 4, 1000, 0)
-# Write function for user value 1 params (11916 to 11920)
-drvModbusAsynConfigure("n$(NI)u1w", "n$(NI)ip", 1, 6, 11916, 5, 4, 1000, 0)
+# Read the user value 1-12 params (11916 to 11975)
+# NOTE: there are is a 5 word offset between user value memory blocks
+drvModbusAsynConfigure("n$(NI)u", "n$(NI)ip", 1, 4, 11916, 60, 4, 1000, 0)
+# Write function for user value 1-12 params (11916 to 11975)
+drvModbusAsynConfigure("n$(NI)uw", "n$(NI)ip", 1, 6, 11916, 60, 4, 1000, 0)
 

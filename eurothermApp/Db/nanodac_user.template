@@ -8,6 +8,11 @@
 # ND - name for this nanodac
 # U - user variable ID number (1 to 12)
 # PORT - asyn port name for user data
+# HIG_OFFSET - word offset for high limit
+# LOW_OFFSET - word offset for low limit
+# VAL_OFFSET - word offset for value
+# STA_OFFSET - word offset for status
+# RES_OFFSET - word offset for resolution
 #
 # Note: By convention the port name for the writeable parameters
 # is the same as the read parameters, but with a 'w' on the end.
@@ -25,7 +30,7 @@ record(ai, "$(S)$(ND)User$(U):HighLim")
 {
   field(DESC, "User $(U) High Limit")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),0,1)")
+  field(INP, "@asyn($(PORT),$(HIG_OFFSET),1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
 }
@@ -37,7 +42,7 @@ record(ai, "$(S)$(ND)User$(U):LowLim")
 {
   field(DESC, "User $(U) Low Limit")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),1,1)")
+  field(INP, "@asyn($(PORT),$(LOW_OFFSET),1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
 }
@@ -49,7 +54,7 @@ record(ai, "$(S)$(ND)User$(U):Val")
 {
   field(DESC, "User $(U) Value")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),2,1)")
+  field(INP, "@asyn($(PORT),$(VAL_OFFSET),1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   info(archive, "Monitor, 00:00:01, VAL")
@@ -62,7 +67,7 @@ record(bi, "$(S)$(ND)User$(U):Status")
 {
   field(DESC, "User $(U) Status")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),3,1)")
+  field(INP, "@asyn($(PORT),$(STA_OFFSET),1)")
   field(SCAN, "I/O Intr")
   field(ZNAM, "Ok")
   field(ONAM, "Error")
@@ -78,7 +83,7 @@ record(ai, "$(S)$(ND)User$(U):Res")
 {
   field(DESC, "User $(U) Resolution")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),4,1)")
+  field(INP, "@asyn($(PORT),$(RES_OFFSET),1)")
   field(SCAN, "I/O Intr")
   field(FLNK, "$(S)$(ND)User$(U):ResSetCalc")
 }
@@ -158,7 +163,7 @@ record(ao, "$(S)$(ND)User$(U):HighLimSet")
 {
   field(DESC, "Set User $(U) High Limit")
   field(DTYP, "asynInt32")
-  field(OUT, "@asyn($(PORT)w,0,1)")
+  field(OUT, "@asyn($(PORT)w,$(HIG_OFFSET),1)")
   field(LINR, "LINEAR")
 }
 
@@ -169,7 +174,7 @@ record(ao, "$(S)$(ND)User$(U):LowLimSet")
 {
   field(DESC, "Set User $(U) Low Limit")
   field(DTYP, "asynInt32")
-  field(OUT, "@asyn($(PORT)w,1,1)")
+  field(OUT, "@asyn($(PORT)w,$(LOW_OFFSET),1)")
   field(LINR, "LINEAR")
 }
 
@@ -180,7 +185,7 @@ record(ao, "$(S)$(ND)User$(U):ValSet")
 {
   field(DESC, "Set User $(U) Value")
   field(DTYP, "asynInt32")
-  field(OUT, "@asyn($(PORT)w,2,1)")
+  field(OUT, "@asyn($(PORT)w,$(VAL_OFFSET),1)")
   field(LINR, "LINEAR")
 }
 
