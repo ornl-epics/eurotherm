@@ -24,6 +24,7 @@ TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 ASYN=		/home/controls/epics/asyn/master
 MODBUS=		/home/controls/epics/modbus/master
 EUROTHERM=	/home/controls/epics/eurotherm/master
+BUSY=		/home/controls/epics/busy/master
 DEVIOCSTATS=	/home/controls/epics/devIocStats/master
 AUTOSAVE=	/home/controls/epics/autosave/master
 
