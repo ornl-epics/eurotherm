@@ -1,0 +1,167 @@
+
+#############################################################
+#
+# Database template to read a real or virtual channel alarm
+# information. The alarm data is not in continues block
+# of memory so we need more than one asyn port.
+# See st.cmd.alarm.
+# 
+# S - base PV name
+# ND - name of this nanodac
+# C - channel name
+# CI - channel index number (1-4 or 1-32 for virtual channels)
+# A - alarm index (1 or 2)
+# ALARM_PORT - asyn port name for the alarm $(A) params
+#
+# Note: some of the floating point params in this template need
+# their ESLO and PREC set, based on what the precision readback is.
+#
+############################################################
+
+substitute "ALARM_PORT_A=$(ALARM_PORT)$(A)"
+
+############################################################
+# Read records
+############################################################
+
+# /// 
+# /// Read the alarm type  
+# ///
+record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Type")
+{
+  field(DESC, "Alarm $(A) Type")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(ALARM_PORT_A),0,1)")
+  field(SCAN, "I/O Intr")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(SVVL, "7")
+  field(EIVL, "10")
+  field(NIVL, "11")
+  field(TEVL, "12")
+  field(ZRST, "None")
+  field(ONST, "Abs High")
+  field(TWST, "Abs Low")
+  field(THST, "Dev High")
+  field(FRST, "Dev Low")
+  field(FVST, "Dev Band")
+  field(SXST, "ROC Rising")
+  field(SVST, "ROC Faling")
+  field(EIST, "Dig Off")
+  field(NIST, "Dig High")
+  field(TEST, "Dig Low")
+}
+
+# /// 
+# /// Read the alarm latch  
+# ///
+record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Latch")
+{
+  field(DESC, "Alarm $(A) Latch")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(ALARM_PORT_A),1,1)")
+  field(SCAN, "I/O Intr")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "None")
+  field(ONST, "Auto")
+  field(TWST, "Manual")
+  field(THST, "Trigger")
+}
+
+# /// 
+# /// Read the alarm hysteresis
+# ///
+record(ai, "$(S)$(ND)$(C):Alarm$(A):Hyst")
+{
+  field(DESC, "Alarm $(A) Hyst")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(ALARM_PORT_A),4,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+
+
+############################################################
+# Write records
+############################################################
+
+# /// 
+# /// Set the alarm type  
+# /// NOTE: this doesn't work - I get an illegal memory
+# /// address error (exception 2). But the read works fine.
+# ///
+record(mbbo, "$(S)$(ND)$(C):Alarm$(A):TypeSet")
+{
+  field(DESC, "Set Alarm $(A) Type")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(ALARM_PORT_A)w,0,1)")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(SVVL, "7")
+  field(EIVL, "10")
+  field(NIVL, "11")
+  field(TEVL, "12")
+  field(ZRST, "None")
+  field(ONST, "Abs High")
+  field(TWST, "Abs Low")
+  field(THST, "Dev High")
+  field(FRST, "Dev Low")
+  field(FVST, "Dev Band")
+  field(SXST, "ROC Rising")
+  field(SVST, "ROC Faling")
+  field(EIST, "Dig Off")
+  field(NIST, "Dig High")
+  field(TEST, "Dig Low")
+}
+
+# /// 
+# /// Set the alarm latch  
+# /// NOTE: this doesn't work - I get an illegal memory 
+# /// address error (exception 2). But the read works fine.
+# ///
+record(mbbo, "$(S)$(ND)$(C):Alarm$(A):LatchSet")
+{
+  field(DESC, "Set Alarm $(A) Latch")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(ALARM_PORT_A)w,1,1)")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "None")
+  field(ONST, "Auto")
+  field(TWST, "Manual")
+  field(THST, "Trigger")
+}
+
+# /// 
+# /// Set the alarm hysteresis
+# ///
+record(ao, "$(S)$(ND)$(C):Alarm$(A):HystSet")
+{
+  field(DESC, "Set Alarm $(A) Hyst")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(ALARM_PORT_A)w,4,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+

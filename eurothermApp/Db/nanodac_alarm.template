@@ -13,7 +13,12 @@
 # ACK_PORT - asyn port name for alarm acknowledge
 # ACK1_OFFSET - address offset for alarm 1 acknowledge
 # ACK2_OFFSET - address offset for alarm 2 acknowledge
+# ALARM_PORT - asyn port name for the rest of the alarm params
 #
+############################################################
+
+############################################################
+# Write records for alarm 1 & 2 acknowledgements
 ############################################################
 
 # /// 
@@ -37,5 +42,16 @@ record(bo, "$(S)$(ND)$(C):Alarm2AckSet")
   field(OUT, "@asyn($(ACK_PORT)w,$(ACK2_OFFSET),1)")
   field(VAL, "1")
 }
+
+############################################################
+# The rest of the alarm params
+############################################################
+
+substitute "A=1"
+include "nanodac_alarm_details.template"
+#substitute "A=2"
+#include "nanodac_alarm_details.template"
+
+
 
 
