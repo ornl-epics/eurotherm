@@ -77,6 +77,18 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Latch")
 }
 
 # /// 
+# /// Read the alarm threshold
+# ///
+record(ai, "$(S)$(ND)$(C):Alarm$(A):Threshold")
+{
+  field(DESC, "Alarm $(A) Threshold")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(ALARM_PORT_A),3,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+}
+
+# /// 
 # /// Read the alarm hysteresis
 # ///
 record(ai, "$(S)$(ND)$(C):Alarm$(A):Hyst")
@@ -160,6 +172,17 @@ record(mbbo, "$(S)$(ND)$(C):Alarm$(A):LatchSet")
 }
 
 # /// 
+# /// Set the alarm threshold
+# ///
+record(ao, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet")
+{
+  field(DESC, "Set Alarm $(A) Threshold")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(ALARM_PORT_A)w,3,1)")
+  field(LINR, "LINEAR")
+}
+
+# /// 
 # /// Set the alarm hysteresis
 # ///
 record(ao, "$(S)$(ND)$(C):Alarm$(A):HystSet")
@@ -209,10 +232,12 @@ record(calcout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc")
 record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec")
 {
   field(OMSL, "supervisory")
-  field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Hyst.ESLO PP")
-  field(OUTB, "$(S)$(ND)$(C):Alarm$(A):Ref.ESLO PP")
-  field(OUTC, "$(S)$(ND)$(C):Alarm$(A):HystSet.ESLO NPP")
-  field(OUTD, "$(S)$(ND)$(C):Alarm$(A):RefSet.ESLO NPP")
+  field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Threshold.ESLO PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm$(A):Hyst.ESLO PP")
+  field(OUTC, "$(S)$(ND)$(C):Alarm$(A):Ref.ESLO PP")
+  field(OUTD, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet.ESLO NPP")
+  field(OUTE, "$(S)$(ND)$(C):Alarm$(A):HystSet.ESLO NPP")
+  field(OUTF, "$(S)$(ND)$(C):Alarm$(A):RefSet.ESLO NPP")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec")
 }
 
@@ -220,10 +245,12 @@ record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec")
 {
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)$(C):Alarm$(A):Prec:Res.VAL NPP MS")
-  field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Hyst.PREC PP")
-  field(OUTB, "$(S)$(ND)$(C):Alarm$(A):Ref.PREC PP")
-  field(OUTC, "$(S)$(ND)$(C):Alarm$(A):HystSet.PREC NPP")
-  field(OUTD, "$(S)$(ND)$(C):Alarm$(A):RefSet.PREC NPP")
+  field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Threshold.PREC PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm$(A):Hyst.PREC PP")
+  field(OUTC, "$(S)$(ND)$(C):Alarm$(A):Ref.PREC PP")
+  field(OUTD, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet.PREC NPP")
+  field(OUTE, "$(S)$(ND)$(C):Alarm$(A):HystSet.PREC NPP")
+  field(OUTF, "$(S)$(ND)$(C):Alarm$(A):RefSet.PREC NPP")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncHyst")
 }
 
@@ -247,6 +274,12 @@ record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncRef")
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)$(C):Alarm$(A):Ref.VAL NPP MS")
   field(OUTA, "$(S)$(ND)$(C):Alarm$(A):RefSet NPP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncThreshold")
 }
-
+record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncThreshold")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)$(C):Alarm$(A):Threshold.VAL NPP MS")
+  field(OUTA, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet NPP")
+}
 
