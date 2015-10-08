@@ -127,6 +127,19 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Dev")
   field(LINR, "LINEAR")
 }
 
+# /// 
+# /// Read the alarm amount.
+# /// This is for rate of change (ROC) type alarms.
+# ///
+record(ai, "$(S)$(ND)$(C):Alarm$(A):Amount")
+{
+  field(DESC, "Alarm $(A) Amount")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(ALARM_PORT_A),8,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+}
+
 ############################################################
 # Write records
 ############################################################
@@ -232,6 +245,18 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):DevSet")
   field(LINR, "LINEAR")
 }
 
+# /// 
+# /// Set the alarm amount.
+# /// This is for rate of change (ROC) type alarms.
+# ///
+record(ao, "$(S)$(ND)$(C):Alarm$(A):AmountSet")
+{
+  field(DESC, "Set Alarm $(A) Amount")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(ALARM_PORT_A)w,8,1)")
+  field(LINR, "LINEAR")
+}
+
 ############################################################
 # Deal with the variable precision
 ############################################################
@@ -267,6 +292,15 @@ record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec")
   field(OUTF, "$(S)$(ND)$(C):Alarm$(A):HystSet.ESLO NPP")
   field(OUTG, "$(S)$(ND)$(C):Alarm$(A):RefSet.ESLO NPP")
   field(OUTH, "$(S)$(ND)$(C):Alarm$(A):DevSet.ESLO NPP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec2")
+}
+
+record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec2")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc.VAL")
+  field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Amount.ESLO PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm$(A):AmountSet.ESLO NPP")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec")
 }
 
@@ -282,6 +316,15 @@ record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec")
   field(OUTF, "$(S)$(ND)$(C):Alarm$(A):HystSet.PREC NPP")
   field(OUTG, "$(S)$(ND)$(C):Alarm$(A):RefSet.PREC NPP")
   field(OUTH, "$(S)$(ND)$(C):Alarm$(A):DevSet.PREC NPP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec2")
+}
+
+record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec2")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)$(C):Alarm$(A):Prec:Res.VAL NPP MS")
+  field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Amount.PREC PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm$(A):AmountSet.PREC NPP")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncHyst")
 }
 

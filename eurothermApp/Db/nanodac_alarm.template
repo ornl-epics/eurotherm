@@ -49,8 +49,8 @@ record(bo, "$(S)$(ND)$(C):Alarm2AckSet")
 
 substitute "A=1"
 include "nanodac_alarm_details.template"
-#substitute "A=2"
-#include "nanodac_alarm_details.template"
+substitute "A=2"
+include "nanodac_alarm_details.template"
 
 
 

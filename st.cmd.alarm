@@ -12,61 +12,62 @@ drvModbusAsynConfigure("n$(NI)caackw", "n$(NI)ip", 1, 6, 432, 8,  4, 2000, 0)
 # There is a smal gap, and the virtual channels start at 448.  
 drvModbusAsynConfigure("n$(NI)caackvw", "n$(NI)ip", 1, 6, 448, 12, 4, 2000, 0)
 
-# The rest of the alarm parameters. Each channel has a block of 18 addresses.
+# The rest of the alarm parameters. Each channel has a block of 18 addresses,
+# but we are only interested in the first 9.
 # Eg, channel 1, alarm 1 is 6208 to 6225 
 # Eg, channel 1, alarm 2 is 6240 to 6257
 
-drvModbusAsynConfigure("n$(NI)c1a1",  "n$(NI)ip", 1, 4, 6208, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c1a1w", "n$(NI)ip", 1, 6, 6208, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c1a2",  "n$(NI)ip", 1, 4, 6240, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c1a2w", "n$(NI)ip", 1, 6, 6240, 18,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c1a1",  "n$(NI)ip", 1, 4, 6208, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c1a1w", "n$(NI)ip", 1, 6, 6208, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c1a2",  "n$(NI)ip", 1, 4, 6240, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c1a2w", "n$(NI)ip", 1, 6, 6240, 9,  4, 2000, 0)
 
-drvModbusAsynConfigure("n$(NI)c2a1",  "n$(NI)ip", 1, 4, 6336, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c2a1w", "n$(NI)ip", 1, 6, 6336, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c2a2",  "n$(NI)ip", 1, 4, 6368, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c2a2w", "n$(NI)ip", 1, 6, 6368, 18,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c2a1",  "n$(NI)ip", 1, 4, 6336, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c2a1w", "n$(NI)ip", 1, 6, 6336, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c2a2",  "n$(NI)ip", 1, 4, 6368, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c2a2w", "n$(NI)ip", 1, 6, 6368, 9,  4, 2000, 0)
 
-drvModbusAsynConfigure("n$(NI)c3a1",  "n$(NI)ip", 1, 4, 6464, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c3a1w", "n$(NI)ip", 1, 6, 6464, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c3a2",  "n$(NI)ip", 1, 4, 6496, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c3a2w", "n$(NI)ip", 1, 6, 6496, 18,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c3a1",  "n$(NI)ip", 1, 4, 6464, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c3a1w", "n$(NI)ip", 1, 6, 6464, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c3a2",  "n$(NI)ip", 1, 4, 6496, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c3a2w", "n$(NI)ip", 1, 6, 6496, 9,  4, 2000, 0)
 
-drvModbusAsynConfigure("n$(NI)c4a1",  "n$(NI)ip", 1, 4, 6592, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c4a1w", "n$(NI)ip", 1, 6, 6592, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c4a2",  "n$(NI)ip", 1, 4, 6624, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)c4a2w", "n$(NI)ip", 1, 6, 6624, 18,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c4a1",  "n$(NI)ip", 1, 4, 6592, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c4a1w", "n$(NI)ip", 1, 6, 6592, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c4a2",  "n$(NI)ip", 1, 4, 6624, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)c4a2w", "n$(NI)ip", 1, 6, 6624, 9,  4, 2000, 0)
 
 # Virtual channels
 
-drvModbusAsynConfigure("n$(NI)vc1a1",  "n$(NI)ip", 1, 4, 7232, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc1a1w", "n$(NI)ip", 1, 6, 7232, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc1a2",  "n$(NI)ip", 1, 4, 7264, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc1a2w", "n$(NI)ip", 1, 6, 7264, 18,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc1a1",  "n$(NI)ip", 1, 4, 7232, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc1a1w", "n$(NI)ip", 1, 6, 7232, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc1a2",  "n$(NI)ip", 1, 4, 7264, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc1a2w", "n$(NI)ip", 1, 6, 7264, 9,  4, 2000, 0)
 
-drvModbusAsynConfigure("n$(NI)vc2a1",  "n$(NI)ip", 1, 4, 7360, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc2a1w", "n$(NI)ip", 1, 6, 7360, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc2a2",  "n$(NI)ip", 1, 4, 7392, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc2a2w", "n$(NI)ip", 1, 6, 7392, 18,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc2a1",  "n$(NI)ip", 1, 4, 7360, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc2a1w", "n$(NI)ip", 1, 6, 7360, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc2a2",  "n$(NI)ip", 1, 4, 7392, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc2a2w", "n$(NI)ip", 1, 6, 7392, 9,  4, 2000, 0)
 
-drvModbusAsynConfigure("n$(NI)vc3a1",  "n$(NI)ip", 1, 4, 7488, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc3a1w", "n$(NI)ip", 1, 6, 7488, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc3a2",  "n$(NI)ip", 1, 4, 7520, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc3a2w", "n$(NI)ip", 1, 6, 7520, 18,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc3a1",  "n$(NI)ip", 1, 4, 7488, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc3a1w", "n$(NI)ip", 1, 6, 7488, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc3a2",  "n$(NI)ip", 1, 4, 7520, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc3a2w", "n$(NI)ip", 1, 6, 7520, 9,  4, 2000, 0)
 
-drvModbusAsynConfigure("n$(NI)vc4a1",  "n$(NI)ip", 1, 4, 7616, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc4a1w", "n$(NI)ip", 1, 6, 7616, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc4a2",  "n$(NI)ip", 1, 4, 7648, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc4a2w", "n$(NI)ip", 1, 6, 7648, 18,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc4a1",  "n$(NI)ip", 1, 4, 7616, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc4a1w", "n$(NI)ip", 1, 6, 7616, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc4a2",  "n$(NI)ip", 1, 4, 7648, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc4a2w", "n$(NI)ip", 1, 6, 7648, 9,  4, 2000, 0)
 
-drvModbusAsynConfigure("n$(NI)vc5a1",  "n$(NI)ip", 1, 4, 7744, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc5a1w", "n$(NI)ip", 1, 6, 7744, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc5a2",  "n$(NI)ip", 1, 4, 7776, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc5a2w", "n$(NI)ip", 1, 6, 7776, 18,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc5a1",  "n$(NI)ip", 1, 4, 7744, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc5a1w", "n$(NI)ip", 1, 6, 7744, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc5a2",  "n$(NI)ip", 1, 4, 7776, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc5a2w", "n$(NI)ip", 1, 6, 7776, 9,  4, 2000, 0)
 
-drvModbusAsynConfigure("n$(NI)vc6a1",  "n$(NI)ip", 1, 4, 7872, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc6a1w", "n$(NI)ip", 1, 6, 7872, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc6a2",  "n$(NI)ip", 1, 4, 7904, 18,  4, 2000, 0)
-drvModbusAsynConfigure("n$(NI)vc6a2w", "n$(NI)ip", 1, 6, 7904, 18,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc6a1",  "n$(NI)ip", 1, 4, 7872, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc6a1w", "n$(NI)ip", 1, 6, 7872, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc6a2",  "n$(NI)ip", 1, 4, 7904, 9,  4, 2000, 0)
+drvModbusAsynConfigure("n$(NI)vc6a2w", "n$(NI)ip", 1, 6, 7904, 9,  4, 2000, 0)
 
 
 
