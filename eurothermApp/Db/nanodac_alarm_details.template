@@ -86,12 +86,20 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Hyst")
   field(INP, "@asyn($(ALARM_PORT_A),4,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
-  field(ESLO, "0.1")
-  field(PREC, "1")
-  field(EGU, "%")
 }
 
-
+# /// 
+# /// Read the alarm reference.
+# /// This is for deviation type alarms.
+# ///
+record(ai, "$(S)$(ND)$(C):Alarm$(A):Ref")
+{
+  field(DESC, "Alarm $(A) Reference")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(ALARM_PORT_A),6,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+}
 
 ############################################################
 # Write records
@@ -160,8 +168,85 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):HystSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ALARM_PORT_A)w,4,1)")
   field(LINR, "LINEAR")
-  field(ESLO, "0.1")
-  field(PREC, "1")
-  field(EGU, "%")
 }
+
+# /// 
+# /// Set the alarm reference.
+# /// This is for deviation type alarms.
+# ///
+record(ao, "$(S)$(ND)$(C):Alarm$(A):RefSet")
+{
+  field(DESC, "Set Alarm $(A) Reference")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(ALARM_PORT_A)w,6,1)")
+  field(LINR, "LINEAR")
+}
+
+############################################################
+# Deal with the variable precision
+############################################################
+
+# ///
+# /// Read the user $(U) resolution
+# /// Based on this, set the PREC and ESLO fields
+# /// in the various records.
+# ///
+record(ai, "$(S)$(ND)$(C):Alarm$(A):Prec:Res")
+{
+  field(INP, "$(S)$(ND)$(C):PV_Res CP MS")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc")
+}
+
+record(calcout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc")
+{
+  field(INPA, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
+  field(CALC, "1/(10**A)")
+  field(DOPT, "Use CALC")
+  field(OOPT, "On Change")
+  field(OUT, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec.VAL PP")
+}
+
+record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec")
+{
+  field(OMSL, "supervisory")
+  field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Hyst.ESLO PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm$(A):Ref.ESLO PP")
+  field(OUTC, "$(S)$(ND)$(C):Alarm$(A):HystSet.ESLO NPP")
+  field(OUTD, "$(S)$(ND)$(C):Alarm$(A):RefSet.ESLO NPP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec")
+}
+
+record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)$(C):Alarm$(A):Prec:Res.VAL NPP MS")
+  field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Hyst.PREC PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm$(A):Ref.PREC PP")
+  field(OUTC, "$(S)$(ND)$(C):Alarm$(A):HystSet.PREC NPP")
+  field(OUTD, "$(S)$(ND)$(C):Alarm$(A):RefSet.PREC NPP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncHyst")
+}
+
+# ///
+# /// The following records read the readback and set the 
+# /// set records. We need to do this because we can only
+# /// set ESLO and PREC on the set records after IOC init, 
+# /// which means the set records typically are initialized 
+# /// with PREC=0. So the set field can be out of sync with
+# /// the readback. This solves that issue, but it's not nice.
+# ///
+record(seq, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncHyst")
+{
+  field(DLY1, "5")
+  field(DOL1, "$(S)$(ND)$(C):Alarm$(A):Hyst.VAL NPP MS")
+  field(LNK1, "$(S)$(ND)$(C):Alarm$(A):HystSet NPP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncRef")
+}
+record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncRef")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)$(C):Alarm$(A):Ref.VAL NPP MS")
+  field(OUTA, "$(S)$(ND)$(C):Alarm$(A):RefSet NPP")
+}
+
 
