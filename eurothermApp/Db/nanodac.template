@@ -255,3 +255,71 @@ substitute "VAL_OFFSET=57"
 substitute "STA_OFFSET=58"
 substitute "RES_OFFSET=59"
 include "nanodac_user.template"
+
+
+# Set up the alarm control
+
+substitute "ACK_PORT=n$(NI)caack"
+
+substitute "C=CH1"
+substitute "CI=1"
+substitute "ACK1_OFFSET=0"
+substitute "ACK2_OFFSET=1"
+include "nanodac_alarm.template"
+
+substitute "C=CH2"
+substitute "CI=2"
+substitute "ACK1_OFFSET=2"
+substitute "ACK2_OFFSET=3"
+include "nanodac_alarm.template"
+
+substitute "C=CH3"
+substitute "CI=3"
+substitute "ACK1_OFFSET=4"
+substitute "ACK2_OFFSET=5"
+include "nanodac_alarm.template"
+
+substitute "C=CH4"
+substitute "CI=4"
+substitute "ACK1_OFFSET=6"
+substitute "ACK2_OFFSET=7"
+include "nanodac_alarm.template"
+
+substitute "ACK_PORT=n$(NI)caackv"
+
+substitute "C=VCH1"
+substitute "CI=1"
+substitute "ACK1_OFFSET=0"
+substitute "ACK2_OFFSET=1"
+include "nanodac_alarm.template"
+
+substitute "C=VCH2"
+substitute "CI=2"
+substitute "ACK1_OFFSET=2"
+substitute "ACK2_OFFSET=3"
+include "nanodac_alarm.template"
+
+substitute "C=VCH3"
+substitute "CI=3"
+substitute "ACK1_OFFSET=4"
+substitute "ACK2_OFFSET=5"
+include "nanodac_alarm.template"
+
+substitute "C=VCH4"
+substitute "CI=4"
+substitute "ACK1_OFFSET=6"
+substitute "ACK2_OFFSET=7"
+include "nanodac_alarm.template"
+
+substitute "C=VCH5"
+substitute "CI=5"
+substitute "ACK1_OFFSET=8"
+substitute "ACK2_OFFSET=9"
+include "nanodac_alarm.template"
+
+substitute "C=VCH6"
+substitute "CI=6"
+substitute "ACK1_OFFSET=10"
+substitute "ACK2_OFFSET=11"
+include "nanodac_alarm.template"
+

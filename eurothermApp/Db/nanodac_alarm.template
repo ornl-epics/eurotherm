@@ -1,0 +1,41 @@
+
+#############################################################
+#
+# Database template to read a real or virtual channel alarm
+# information. The alarm data is not in continues block
+# of memory so we need more than one asyn port.
+# See st.cmd.alarm.
+# 
+# S - base PV name
+# ND - name of this nanodac
+# C - channel name
+# CI - channel index number (1-4 or 1-32 for virtual channels)
+# ACK_PORT - asyn port name for alarm acknowledge
+# ACK1_OFFSET - address offset for alarm 1 acknowledge
+# ACK2_OFFSET - address offset for alarm 2 acknowledge
+#
+############################################################
+
+# /// 
+# /// Write 1 to acknowledge the alarm 1 
+# ///
+record(bo, "$(S)$(ND)$(C):Alarm1AckSet")
+{
+  field(DESC, "Alarm Acknowledge")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(ACK_PORT)w,$(ACK1_OFFSET),1)")
+  field(VAL, "1")
+}
+
+# /// 
+# /// Write 1 to acknowledge the alarm 2
+# ///
+record(bo, "$(S)$(ND)$(C):Alarm2AckSet")
+{
+  field(DESC, "Alarm Acknowledge")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(ACK_PORT)w,$(ACK2_OFFSET),1)")
+  field(VAL, "1")
+}
+
+

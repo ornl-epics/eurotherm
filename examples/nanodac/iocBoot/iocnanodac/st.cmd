@@ -31,6 +31,8 @@ epicsEnvSet("NI","1")
 
 < $(EUROTHERM)/st.cmd.user
 
+< $(EUROTHERM)/st.cmd.alarm
+
 ####################################################################
 
 ## Load record instances

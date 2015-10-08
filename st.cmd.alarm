@@ -1,0 +1,14 @@
+
+# This st.cmd file provides read and write ports for all the alarm parameters.
+
+# The acknowledge words for all channels are in
+# a block of memory (432 to 439, where:
+# channel 1, alarm 1 ack is 432
+# channel 1, alarm 2 ack is 433
+# channel 2, alarm 1 ack is 434
+# etc.
+# We just need to write a 1 to the acknowledge register.
+drvModbusAsynConfigure("n$(NI)caackw", "n$(NI)ip", 1, 6, 432, 8,  4, 1000, 0)
+# There is a smal gap, and the virtual channels start at 448.  
+drvModbusAsynConfigure("n$(NI)caackvw", "n$(NI)ip", 1, 6, 448, 12, 4, 1000, 0)
+
