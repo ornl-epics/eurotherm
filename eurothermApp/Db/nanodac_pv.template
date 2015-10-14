@@ -221,6 +221,7 @@ record(calc, "$(S)$(ND)$(C):AlarmSummaryCalc") {
   field(INPC, "$(S)$(ND)$(C):Alarm1 CP MS")
   field(INPD, "$(S)$(ND)$(C):Alarm2 CP MS")
   field(CALC, "A")
+  field(SDIS, "$(S)$(ND)$(C):AlarmDisable")
   field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc2")  
 }
 
@@ -239,3 +240,34 @@ record(bi, "$(S)$(ND)$(C):AlarmSummary") {
   field(PINI, "YES")
   field(VAL, "0")  
 }
+
+# ///
+# /// Disable alarms for this channel
+# ///
+record(bo, "$(S)$(ND)$(C):AlarmDisable") {
+  field(DESC, "Disable Alarm")
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(OMSL, "supervisory")
+  field(ZNAM, "Alarm Enabled")
+  field(ONAM, "Alarm Disabled")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MINOR")
+  field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// If we have disabled the alarm for this 
+# /// channel, zero the AlarmSummary PV.
+# ///
+record(calcout, "$(S)$(ND)$(C):AlarmDisable3") {
+  field(INPA, "$(S)$(ND)$(C):AlarmDisable.VAL CP MS")
+  field(CALC, "A=1?0:1")
+  field(DOPT, "Use CALC")
+  field(OOPT, "When Zero")
+  field(OUT, "$(S)$(ND)$(C):AlarmSummary.VAL PP")
+}
+
+
+
