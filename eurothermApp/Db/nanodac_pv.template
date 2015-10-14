@@ -31,15 +31,11 @@ record(ai, "$(S)$(ND)$(C):PV")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   field(HHSV,"MAJOR")
-  field(HSV, "MINOR")
-  field(LSV, "MINOR")
   field(LLSV,"MAJOR")
   field(HYST,"0.0")
   field(HIHI,"1000")
-  field(HIGH,"1000")
-  field(LOW,"-1")
   field(LOLO,"-1")
-  info(autosaveFields, "HIHI HIGH LOW LOLO ADEL MDEL HYST")
+  info(autosaveFields, "HIHI LOLO ADEL MDEL HYST")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -91,9 +87,9 @@ record(mbbi, "$(S)$(ND)$(C):Status")
 # ///
 # /// Read the channel alarm status 
 # ///
-record(mbbi, "$(S)$(ND)$(C):Alarm")
+record(mbbi, "$(S)$(ND)$(C):Alarm1")
 {
-  field(DESC, "$(C) Alarm")
+  field(DESC, "$(C) Alarm 1")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),$(ALARM_OFFSET),1)")
   field(SCAN, "I/O Intr")
@@ -117,7 +113,7 @@ record(mbbi, "$(S)$(ND)$(C):Alarm")
 # ///
 record(mbbi, "$(S)$(ND)$(C):Alarm2")
 {
-  field(DESC, "$(C) Alarm2")
+  field(DESC, "$(C) Alarm 2")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),$(ALARM2_OFFSET),1)")
   field(SCAN, "I/O Intr")
@@ -210,3 +206,36 @@ record(subArray, "$(S)$(ND)$(C):Units")
   field(INDX, "21")
 }
 
+###########################################################
+# Summarize the alarm on a per-channel basis
+###########################################################
+
+# ///
+# /// Alarm summary record for channel $(C)
+# /// This is a summary of the PV alarm state, the controller
+# /// alarm fields and the channel status.
+# ///
+record(calc, "$(S)$(ND)$(C):AlarmSummaryCalc") {
+  field(INPA, "$(S)$(ND)$(C):PV CP MS")
+  field(INPB, "$(S)$(ND)$(C):Status CP MS")
+  field(INPC, "$(S)$(ND)$(C):Alarm1 CP MS")
+  field(INPD, "$(S)$(ND)$(C):Alarm2 CP MS")
+  field(CALC, "A")
+  field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc2")  
+}
+
+record(calcout, "$(S)$(ND)$(C):AlarmSummaryCalc2") {
+  field(INPA, "$(S)$(ND)$(C):AlarmSummaryCalc.STAT")
+  field(CALC, "A!=0?1:0")
+  field(DOPT, "Use CALC")
+  field(OOPT, "Every Time")
+  field(OUT, "$(S)$(ND)$(C):AlarmSummary PP")
+}
+
+record(bi, "$(S)$(ND)$(C):AlarmSummary") {
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Alarm")
+  field(OSV, "MAJOR")
+  field(PINI, "YES")
+  field(VAL, "0")  
+}
