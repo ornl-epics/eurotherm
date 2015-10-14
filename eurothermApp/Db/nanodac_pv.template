@@ -261,7 +261,7 @@ record(bo, "$(S)$(ND)$(C):AlarmDisable") {
 # /// If we have disabled the alarm for this 
 # /// channel, zero the AlarmSummary PV.
 # ///
-record(calcout, "$(S)$(ND)$(C):AlarmDisable3") {
+record(calcout, "$(S)$(ND)$(C):AlarmDisableZero") {
   field(INPA, "$(S)$(ND)$(C):AlarmDisable.VAL CP MS")
   field(CALC, "A=1?0:1")
   field(DOPT, "Use CALC")
