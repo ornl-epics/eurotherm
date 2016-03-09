@@ -115,6 +115,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:PB1")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Ti1")
@@ -125,6 +126,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Ti1")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
   field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Td1")
@@ -135,6 +137,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Td1")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
   field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:PB2")
@@ -147,6 +150,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:PB2")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Ti2")
@@ -157,6 +161,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Ti2")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
   field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Td2")
@@ -167,6 +172,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Td2")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
   field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:PB3")
@@ -179,6 +185,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:PB3")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Ti3")
@@ -189,6 +196,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Ti3")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
   field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Td3")
@@ -199,6 +207,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Td3")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
   field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # ///
