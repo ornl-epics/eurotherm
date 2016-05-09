@@ -51,6 +51,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):Value") {
   field(INP, "$(PV) CP MS")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcInWindow.PROC")
   field(EGU, "$(UNITS)")
+  field(PREC, "$(PREC=2)")
 }
 
 # ///
@@ -66,7 +67,7 @@ record(calcout, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcInWindow") {
   field(OOPT, "Every Time")
   field(OUT, "$(S)$(ND)Loop$(L):PID:Set$(W):InWindow.VAL PP MS")
   field(DOPT, "Use CALC")
-  field(PREC, "1")
+  field(PREC, "$(PREC=2)")
   info(autosaveFields, "A B")
 }
 
@@ -141,7 +142,7 @@ record(seq, "$(S)$(ND)Loop$(L):PID:Set$(W):PIDWrite") {
 record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):P") {
   field(DESC, "P Readback")
   field(INP, "$(P_LINK) CP MS")
-  field(PREC, "2")
+  field(PREC, "$(PREC=2)")
 }
 
 # ///
@@ -150,7 +151,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):P") {
 record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):I") {
   field(DESC, "I Readback")
   field(INP, "$(I_LINK) CP MS")
-  field(PREC, "2")
+  field(PREC, "$(PREC=2)")
 }
 
 # ///
@@ -159,7 +160,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):I") {
 record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):D") {
   field(DESC, "D Readback")
   field(INP, "$(D_LINK) CP MS")
-  field(PREC, "2")
+  field(PREC, "$(PREC=2)")
 }
 
 # ///
@@ -168,7 +169,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):D") {
 record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PL") {
   field(DESC, "Power Low Limit RBV")
   field(INP, "$(PL_LINK) CP MS")
-  field(PREC, "2")
+  field(PREC, "$(PREC=2)")
 }
 
 # ///
@@ -177,7 +178,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PL") {
 record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PH") {
   field(DESC, "Power High Limit RBV")
   field(INP, "$(PH_LINK) CP MS")
-  field(PREC, "2")
+  field(PREC, "$(PREC=2)")
 }
 
 
