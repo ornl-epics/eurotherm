@@ -132,7 +132,7 @@ record(seq, "$(S)$(ND)Loop$(L):PID:Set$(W):PIDWrite") {
   field(DLY5, "0.1")
   field(SDIS, "$(S)$(ND)Loop$(L):PID:Set$(W):Disable")
   field(PREC, "2")
-  info(autosaveFields, "DO1 DO2 DO3")
+  info(autosaveFields, "DO1 DO2 DO3 DO4 DO5")
 }
 
 # ///
