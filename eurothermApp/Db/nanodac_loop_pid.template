@@ -313,6 +313,45 @@ record(mbbo, "$(S)$(ND)Loop$(L):PID:TypeSet")
   field(SXST, "Remote")  
 }
 
+# ///
+# /// Menu to select using a software table instead of the 
+# /// 3 controller PID sets. If we enable the software
+# /// table then we set NumSetsSet to "1 set" and set ActiveSetSet
+# /// to 1. The software table will then populate the parameters
+# /// of set 1.
+# ///
+record(bo, "$(S)$(ND)Loop$(L):PID:Source")
+{
+  field(DESC, "Controller/Software PID")
+  field(PINI, "YES")
+  field(VAL, "1")
+  field(ZNAM, "Controller PID")
+  field(ONAM, "Software PID")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalc")
+  info(autosaveFields, "VAL")
+}
+record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalc")
+{
+  field(DESC, "Use 1 Set")
+  field(INPA, "$(S)$(ND)Loop$(L):PID:Source.VAL")
+  field(CALC, "A==1")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)Loop$(L):PID:SourceCalcSet.PROC")
+}
+record(seq, "$(S)$(ND)Loop$(L):PID:SourceCalcSet")
+{
+  field(DLY1, "0.1")
+  field(DLY2, "0.1")
+  field(DLY3, "0.1")
+  field(DO1, "1")
+  field(LNK1, "$(S)$(ND)Loop$(L):PID:TypeSet.VAL PP")
+  field(DO2, "1")
+  field(LNK2, "$(S)$(ND)Loop$(L):PID:NumSetsSet.VAL PP")
+  field(DO3, "1")
+  field(LNK3, "$(S)$(ND)Loop$(L):PID:ActiveSetSet.VAL PP")
+}
+
 # /// 
 # /// Set the number of sets in use (1, 2 or 3). 
 # ///
