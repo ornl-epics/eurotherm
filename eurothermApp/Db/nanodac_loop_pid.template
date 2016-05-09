@@ -330,6 +330,8 @@ record(bo, "$(S)$(ND)Loop$(L):PID:Source")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalc")
   info(autosaveFields, "VAL")
 }
+# If we are using the software table, set up the controller
+# appropriately and enable the table.
 record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalc")
 {
   field(DESC, "Use 1 Set")
@@ -338,6 +340,7 @@ record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalc")
   field(OOPT, "When Non-zero")
   field(DOPT, "Use CALC")
   field(OUT, "$(S)$(ND)Loop$(L):PID:SourceCalcSet.PROC")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable")
 }
 record(seq, "$(S)$(ND)Loop$(L):PID:SourceCalcSet")
 {
@@ -350,6 +353,17 @@ record(seq, "$(S)$(ND)Loop$(L):PID:SourceCalcSet")
   field(LNK2, "$(S)$(ND)Loop$(L):PID:NumSetsSet.VAL PP")
   field(DO3, "1")
   field(LNK3, "$(S)$(ND)Loop$(L):PID:ActiveSetSet.VAL PP")
+  field(DO4, "0")
+  field(LNK4, "$(S)$(ND)Loop$(L):PID:TableControl.VAL PP")
+}
+# and if we are not using the software PID table, disable the table
+record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable")
+{
+  field(INPA, "$(S)$(ND)Loop$(L):PID:Source.VAL")
+  field(CALC, "A==0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)Loop$(L):PID:TableControl.VAL PP")
 }
 
 # /// 
@@ -615,5 +629,46 @@ include "pid_set_window.template"
 substitute "W=16"
 include "pid_set_window.template"
 
+# ///
+# /// Record to enable/disable the table
+# ///
+record(bo, "$(S)$(ND)Loop$(L):PID:TableControl")
+{
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(ZNAM, "Table Enabled")
+  field(ONAM, "Table Disabled")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MAJOR")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:TableControlSet")
+  info(autosaveFields, "VAL")
+}
 
+record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)Loop$(L):PID:TableControl")
+  field(OUTA, "$(S)$(ND)Loop$(L):PID:Set1:Disable")
+  field(OUTB, "$(S)$(ND)Loop$(L):PID:Set2:Disable")
+  field(OUTC, "$(S)$(ND)Loop$(L):PID:Set3:Disable")
+  field(OUTD, "$(S)$(ND)Loop$(L):PID:Set4:Disable")
+  field(OUTE, "$(S)$(ND)Loop$(L):PID:Set5:Disable")
+  field(OUTF, "$(S)$(ND)Loop$(L):PID:Set6:Disable")
+  field(OUTG, "$(S)$(ND)Loop$(L):PID:Set7:Disable")
+  field(OUTH, "$(S)$(ND)Loop$(L):PID:Set8:Disable")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:TableControlSet2")
+}
 
+record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet2")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)Loop$(L):PID:TableControl")
+  field(OUTA, "$(S)$(ND)Loop$(L):PID:Set9:Disable")
+  field(OUTB, "$(S)$(ND)Loop$(L):PID:Set10:Disable")
+  field(OUTC, "$(S)$(ND)Loop$(L):PID:Set11:Disable")
+  field(OUTD, "$(S)$(ND)Loop$(L):PID:Set12:Disable")
+  field(OUTE, "$(S)$(ND)Loop$(L):PID:Set13:Disable")
+  field(OUTF, "$(S)$(ND)Loop$(L):PID:Set14:Disable")
+  field(OUTG, "$(S)$(ND)Loop$(L):PID:Set15:Disable")
+  field(OUTH, "$(S)$(ND)Loop$(L):PID:Set16:Disable")
+}
