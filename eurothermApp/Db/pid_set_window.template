@@ -2,6 +2,7 @@
 #
 # Template to write a set of PID parameters and a high and low
 # output power limit when a process variable enters the specified window. 
+# This is specific to the NanoDAC application.
 #
 # Matt Pearson, May 16
 #
@@ -38,6 +39,7 @@ record(bo, "$(S)$(ND)Loop$(L):PID:Set$(W):Disable") {
   field(ONAM, "PID Disabled")
   field(ZSV, "NO_ALARM")
   field(OSV, "MAJOR")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcWriteEnable")
   info(autosaveFields, "VAL")
 }
 
@@ -92,6 +94,20 @@ record(calcout, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcPIDWrite") {
   field(OUT, "$(S)$(ND)Loop$(L):PID:Set$(W):PIDWrite.PROC")
   field(DOPT, "Use CALC")
   field(SDIS, "$(S)$(ND)Loop$(L):PID:Set$(W):Disable")
+}
+
+# ///
+# /// If we enable this template, and the in-window flag is 1, trigger the write.
+# /// This record is processed when we enable or disable the template.
+# ///
+record(calcout, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcWriteEnable") {
+  field(DESC, "Calc Write Enable")
+  field(INPA, "$(S)$(ND)Loop$(L):PID:Set$(W):InWindow.VAL MS")
+  field(INPB, "$(S)$(ND)Loop$(L):PID:Set$(W):Disable.VAL MS")
+  field(CALC, "A&&!B")
+  field(OOPT, "When Non-zero")
+  field(OUT, "$(S)$(ND)Loop$(L):PID:Set$(W):PIDWrite.PROC")
+  field(DOPT, "Use CALC")
 }
 
 # ///
