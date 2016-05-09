@@ -124,6 +124,12 @@ record(seq, "$(S)$(ND)Loop$(L):PID:Set$(W):PIDWrite") {
   field(DO3, "$(D=0)")
   field(LNK3, "$(D_LINK) PP")
   field(DLY3, "0.1")
+  field(DO4, "$(PL=0)")
+  field(LNK4, "$(PL_LINK) PP")
+  field(DLY4, "0.1")
+  field(DO5, "$(PH=0)")
+  field(LNK5, "$(PH_LINK) PP")
+  field(DLY5, "0.1")
   field(SDIS, "$(S)$(ND)Loop$(L):PID:Set$(W):Disable")
   field(PREC, "2")
   info(autosaveFields, "DO1 DO2 DO3")
@@ -155,6 +161,25 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):D") {
   field(INP, "$(D_LINK) CP MS")
   field(PREC, "2")
 }
+
+# ///
+# /// Read back the output power low limit (for feedback for user)
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PL") {
+  field(DESC, "Power Low Limit RBV")
+  field(INP, "$(PL_LINK) CP MS")
+  field(PREC, "2")
+}
+
+# ///
+# /// Read back the output power high limit (for feedback for user)
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PH") {
+  field(DESC, "Power High Limit RBV")
+  field(INP, "$(PH_LINK) CP MS")
+  field(PREC, "2")
+}
+
 
 
 
