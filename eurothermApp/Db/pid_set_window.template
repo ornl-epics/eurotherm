@@ -68,6 +68,7 @@ record(calcout, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcInWindow") {
   field(OUT, "$(S)$(ND)Loop$(L):PID:Set$(W):InWindow.VAL PP MS")
   field(DOPT, "Use CALC")
   field(PREC, "$(PREC=2)")
+  field(SCAN, "1 second")
 }
 
 # ///
