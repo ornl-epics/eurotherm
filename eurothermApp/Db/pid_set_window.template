@@ -116,24 +116,73 @@ record(calcout, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcWriteEnable") {
 # ///
 record(seq, "$(S)$(ND)Loop$(L):PID:Set$(W):PIDWrite") {
   field(DESC, "Write PID Values")
-  field(DO1, "$(P=0)")
+  field(DOL1, "$(S)$(ND)Loop$(L):PID:Set$(W):PSet")
   field(LNK1, "$(P_LINK) PP")
   field(DLY1, "0.1")
-  field(DO2, "$(I=0)")
+  field(DOL2, "$(S)$(ND)Loop$(L):PID:Set$(W):ISet")
   field(LNK2, "$(I_LINK) PP")
   field(DLY2, "0.1")
-  field(DO3, "$(D=0)")
+  field(DOL3, "$(S)$(ND)Loop$(L):PID:Set$(W):DSet")
   field(LNK3, "$(D_LINK) PP")
   field(DLY3, "0.1")
-  field(DO4, "$(PL=0)")
+  field(DOL4, "$(S)$(ND)Loop$(L):PID:Set$(W):PLSet")
   field(LNK4, "$(PL_LINK) PP")
   field(DLY4, "0.1")
-  field(DO5, "$(PH=0)")
+  field(DOL5, "$(S)$(ND)Loop$(L):PID:Set$(W):PHSet")
   field(LNK5, "$(PH_LINK) PP")
   field(DLY5, "0.1")
   field(SDIS, "$(S)$(ND)Loop$(L):PID:Set$(W):Disable")
   field(PREC, "2")
-  info(autosaveFields, "DO1 DO2 DO3 DO4 DO5")
+}
+
+# ///
+# /// The P that will be written by the seq record PIDWrite
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PSet") {
+  field(DESC, "P Set")
+  field(VAL, "$(P=0)")
+  field(PREC, "$(PREC=2)")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// The I that will be written by the seq record PIDWrite
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):ISet") {
+  field(DESC, "I Set")
+  field(VAL, "$(I=0)")
+  field(PREC, "$(PREC=2)")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// The D that will be written by the seq record PIDWrite
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):DSet") {
+  field(DESC, "D Set")
+  field(VAL, "$(D=0)")
+  field(PREC, "$(PREC=2)")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// The PL that will be written by the seq record PIDWrite
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PLSet") {
+  field(DESC, "PL Set")
+  field(VAL, "$(PL=0)")
+  field(PREC, "$(PREC=2)")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// The PH that will be written by the seq record PIDWrite
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PHSet") {
+  field(DESC, "PH Set")
+  field(VAL, "$(PH=0)")
+  field(PREC, "$(PREC=2)")
+  info(autosaveFields, "VAL")
 }
 
 # ///
