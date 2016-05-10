@@ -60,15 +60,36 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):Value") {
 record(calcout, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcInWindow") {
   field(DESC, "Calc PV in window")
   field(PINI, "YES")
-  field(INPA, "$(LOW=0)")
-  field(INPB, "$(HIGH=0)")
+  field(INPA, "$(S)$(ND)Loop$(L):PID:Set$(W):Low")
+  field(INPB, "$(S)$(ND)Loop$(L):PID:Set$(W):High")
   field(INPC, "$(S)$(ND)Loop$(L):PID:Set$(W):Value MS")
   field(CALC, "((C>=A)&&(C<B))")
   field(OOPT, "Every Time")
   field(OUT, "$(S)$(ND)Loop$(L):PID:Set$(W):InWindow.VAL PP MS")
   field(DOPT, "Use CALC")
   field(PREC, "$(PREC=2)")
-  info(autosaveFields, "A B")
+}
+
+# ///
+# /// The low boundary for the PV that is used by CalcInWindow
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):Low") {
+  field(DESC, "Low PV")
+  field(VAL, "$(LOW=0)")
+  field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// The high boundary for the PV that is used by CalcInWindow
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):High") {
+  field(DESC, "High PV")
+  field(VAL, "$(HIGH=0)")
+  field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
+  info(autosaveFields, "VAL")
 }
 
 # ///
@@ -142,6 +163,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PSet") {
   field(DESC, "P Set")
   field(VAL, "$(P=0)")
   field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
   info(autosaveFields, "VAL")
 }
 
@@ -152,6 +174,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):ISet") {
   field(DESC, "I Set")
   field(VAL, "$(I=0)")
   field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
   info(autosaveFields, "VAL")
 }
 
@@ -162,6 +185,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):DSet") {
   field(DESC, "D Set")
   field(VAL, "$(D=0)")
   field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
   info(autosaveFields, "VAL")
 }
 
@@ -172,6 +196,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PLSet") {
   field(DESC, "PL Set")
   field(VAL, "$(PL=0)")
   field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
   info(autosaveFields, "VAL")
 }
 
@@ -182,6 +207,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PHSet") {
   field(DESC, "PH Set")
   field(VAL, "$(PH=0)")
   field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
   info(autosaveFields, "VAL")
 }
 
