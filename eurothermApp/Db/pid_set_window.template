@@ -122,6 +122,8 @@ record(calcout, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcPIDWrite") {
 # ///
 # /// If we enable this template, and the in-window flag is 1, trigger the write.
 # /// This record is processed when we enable or disable the template.
+# /// This is also precessed when a user changes one of the parameters. This fixes the issue
+# /// of a change not being applied if the PV is already inside the window.
 # ///
 record(calcout, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcWriteEnable") {
   field(DESC, "Calc Write Enable")
@@ -165,6 +167,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PSet") {
   field(VAL, "$(P=0)")
   field(PREC, "$(PREC=2)")
   field(PINI, "YES")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcWriteEnable")
   info(autosaveFields, "VAL")
 }
 
@@ -176,6 +179,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):ISet") {
   field(VAL, "$(I=0)")
   field(PREC, "$(PREC=2)")
   field(PINI, "YES")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcWriteEnable")
   info(autosaveFields, "VAL")
 }
 
@@ -187,6 +191,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):DSet") {
   field(VAL, "$(D=0)")
   field(PREC, "$(PREC=2)")
   field(PINI, "YES")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcWriteEnable")
   info(autosaveFields, "VAL")
 }
 
@@ -198,6 +203,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PLSet") {
   field(VAL, "$(PL=0)")
   field(PREC, "$(PREC=2)")
   field(PINI, "YES")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcWriteEnable")
   info(autosaveFields, "VAL")
 }
 
@@ -209,6 +215,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PHSet") {
   field(VAL, "$(PH=0)")
   field(PREC, "$(PREC=2)")
   field(PINI, "YES")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcWriteEnable")
   info(autosaveFields, "VAL")
 }
 
