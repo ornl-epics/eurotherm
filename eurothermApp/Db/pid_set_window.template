@@ -264,6 +264,16 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PH") {
   field(PREC, "$(PREC=2)")
 }
 
+# ///
+# /// User description for this PID window set
+# ///
+record(stringout, "$(S)$(ND)Loop$(L):PID:Set$(W):Desc") {
+  field(DESC, "PID Description")
+  field(VAL, "PID Set $(W)")
+  field(PINI, "YES")
+  info(autosaveFields, "VAL")
+}
+
 
 
 
