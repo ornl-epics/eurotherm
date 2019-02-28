@@ -159,6 +159,8 @@ record(dfanout, "$(S)$(ND)$(C):PV_ResSetPrec")
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
   field(OUTA, "$(S)$(ND)$(C):PV.PREC PP")
+  field(OUTB, "$(S)$(ND)$(C):AlarmLow.PREC PP")
+  field(OUTC, "$(S)$(ND)$(C):AlarmHigh.PREC PP")
 }
 
 # ///
@@ -269,5 +271,125 @@ record(calcout, "$(S)$(ND)$(C):AlarmDisableZero") {
   field(OUT, "$(S)$(ND)$(C):AlarmSummary.VAL PP")
 }
 
+
+#######################################################################
+# Provide new high level PVs for the high and low alarms on the input
+#######################################################################
+
+record(ao, "$(S)$(ND)$(C):AlarmHigh") {
+  field(VAL, "0.0")
+  field(PINI, "YES")
+  field(FLNK, "$(S)$(ND)$(C):Alarm0HighCalc")
+  info(autosaveFields, "VAL")
+}
+record(mbbo, "$(S)$(ND)$(C):AlarmHighSync") {
+  field(PINI, "YES")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(ZRST, "No Auto Sync")
+  field(ONST, "Sync To Alarm 1")
+  field(TWST, "Sync To Alarm 2")
+  field(FLNK, "$(S)$(ND)$(C):Alarm0HighCalc")
+  info(autosaveFields, "VAL")
+}
+record(calcout, "$(S)$(ND)$(C):Alarm0HighCalc") {
+  field(INPA, "$(S)$(ND)$(C):AlarmHigh")
+  field(INPB, "$(S)$(ND)$(C):AlarmHighSync")
+  field(CALC, "B==0?A:0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)$(C):Alarm0HighFan.VAL PP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm1HighCalc")
+}
+record(calcout, "$(S)$(ND)$(C):Alarm1HighCalc") {
+  field(INPA, "$(S)$(ND)$(C):AlarmHigh")
+  field(INPB, "$(S)$(ND)$(C):AlarmHighSync")
+  field(CALC, "B==1?A:0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)$(C):Alarm1HighFan.VAL PP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm2HighCalc")
+}
+record(calcout, "$(S)$(ND)$(C):Alarm2HighCalc") {
+  field(INPA, "$(S)$(ND)$(C):AlarmHigh")
+  field(INPB, "$(S)$(ND)$(C):AlarmHighSync")
+  field(CALC, "B==2?A:0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)$(C):Alarm2HighFan.VAL PP")
+}
+record(dfanout, "$(S)$(ND)$(C):Alarm0HighFan") {
+  field(OMSL, "supervisory")
+  field(OUTA, "$(S)$(ND)$(C):PV.HIHI PP")
+}
+record(dfanout, "$(S)$(ND)$(C):Alarm1HighFan") {
+  field(OMSL, "supervisory")
+  field(OUTA, "$(S)$(ND)$(C):PV.HIHI PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm1:ThresholdSet PP")
+}
+record(dfanout, "$(S)$(ND)$(C):Alarm2HighFan") {
+  field(OMSL, "supervisory")
+  field(OUTA, "$(S)$(ND)$(C):PV.HIHI PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm2:ThresholdSet PP")
+}
+
+record(ao, "$(S)$(ND)$(C):AlarmLow") {
+  field(VAL, "0.0")
+  field(PINI, "YES")
+  field(FLNK, "$(S)$(ND)$(C):Alarm0LowCalc")
+  info(autosaveFields, "VAL")
+}
+record(mbbo, "$(S)$(ND)$(C):AlarmLowSync") {
+  field(PINI, "YES")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(ZRST, "No Auto Sync")
+  field(ONST, "Sync To Alarm 1")
+  field(TWST, "Sync To Alarm 2")
+  field(FLNK, "$(S)$(ND)$(C):Alarm0LowCalc")
+  info(autosaveFields, "VAL")
+}
+record(calcout, "$(S)$(ND)$(C):Alarm0LowCalc") {
+  field(INPA, "$(S)$(ND)$(C):AlarmLow")
+  field(INPB, "$(S)$(ND)$(C):AlarmLowSync")
+  field(CALC, "B==0?A:0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)$(C):Alarm0LowFan.VAL PP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm1LowCalc")
+}
+record(calcout, "$(S)$(ND)$(C):Alarm1LowCalc") {
+  field(INPA, "$(S)$(ND)$(C):AlarmLow")
+  field(INPB, "$(S)$(ND)$(C):AlarmLowSync")
+  field(CALC, "B==1?A:0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)$(C):Alarm1LowFan.VAL PP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm2LowCalc")
+}
+record(calcout, "$(S)$(ND)$(C):Alarm2LowCalc") {
+  field(INPA, "$(S)$(ND)$(C):AlarmLow")
+  field(INPB, "$(S)$(ND)$(C):AlarmLowSync")
+  field(CALC, "B==2?A:0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)$(C):Alarm2LowFan.VAL PP")
+}
+record(dfanout, "$(S)$(ND)$(C):Alarm0LowFan") {
+  field(OMSL, "supervisory")
+  field(OUTA, "$(S)$(ND)$(C):PV.LOLO PP")
+}
+record(dfanout, "$(S)$(ND)$(C):Alarm1LowFan") {
+  field(OMSL, "supervisory")
+  field(OUTA, "$(S)$(ND)$(C):PV.LOLO PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm1:ThresholdSet PP")
+}
+record(dfanout, "$(S)$(ND)$(C):Alarm2LowFan") {
+  field(OMSL, "supervisory")
+  field(OUTA, "$(S)$(ND)$(C):PV.LOLO PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm2:ThresholdSet PP")
+}
 
 
