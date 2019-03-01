@@ -362,5 +362,12 @@ record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncDev")
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)$(C):Alarm$(A):Dev.VAL NPP MS")
   field(OUTA, "$(S)$(ND)$(C):Alarm$(A):DevSet NPP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncAlarm")
+}
+record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncAlarm")
+{
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)$(C):AlarmLow.PROC PP")
+  field(OUTB, "$(S)$(ND)$(C):AlarmHigh.PROC PP")
 }
 

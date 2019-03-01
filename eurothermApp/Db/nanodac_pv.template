@@ -150,10 +150,17 @@ record(calcout, "$(S)$(ND)$(C):PV_ResSetCalc")
 {
   field(INPA, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
   field(CALC, "1/(10**A)")
-  field(OUT, "$(S)$(ND)$(C):PV.ESLO PP")
+  field(OOPT, "On Change")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)$(C):PV_ResSetEslo.PREC PP")
+}
+record(dfanout, "$(S)$(ND)$(C):PV_ResSetEslo")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)$(C):PV_ResSetCalc NPP MS")
+  field(OUTA, "$(S)$(ND)$(C):PV.ESLO PP")
   field(FLNK, "$(S)$(ND)$(C):PV_ResSetPrec")
 }
-
 record(dfanout, "$(S)$(ND)$(C):PV_ResSetPrec")
 {
   field(OMSL, "closed_loop")
