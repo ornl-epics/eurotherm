@@ -5,3 +5,5 @@ drvModbusAsynConfigure("n$(NI)u", "n$(NI)ip", 1, 4, 11916, 60, 4, 1000, 0)
 # Write function for user value 1-12 params (11916 to 11975)
 drvModbusAsynConfigure("n$(NI)uw", "n$(NI)ip", 1, 6, 11916, 60, 4, 1000, 0)
 
+epicsThreadSleep(0.5)
+

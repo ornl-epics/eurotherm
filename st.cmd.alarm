@@ -37,6 +37,8 @@ drvModbusAsynConfigure("n$(NI)c4a1w", "n$(NI)ip", 1, 6, 6592, 9,  4, 2000, 0)
 drvModbusAsynConfigure("n$(NI)c4a2",  "n$(NI)ip", 1, 4, 6624, 9,  4, 2000, 0)
 drvModbusAsynConfigure("n$(NI)c4a2w", "n$(NI)ip", 1, 6, 6624, 9,  4, 2000, 0)
 
+epicsThreadSleep(0.5)
+
 # Virtual channels
 
 drvModbusAsynConfigure("n$(NI)vc1a1",  "n$(NI)ip", 1, 4, 7232, 9,  4, 2000, 0)
@@ -69,5 +71,6 @@ drvModbusAsynConfigure("n$(NI)vc6a1w", "n$(NI)ip", 1, 6, 7872, 9,  4, 2000, 0)
 drvModbusAsynConfigure("n$(NI)vc6a2",  "n$(NI)ip", 1, 4, 7904, 9,  4, 2000, 0)
 drvModbusAsynConfigure("n$(NI)vc6a2w", "n$(NI)ip", 1, 6, 7904, 9,  4, 2000, 0)
 
+epicsThreadSleep(0.5)
 
 

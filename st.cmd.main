@@ -24,6 +24,8 @@ modbusInterposeConfig("n$(NI)ip", 0, 2000, 0)
 drvModbusAsynConfigure("n$(NI)ch", "n$(NI)ip", 1, 4, 256, 16, 4, 200, 0)
 drvModbusAsynConfigure("n$(NI)cv", "n$(NI)ip", 1, 4, 288, 24, 4, 200, 0)
 
+epicsThreadSleep(0.5)
+
 # Read the resolutions values for each channel every 10s
 drvModbusAsynConfigure("n$(NI)ch1res", "n$(NI)ip", 1, 4, 6145, 1, 4, 10000, 0)
 drvModbusAsynConfigure("n$(NI)ch2res", "n$(NI)ip", 1, 4, 6273, 1, 4, 10000, 0)
@@ -36,6 +38,8 @@ drvModbusAsynConfigure("n$(NI)cv3res", "n$(NI)ip", 1, 4, 7426, 1, 4, 10000, 0)
 drvModbusAsynConfigure("n$(NI)cv4res", "n$(NI)ip", 1, 4, 7554, 1, 4, 10000, 0)
 drvModbusAsynConfigure("n$(NI)cv5res", "n$(NI)ip", 1, 4, 7682, 1, 4, 10000, 0)
 drvModbusAsynConfigure("n$(NI)cv6res", "n$(NI)ip", 1, 4, 7810, 1, 4, 10000, 0)
+
+epicsThreadSleep(0.5)
 
 # The channel description (and units string) seem to occupy 25 words.
 # 20 registers for the description
@@ -52,4 +56,6 @@ drvModbusAsynConfigure("n$(NI)cv3str", "n$(NI)ip", 1, 4, 19254, 25, 4, 10000, 0)
 drvModbusAsynConfigure("n$(NI)cv4str", "n$(NI)ip", 1, 4, 19281, 25, 4, 10000, 0)
 drvModbusAsynConfigure("n$(NI)cv5str", "n$(NI)ip", 1, 4, 19308, 25, 4, 10000, 0)
 drvModbusAsynConfigure("n$(NI)cv6str", "n$(NI)ip", 1, 4, 19335, 25, 4, 10000, 0)
+
+epicsThreadSleep(0.5)
 
