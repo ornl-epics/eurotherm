@@ -324,10 +324,11 @@ record(bo, "$(S)$(ND)Loop$(L):PID:Source")
 {
   field(DESC, "Controller/Software PID")
   field(PINI, "YES")
-  field(VAL, "0")
+  field(VAL, "1")
   field(ZNAM, "Controller PID")
   field(ONAM, "Software PID")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalc")
+  info(autosaveFields, "VAL")
 }
 # If we are using the software table, set up the controller
 # appropriately and enable the table.
