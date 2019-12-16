@@ -218,6 +218,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):HystSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ALARM_PORT_A)w,4,1)")
   field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
@@ -230,6 +231,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):RefSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ALARM_PORT_A)w,6,1)")
   field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
@@ -243,6 +245,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):DevSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ALARM_PORT_A)w,7,1)")
   field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
@@ -255,6 +258,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):AmountSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ALARM_PORT_A)w,8,1)")
   field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 ############################################################
@@ -270,6 +274,7 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Prec:Res")
 {
   field(INP, "$(S)$(ND)$(C):PV_Res CP MS")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(calcout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc")
@@ -279,6 +284,7 @@ record(calcout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc")
   field(DOPT, "Use CALC")
   field(OOPT, "On Change")
   field(OUT, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec.VAL PP")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec")

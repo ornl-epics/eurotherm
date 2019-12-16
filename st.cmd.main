@@ -1,6 +1,8 @@
 
-# Asyn IP port 
-drvAsynIPPortConfigure("n$(NI)ip","$(IP_ADDR)",0,0,1)
+# Asyn IP port
+# set to noAutoConnect
+#    drvAsynIPPortConfigure("portName","hostInfo",priority,noAutoConnect,noProcessEos) 
+drvAsynIPPortConfigure("n$(NI)ip","$(IP_ADDR)",0,1,1)
         
 # modbusInterposeConfig
 # arg 1: portName

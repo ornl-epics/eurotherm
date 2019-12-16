@@ -30,6 +30,7 @@ record(ai, "$(S)$(ND)Loop$(L):SP:HighLimit")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # ///
@@ -44,6 +45,7 @@ record(ai, "$(S)$(ND)Loop$(L):SP:LowLimit")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # ///
@@ -59,6 +61,7 @@ record(ai, "$(S)$(ND)Loop$(L):SP:Rate")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 ############################################################
@@ -76,6 +79,7 @@ record(ao, "$(S)$(ND)Loop$(L):SP:HighLimitSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # ///
@@ -89,6 +93,7 @@ record(ao, "$(S)$(ND)Loop$(L):SP:LowLimitSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # ///
@@ -103,5 +108,6 @@ record(ao, "$(S)$(ND)Loop$(L):SP:RateSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
