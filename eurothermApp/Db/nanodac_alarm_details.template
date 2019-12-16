@@ -55,6 +55,7 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Type")
   field(EIST, "Dig Off")
   field(NIST, "Dig High")
   field(TEST, "Dig Low")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
@@ -74,6 +75,7 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Latch")
   field(ONST, "Auto")
   field(TWST, "Manual")
   field(THST, "Trigger")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
@@ -86,6 +88,7 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Threshold")
   field(INP, "@asyn($(ALARM_PORT_A),3,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
@@ -98,6 +101,7 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Hyst")
   field(INP, "@asyn($(ALARM_PORT_A),4,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
@@ -111,6 +115,7 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Ref")
   field(INP, "@asyn($(ALARM_PORT_A),6,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
@@ -125,6 +130,7 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Dev")
   field(INP, "@asyn($(ALARM_PORT_A),7,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
@@ -138,6 +144,7 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Amount")
   field(INP, "@asyn($(ALARM_PORT_A),8,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 ############################################################
@@ -176,6 +183,7 @@ record(mbbo, "$(S)$(ND)$(C):Alarm$(A):TypeSet")
   field(EIST, "Dig Off")
   field(NIST, "Dig High")
   field(TEST, "Dig Low")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
@@ -196,6 +204,7 @@ record(mbbo, "$(S)$(ND)$(C):Alarm$(A):LatchSet")
   field(ONST, "Auto")
   field(TWST, "Manual")
   field(THST, "Trigger")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
@@ -207,6 +216,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ALARM_PORT_A)w,3,1)")
   field(LINR, "LINEAR")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 

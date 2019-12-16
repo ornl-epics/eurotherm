@@ -144,6 +144,7 @@ record(ai, "$(S)$(ND)$(C):PV_Res")
   field(INP, "@asyn($(PORT)$(CI)res,0,1)")
   field(SCAN, "I/O Intr")
   field(FLNK, "$(S)$(ND)$(C):PV_ResSetCalc")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 record(calcout, "$(S)$(ND)$(C):PV_ResSetCalc")
@@ -248,6 +249,7 @@ record(bi, "$(S)$(ND)$(C):AlarmSummary") {
   field(OSV, "MAJOR")
   field(PINI, "YES")
   field(VAL, "0")  
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # ///
@@ -264,6 +266,7 @@ record(bo, "$(S)$(ND)$(C):AlarmDisable") {
   field(OSV, "MINOR")
   field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc")
   info(autosaveFields, "VAL")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # ///
@@ -288,6 +291,7 @@ record(ao, "$(S)$(ND)$(C):AlarmHigh") {
   field(PINI, "YES")
   field(FLNK, "$(S)$(ND)$(C):Alarm0HighCalc")
   info(autosaveFields, "VAL")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 record(mbbo, "$(S)$(ND)$(C):AlarmHighSync") {
   field(PINI, "YES")
@@ -346,6 +350,7 @@ record(ao, "$(S)$(ND)$(C):AlarmLow") {
   field(PINI, "YES")
   field(FLNK, "$(S)$(ND)$(C):Alarm0LowCalc")
   info(autosaveFields, "VAL")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 record(mbbo, "$(S)$(ND)$(C):AlarmLowSync") {
   field(PINI, "YES")
