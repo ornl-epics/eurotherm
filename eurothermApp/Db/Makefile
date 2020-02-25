@@ -17,6 +17,7 @@ DB += nanodac_loop_output.db
 DB += nanodac_loop_pid.db
 DB += nanodac_loop_setpoint.db
 DB += pid_set_window.db
+DB += nanodac_loop_adv.db
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

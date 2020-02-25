@@ -1,0 +1,42 @@
+#############################################################
+#
+# Database template to read and write advance loop main variables 
+# for the eurotherm nanodac.  
+# 
+# S - base PV name
+# ND - name for this nanodac
+# PORT - asyn port name for loop main data
+#
+# Note: By convention the port name for the writeable parameters
+# is the same as the read parameters, but with a 'w' on the end.
+#
+############################################################
+
+# /// 
+# /// Read the setpoint
+# ///
+record(ai, "$(S)$(ND)LoopAdv:SP")
+{
+  field(DESC, "Advance Loop Setpoint")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),0,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Set the loop setpoint demand value 
+# ///
+record(ao, "$(S)$(ND)LoopAdv:SPSet")
+{
+  field(DESC, "Set Loop$(L) Setpoint")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,0,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
