@@ -1,7 +1,7 @@
 
 # Read the advance loop main params (769)
 drvModbusAsynConfigure("n$(NI)adl", "n$(NI)ip", 1, 4, 769, 1, 4, 1000, 0)
-# Write function for loop 1 main (769)
+# Write function for advance loop main (769)
 drvModbusAsynConfigure("n$(NI)adlw", "n$(NI)ip", 1, 6, 769, 1, 4, 1000, 0)
 
 epicsThreadSleep(0.5)
