@@ -327,3 +327,27 @@ record(bo, "$(S)$(ND)Loop$(L):InhibitSet")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+############################################################
+# /// 
+# /// Initiate the loop autotune 
+# ///
+record(bo, "$(S)$(ND)Loop$(L):AutotuneEnaSet")
+{
+  field(DESC, "Set Loop$(L) Autotune Ena")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PN)w,0,1)")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(FLNK, "$(S)$(ND)Loop$(L):AutotuneEna")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+record(bi, "$(S)$(ND)Loop$(L):AutotuneEna")
+{
+  field(DESC, "Set Loop$(L) Autotune Ena")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PN),0,1)")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  field(SCAN, "I/O Intr")
+  info(archive, "Monitor, 00:00:01, VAL")
+}

@@ -21,4 +21,9 @@ drvModbusAsynConfigure("n$(NI)l2o", "n$(NI)ip", 1, 4, 5980, 64, 4, 1000, 0)
 # Write function for loop 2 output and setpoint params (5980 to 6032)
 drvModbusAsynConfigure("n$(NI)l2ow", "n$(NI)ip", 1, 6, 5980, 52, 4, 1000, 0)
 
+# Read functions for loop 2 Autotune params (5937 to 5939)
+drvModbusAsynConfigure("n$(NI)l2tu", "n$(NI)ip", 1, 4, 5937, 3, 4, 1000, 0)
+# Write functions for loop 2 Autotune params.
+drvModbusAsynConfigure("n$(NI)l2tuw", "n$(NI)ip", 1, 6, 5937, 3, 4, 1000, 0)
+
 epicsThreadSleep(0.5)

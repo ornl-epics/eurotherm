@@ -118,9 +118,11 @@ include "nanodac_pv.template"
 
 substitute "L=1"
 substitute "PORT=n$(NI)l1"
+substitute "PN=n$(NI)l1tu"
 include "nanodac_loop_main.template"
 substitute "L=2"
 substitute "PORT=n$(NI)l2"
+substitute "PN=n$(NI)l2tu"
 include "nanodac_loop_main.template"
 
 substitute "L=1"
