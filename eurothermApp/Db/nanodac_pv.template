@@ -167,8 +167,8 @@ record(dfanout, "$(S)$(ND)$(C):PV_ResSetPrec")
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
   field(OUTA, "$(S)$(ND)$(C):PV.PREC PP")
-  field(OUTB, "$(S)$(ND)$(C):AlarmLow.PREC PP")
-  field(OUTC, "$(S)$(ND)$(C):AlarmHigh.PREC PP")
+  field(OUTB, "$(S)$(ND)$(C):AlarmLow.PREC NPP")
+  field(OUTC, "$(S)$(ND)$(C):AlarmHigh.PREC NPP")
 }
 
 # ///
@@ -286,15 +286,19 @@ record(calcout, "$(S)$(ND)$(C):AlarmDisableZero") {
 # Provide new high level PVs for the high and low alarms on the input
 #######################################################################
 
+record(seq, "$(S)$(ND)$(C):AlarmHighPini") {
+  field(PINI, "YES")
+  field(DLY1, "5")
+  field(DOL1, "1")
+  field(LNK1, "$(S)$(ND)$(C):AlarmHigh.PROC PP")
+}
 record(ao, "$(S)$(ND)$(C):AlarmHigh") {
   field(VAL, "0.0")
-  field(PINI, "YES")
   field(FLNK, "$(S)$(ND)$(C):Alarm0HighCalc")
   info(autosaveFields, "VAL")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 record(mbbo, "$(S)$(ND)$(C):AlarmHighSync") {
-  field(PINI, "YES")
   field(ZRVL, "0")
   field(ONVL, "1")
   field(TWVL, "2")
@@ -345,15 +349,19 @@ record(dfanout, "$(S)$(ND)$(C):Alarm2HighFan") {
   field(OUTB, "$(S)$(ND)$(C):Alarm2:ThresholdSet PP")
 }
 
+record(seq, "$(S)$(ND)$(C):AlarmLowPini") {
+  field(PINI, "YES")
+  field(DLY1, "5")
+  field(DOL1, "1")
+  field(LNK1, "$(S)$(ND)$(C):AlarmLow.PROC PP")
+}
 record(ao, "$(S)$(ND)$(C):AlarmLow") {
   field(VAL, "0.0")
-  field(PINI, "YES")
   field(FLNK, "$(S)$(ND)$(C):Alarm0LowCalc")
   info(autosaveFields, "VAL")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 record(mbbo, "$(S)$(ND)$(C):AlarmLowSync") {
-  field(PINI, "YES")
   field(ZRVL, "0")
   field(ONVL, "1")
   field(TWVL, "2")
