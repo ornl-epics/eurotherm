@@ -1,0 +1,29 @@
+
+# Asyn IP port
+# set to noAutoConnect
+#    drvAsynIPPortConfigure("portName","hostInfo",priority,noAutoConnect,noProcessEos) 
+drvAsynIPPortConfigure("n$(NI)ip","$(IP_ADDR)",0,1,1)
+        
+# modbusInterposeConfig
+# arg 1: portName
+# arg 2: linkType
+# arg 3: timeoutMsec
+# arg 4: writeDelayMsec
+modbusInterposeConfig("n$(NI)ip", 0, 2000, 0)
+
+# drvModbusAsynConfigure
+# arg 1: portName
+# arg 2: tcpPortName
+# arg 3: slaveAddress 
+# arg 4: modbusFunction 
+# arg 5: modbusStartAddress 
+# arg 6: modbusLength
+# arg 7: default dataType
+# arg 8: pollMsec 
+# arg 9: plcType
+
+# Port to read floats
+drvModbusAsynConfigure("n$(NI)ch", "n$(NI)ip", 1, 4, -1, 2, 5, 0, 0)
+
+epicsThreadSleep(1)
+

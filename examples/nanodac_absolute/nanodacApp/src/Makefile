@@ -1,0 +1,39 @@
+TOP=../..
+
+include $(TOP)/configure/CONFIG
+#----------------------------------------
+#  ADD MACRO DEFINITIONS AFTER THIS LINE
+
+#=============================
+# Build the IOC application
+
+PROD_IOC = nanodac
+# nanodac.dbd will be created and installed
+DBD += nanodac.dbd
+
+# nanodac.dbd will be made up from these files:
+nanodac_DBD += base.dbd
+nanodac_DBD += asyn.dbd
+nanodac_DBD += drvAsynIPPort.dbd
+nanodac_DBD += modbusSupport.dbd
+
+# nanodac_registerRecordDeviceDriver.cpp derives from nanodac.dbd
+nanodac_SRCS += nanodac_registerRecordDeviceDriver.cpp
+
+# Build the main IOC entry point on workstation OSs.
+nanodac_SRCS_DEFAULT += nanodacMain.cpp
+nanodac_SRCS_vxWorks += -nil-
+
+# Link in the code from the support library
+nanodac_LIBS += asyn
+nanodac_LIBS += modbus
+
+# Finally link to the EPICS Base libraries
+nanodac_LIBS += $(EPICS_BASE_IOC_LIBS)
+
+#=============================
+
+include $(TOP)/configure/RULES
+#----------------------------------------
+#  ADD RULES AFTER THIS LINE
+
