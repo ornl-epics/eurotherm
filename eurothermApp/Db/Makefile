@@ -19,6 +19,10 @@ DB += nanodac_loop_setpoint.db
 DB += pid_set_window.db
 DB += nanodac_loop_adv.db
 
+# New absolute addressing version
+DB += nd.db
+DB += nd_pv.db
+
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add
 # <anyname>_TEMPLATE = <templatename>

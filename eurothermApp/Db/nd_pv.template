@@ -1,0 +1,37 @@
+#############################################################
+#
+# Database template to read a real or virtual channel from the 
+# eurotherm nanodac. This is a new version that uses Modbus
+# absolute addressing and reads floating point data types.
+# 
+# S - base PV name
+# ND - name of this nanodac
+# C - channel name
+# CI - channel index number (1-4 or 1-32 for virtual channels)
+# PORT - asyn port name for channel data
+# PV_ADDR - address for $(PORT) to read the PV
+#
+# Matt Pearson
+# May 2020
+#
+############################################################
+
+# ///
+# /// Read the channel process variable
+# ///
+record(ai, "$(S)$(ND)$(C):PV") {
+  field(DESC, "$(C) Process Variable")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(PV_ADDR),1)")
+  field(SCAN, "Passive")
+  field(HHSV,"MAJOR")
+  field(LLSV,"MAJOR")
+  field(HYST,"0.0")
+  field(HIHI,"1000")
+  field(LOLO,"-1")
+  info(autosaveFields, "HIHI LOLO ADEL MDEL HYST")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+
+

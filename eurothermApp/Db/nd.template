@@ -1,0 +1,39 @@
+############################################################
+#
+# Top level nanodac template. 
+#
+# This instantiates the other nanodac templates. This is the new
+# version developed in May 2020 that uses absolute addressing 
+# and floating point readback.
+#
+# S - base PV name
+# ND - PV name for this Nanodac
+# NI - index number for this Nanodac
+#
+# Matt Pearson
+# May 2020
+#
+############################################################
+
+# ///
+# /// Generic Asyn record.
+# /// Not useful for modbus params, but we can see the 
+# /// socket connect status via the CNCT field
+# ///
+record(asyn,"$(S)$(ND)Asyn") {
+  field(DTYP,"asynRecordDevice")
+  field(PORT,"n$(NI)ip")
+  field(ADDR,"0")
+}
+
+# ///
+# /// Set up the channels (4 real ones and 6 virtual ones)
+# ///
+
+substitute "PORT=n$(NI)ch"
+
+substitute "C=CH1"
+substitute "CI=1"
+substitute "PV_ADDR=0"
+include "nd_pv.template"
+
