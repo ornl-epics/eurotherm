@@ -23,7 +23,7 @@ modbusInterposeConfig("n$(NI)ip", 0, 2000, 0)
 # arg 9: plcType
 
 # Port to read floats
-drvModbusAsynConfigure("n$(NI)ch", "n$(NI)ip", 1, 4, -1, 2, 5, 0, 0)
+drvModbusAsynConfigure("n$(NI)2w4", "n$(NI)ip", 1, 4, -1, 2, 0, 0, 0)
 
 epicsThreadSleep(1)
 
