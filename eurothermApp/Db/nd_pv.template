@@ -20,7 +20,7 @@
 record(ai, "$(S)$(ND)$(C):PV") {
   field(DESC, "$(C) Process Variable")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT)2w4,256,1)")
+  field(INP, "@asyn($(PORT)2w4,256,1)FLOAT32_BE")
   field(SCAN, "Passive")
   field(HHSV,"MAJOR")
   field(LLSV,"MAJOR")
