@@ -9,6 +9,9 @@
 # C - channel name (eg. CH1)
 # PORT - asyn port name for channel data
 #
+# Addresses:
+#  ADDR_PV - the PV address (from the 32-bit area)
+#
 # Matt Pearson
 # May 2020
 #
@@ -20,7 +23,7 @@
 record(ai, "$(S)$(ND)$(C):PV") {
   field(DESC, "$(C) Process Variable")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT)2w4,256,1)FLOAT32_BE")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_PV),1)FLOAT32_BE")
   field(SCAN, "Passive")
   field(HHSV,"MAJOR")
   field(LLSV,"MAJOR")

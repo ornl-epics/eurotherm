@@ -6,6 +6,17 @@
 # version developed in May 2020 that uses absolute addressing 
 # and floating point readback.
 #
+# The modbus addresses listed in the manual are for 16-bit numbers
+# or less (like status bits). To access the 32-bit IEEE floating
+# point number versions (for things like PV value) we have to access
+# an offset memory area:
+#
+# (addr * 2) + 0x8000
+#
+# So, for example, Channel.1.Main.PV is address 256. To read back
+# the full 32-bit value we need to read two 16-bit words from the 
+# address (256*2)+32768 = 33280
+#
 # S - base PV name
 # ND - PV name for this Nanodac
 # NI - index number for this Nanodac (eg. 1)
@@ -22,6 +33,7 @@
 substitute "PORT=n$(NI)"
 
 substitute "C=CH1"
+substitute "ADDR_PV=33280"
 include "nd_pv.template"
 
 
