@@ -23,7 +23,7 @@ TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 
 ASYN=		/home/controls/epics/asyn/master
 MODBUS=		/home/controls/epics/modbus/master
-EUROTHERM=	/home/controls/epics/eurotherm/master
+EUROTHERM=	/home/controls/epics/eurotherm/absolute_devel
 
 # EPICS_BASE usually appears last so other apps can override stuff:
 EPICS_BASE=/home/controls/epics/base/master
