@@ -10,7 +10,12 @@
 # PORT - asyn port name for channel data
 #
 # Addresses:
-#  ADDR_PV - the PV address (from the 32-bit area)
+#  ADDR_VAL - the PV address (32-bit range)
+#  ADDR_STA - the channel status address (16-bit range)
+#  ADDR_AL1 - the channel alarm 1 address (16-bit range)
+#  ADDR_AL2 - the channel alarm 2 address (16-bit range)
+#  ADDR_RES - the channel resolution address (16-bit range)
+#  ADDR_DES - the channel description & units string (16-bit range)
 #
 # Matt Pearson
 # May 2020
@@ -18,23 +23,179 @@
 ############################################################
 
 # ///
+# /// Records to control the fast/slow poll behaviour for this channel
+# ///
+record(bo, "$(S)$(ND)$(C):Poll") {
+  field(SCAN, "1 second")
+  field(FLNK, "$(S)$(ND)$(C):PV")
+}
+record(bo, "$(S)$(ND)$(C):PollSlow") {
+  field(SCAN, "10 second")
+  field(FLNK, "$(S)$(ND)$(C):PV_Res")
+}
+
+##############################################################
+# Fast polled parameters
+
+# ///
 # /// Read the channel process variable
 # ///
 record(ai, "$(S)$(ND)$(C):PV") {
   field(DESC, "$(C) Process Variable")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT)2w4,$(ADDR_PV),1)FLOAT32_BE")
-  field(SCAN, "Passive")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_VAL),1)FLOAT32_BE")
   field(HHSV,"MAJOR")
   field(LLSV,"MAJOR")
   field(HYST,"0.0")
   field(HIHI,"10000")
   field(LOLO,"-1")
+  field(PREC, "$(PREC=3)")
+  field(FLNK, "$(S)$(ND)$(C):Status")
   info(autosaveFields, "HIHI LOLO ADEL MDEL HYST")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Read the channel status 
+# ///
+record(mbbi, "$(S)$(ND)$(C):Status") {
+  field(DESC, "$(C) Status")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_STA),1)UINT16")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(SVVL, "7")
+  field(EIVL, "8")
+  field(NIVL, "9")
+  field(TEVL, "12")
+  field(ZRST, "Good")
+  field(ONST, "Off")
+  field(TWST, "Over Range")
+  field(THST, "Under Range")
+  field(FRST, "Hardware Error")
+  field(FVST, "Ranging")
+  field(SXST, "Overflow")
+  field(SVST, "Bad")
+  field(EIST, "Hardware Exceeded")
+  field(NIST, "No Data")
+  field(TEST, "Comm Channel Error")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "NO_ALARM")
+  field(TWSV, "MAJOR")
+  field(THSV, "MAJOR")
+  field(FRSV, "MAJOR")
+  field(FVSV, "MAJOR")
+  field(SXSV, "MAJOR")
+  field(SVSV, "MAJOR")
+  field(EISV, "MAJOR")
+  field(NISV, "MAJOR")
+  field(TESV, "MAJOR")
+  field(FLNK, "$(S)$(ND)$(C):Alarm1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
 
+# ///
+# /// Read the channel alarm status 
+# ///
+record(mbbi, "$(S)$(ND)$(C):Alarm1") {
+  field(DESC, "$(C) Alarm 1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_AL1),1)UINT16")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "Off")
+  field(ONST, "Active")
+  field(TWST, "Safe Not Ack")
+  field(THST, "Active Not Ack")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "MINOR")
+  field(TWSV, "MINOR")
+  field(THSV, "MAJOR")
+  field(FLNK, "$(S)$(ND)$(C):Alarm2")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the channel alarm 2 status 
+# ///
+record(mbbi, "$(S)$(ND)$(C):Alarm2") {
+  field(DESC, "$(C) Alarm 2")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_AL2),1)UINT16")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "Off")
+  field(ONST, "Active")
+  field(TWST, "Safe Not Ack")
+  field(THST, "Active Not Ack")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "MINOR")
+  field(TWSV, "MINOR")
+  field(THSV, "MAJOR")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+##############################################################
+# Slow polled parameters
+
+# ///
+# /// Read the channel resolution
+# ///
+record(ai, "$(S)$(ND)$(C):PV_Res") {
+  field(DESC, "$(C) Resolution")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_RES),1)UINT16")
+  field(FLNK, "$(S)$(ND)$(C):DescRaw")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the channel description (and units string).
+# /// Reading an int array seems to work. I tried asynOctetRead
+# /// and the STRING type conversion but the units were lost.
+# ///
+record(waveform, "$(S)$(ND)$(C):DescRaw") {
+  field(DESC, "$(C) Desc")
+  field(DTYP, "asynInt32ArrayIn")
+  field(INP, "@asyn($(PORT)25w4,$(ADDR_DES),1)UINT16")
+  field(FTVL, "LONG")
+  field(NELM, "25")
+  field(FLNK, "$(S)$(ND)$(C):Desc")
+}
+
+# ///
+# /// The channel description
+# ///
+record(subArray, "$(S)$(ND)$(C):Desc") {
+  field(DESC, "$(C) Description")
+  field(INP, "$(S)$(ND)$(C):DescRaw.VAL")
+  field(FTVL, "CHAR")
+  field(NELM, "20")
+  field(MALM, "25")
+  field(INDX, "0")
+  field(FLNK, "$(S)$(ND)$(C):Units")
+}
+
+# ///
+# /// The channel units string
+# ///
+record(subArray, "$(S)$(ND)$(C):Units") {
+  field(DESC, "$(C) Units")
+  field(INP, "$(S)$(ND)$(C):DescRaw.VAL")
+  field(FTVL, "CHAR")
+  field(NELM, "5")
+  field(MALM, "25")
+  field(INDX, "21")
+}
 
 
 

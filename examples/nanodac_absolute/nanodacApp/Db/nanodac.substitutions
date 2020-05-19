@@ -2,7 +2,7 @@
 file nd.db
 {
 pattern {S, ND, NI}
-	{BL99:, SE:ND1:, 1}
+	{SECAGE:, SE:ND7B:, 1}
 }
 
 

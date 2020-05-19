@@ -14,7 +14,7 @@ nanodac_registerRecordDeviceDriver pdbbase
 ####################################################
 # TCP to Eurotherm
 
-epicsEnvSet("IP_ADDR","192.168.200.177:502")
+epicsEnvSet("IP_ADDR","10.112.133.160:502")
 
 ####################################################
 

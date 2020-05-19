@@ -2,8 +2,10 @@
 # Asyn IP port
 # set to noAutoConnect
 #    drvAsynIPPortConfigure("portName","hostInfo",priority,noAutoConnect,noProcessEos) 
-drvAsynIPPortConfigure("n$(NI)ip","$(IP_ADDR)",0,1,1)
+drvAsynIPPortConfigure("n$(NI)ip","$(IP_ADDR)",0,0,1)
         
+epicsThreadSleep(1)
+
 # modbusInterposeConfig
 # arg 1: portName
 # arg 2: linkType
@@ -22,8 +24,21 @@ modbusInterposeConfig("n$(NI)ip", 0, 2000, 0)
 # arg 8: pollMsec 
 # arg 9: plcType
 
-# Port to read floats
+# Port to read 1 or 2 modbus words. 
+drvModbusAsynConfigure("n$(NI)1w4", "n$(NI)ip", 1, 4, -1, 1, 0, 0, 0)
 drvModbusAsynConfigure("n$(NI)2w4", "n$(NI)ip", 1, 4, -1, 2, 0, 0, 0)
 
+# The channel description (and units string) seem to occupy 25 words.
+# 20 registers for the description
+# 5 registers for the units
+# 1 char per register, stored in the high order byte.
+drvModbusAsynConfigure("n$(NI)25w4", "n$(NI)ip", 1, 4, -1, 25, 0, 0, 0)
+
 epicsThreadSleep(1)
+
+# Turn off autoConnect to force an IOC reboot
+asynAutoConnect n$(NI)ip,0,0
+
+
+
 
