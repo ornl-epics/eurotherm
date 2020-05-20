@@ -176,3 +176,63 @@ record(bo, "$(S)$(ND)$(C):Alarm$(A)AckSet") {
   field(OUT, "@asyn($(PORT)1w6,$(ADDR_ALARM_ACK),1)UINT16")
 }
 
+# /// 
+# /// Set the alarm threshold
+# ///
+record(ao, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet") {
+  field(DESC, "Set Alarm $(A) Threshold")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_THR),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Set the alarm hysteresis
+# ///
+record(ao, "$(S)$(ND)$(C):Alarm$(A):HystSet") {
+  field(DESC, "Set Alarm $(A) Hyst")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_HYS),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Set the alarm reference.
+# /// This is for deviation type alarms.
+# ///
+record(ao, "$(S)$(ND)$(C):Alarm$(A):RefSet") {
+  field(DESC, "Set Alarm $(A) Reference")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_REF),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Set the alarm deviation.
+# /// This is for deviation type alarms. It defines
+# /// the width around the $(S)$(ND)$(C):Alarm$(A):Ref.
+# ///
+record(ao, "$(S)$(ND)$(C):Alarm$(A):DevSet") {
+  field(DESC, "Set Alarm $(A) Deviation")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_DEV),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Set the alarm amount.
+# /// This is for rate of change (ROC) type alarms.
+# ///
+record(ao, "$(S)$(ND)$(C):Alarm$(A):AmountSet") {
+  field(DESC, "Set Alarm $(A) Amount")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_AMO),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+
