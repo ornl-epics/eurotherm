@@ -95,8 +95,74 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Latch") {
   field(ONST, "Auto")
   field(TWST, "Manual")
   field(THST, "Trigger")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Threshold")
   info(archive, "Monitor, 00:00:01, VAL")
 }
+
+# /// 
+# /// Read the alarm threshold
+# ///
+record(ai, "$(S)$(ND)$(C):Alarm$(A):Threshold") {
+  field(DESC, "Alarm $(A) Threshold")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_ALARM_THR),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Hyst")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the alarm hysteresis
+# ///
+record(ai, "$(S)$(ND)$(C):Alarm$(A):Hyst") {
+  field(DESC, "Alarm $(A) Hyst")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_ALARM_HYS),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Ref")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the alarm reference.
+# /// This is for deviation type alarms.
+# ///
+record(ai, "$(S)$(ND)$(C):Alarm$(A):Ref") {
+  field(DESC, "Alarm $(A) Reference")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_ALARM_REF),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  field($(S)$(ND)$(C):Alarm$(A):Dev")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the alarm deviation.
+# /// This is for deviation type alarms. It defines
+# /// the width around the $(S)$(ND)$(C):Alarm$(A):Ref.
+# ///
+record(ai, "$(S)$(ND)$(C):Alarm$(A):Dev") {
+  field(DESC, "Alarm $(A) Deviation")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_ALARM_DEV),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Amount")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the alarm amount.
+# /// This is for rate of change (ROC) type alarms.
+# ///
+record(ai, "$(S)$(ND)$(C):Alarm$(A):Amount") {
+  field(DESC, "Alarm $(A) Amount")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_MAIN_AMO),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+
 
 ######################################################################
 # Write records

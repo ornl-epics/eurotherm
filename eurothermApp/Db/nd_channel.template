@@ -4,26 +4,35 @@
 # eurotherm nanodac. This is a new version that uses Modbus
 # absolute addressing and reads floating point data types.
 # 
-# S - base PV name
-# ND - name of this nanodac
+# Additional macros:
 # C - channel name (eg. CH1)
 # PORT - asyn port name for channel data
-# PREC - precision (optional, default=3)
-# ADEL - archive deadband for PV (optional, default=0.1)
 #
 # Addresses:
 #  ADDR_MAIN_PV    - the PV address (32-bit range)
 #  ADDR_MAIN_STA   - the channel status address (16-bit range)
 #  ADDR_MAIN_DES   - the channel description & units string (16-bit range)
+#  Alarm 1:
 #  ADDR_ALARM1_STA - the channel alarm 1 address (16-bit range)
 #  ADDR_ALARM1_ACK - the channel alarm 1 ack address (16-bit range)
 #  ADDR_ALARM1_TYP - the channel alarm 1 type address (16-bit range)
 #  ADDR_ALARM1_LAT - the channel alarm 1 latch address (16-bit range)
+#  ADDR_ALARM1_THR - the channel alarm 1 threshold address (32-bit range)
+#  ADDR_ALARM1_HYS - the channel alarm 1 hysteresis address (32-bit range)
+#  ADDR_ALARM1_REF - the channel alarm 1 reference address (32-bit range)
+#  ADDR_ALARM1_DEV - the channel alarm 1 deviation address (32-bit range)
+#  ADDR_ALARM1_AMO - the channel alarm 1 amount address (32-bit range)
+#  Alarm 2:
 #  ADDR_ALARM2_STA - the channel alarm 2 address (16-bit range)
 #  ADDR_ALARM2_ACK - the channel alarm 2 ack address (16-bit range)
 #  ADDR_ALARM2_TYP - the channel alarm 2 type address (16-bit range)
 #  ADDR_ALARM2_LAT - the channel alarm 2 latch address (16-bit range)
-#
+#  ADDR_ALARM2_THR - the channel alarm 2 threshold address (32-bit range)
+#  ADDR_ALARM2_HYS - the channel alarm 2 hysteresis address (32-bit range)
+#  ADDR_ALARM2_REF - the channel alarm 2 reference address (32-bit range)
+#  ADDR_ALARM2_DEV - the channel alarm 2 deviation address (32-bit range)
+#  ADDR_ALARM2_AMO - the channel alarm 2 amount address (32-bit range)
+
 # Matt Pearson
 # May 2020
 #
@@ -54,6 +63,11 @@ substitute "ADDR_ALARM=$(ADDR_ALARM1_STA)"
 substitute "ADDR_ALARM_ACK=$(ADDR_ALARM1_ACK)"
 substitute "ADDR_ALARM_TYP=$(ADDR_ALARM1_TYP)"
 substitute "ADDR_ALARM_LAT=$(ADDR_ALARM1_LAT)"
+substitute "ADDR_ALARM_THR=$(ADDR_ALARM1_THR)"
+substitute "ADDR_ALARM_HYS=$(ADDR_ALARM1_HYS)"
+substitute "ADDR_ALARM_REF=$(ADDR_ALARM1_REF)"
+substitute "ADDR_ALARM_DEV=$(ADDR_ALARM1_DEV)"
+substitute "ADDR_ALARM_AMO=$(ADDR_ALARM1_AMO)"
 include "nd_channel_alarm.template"
 
 substitute "A=2"
@@ -61,6 +75,11 @@ substitute "ADDR_ALARM=$(ADDR_ALARM2_STA)"
 substitute "ADDR_ALARM_ACK=$(ADDR_ALARM2_ACK)"
 substitute "ADDR_ALARM_TYP=$(ADDR_ALARM2_TYP)"
 substitute "ADDR_ALARM_LAT=$(ADDR_ALARM2_LAT)"
+substitute "ADDR_ALARM_THR=$(ADDR_ALARM2_THR)"
+substitute "ADDR_ALARM_HYS=$(ADDR_ALARM2_HYS)"
+substitute "ADDR_ALARM_REF=$(ADDR_ALARM2_REF)"
+substitute "ADDR_ALARM_DEV=$(ADDR_ALARM2_DEV)"
+substitute "ADDR_ALARM_AMO=$(ADDR_ALARM2_AMO)"
 include "nd_channel_alarm.template"
 
 ###########################################################
