@@ -12,11 +12,13 @@
 # ADEL - archive deadband for PV (optional, default=0.1)
 #
 # Addresses:
-#  ADDR_VAL - the PV address (32-bit range)
-#  ADDR_STA - the channel status address (16-bit range)
-#  ADDR_AL1 - the channel alarm 1 address (16-bit range)
-#  ADDR_AL2 - the channel alarm 2 address (16-bit range)
-#  ADDR_DES - the channel description & units string (16-bit range)
+#  ADDR_MAIN_PV - the PV address (32-bit range)
+#  ADDR_MAIN_STA - the channel status address (16-bit range)
+#  ADDR_MAIN_DES - the channel description & units string (16-bit range)
+#  ADDR_ALARM1_STA - the channel alarm 1 address (16-bit range)
+#  ADDR_ALARM2_STA - the channel alarm 2 address (16-bit range)
+#  ADDR_ALARM1_ACK - the channel alarm 1 ack address (16-bit range)
+#  ADDR_ALARM2_ACK - the channel alarm 2 ack address (16-bit range)
 #
 # Matt Pearson
 # May 2020
@@ -44,11 +46,13 @@ record(dfanout, "$(S)$(ND)$(C):PollSlow") {
 include "nd_channel_main.template"
 
 substitute "A=1"
-substitute "ADDR_ALARM=$(ADDR_AL1)"
+substitute "ADDR_ALARM=$(ADDR_ALARM1_STA)"
+substitute "ADDR_ALARM_ACK=$(ADDR_ALARM1_ACK)"
 include "nd_channel_alarm.template"
 
 substitute "A=2"
-substitute "ADDR_ALARM=$(ADDR_AL2)"
+substitute "ADDR_ALARM=$(ADDR_ALARM2_STA)"
+substitute "ADDR_ALARM_ACK=$(ADDR_ALARM2_ACK)"
 include "nd_channel_alarm.template"
 
 

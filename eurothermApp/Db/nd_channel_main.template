@@ -1,22 +1,10 @@
 #############################################################
 #
 # Database template to read a real or virtual channel from the 
-# eurotherm nanodac. This is a new version that uses Modbus
-# absolute addressing and reads floating point data types.
-# 
-# S - base PV name
-# ND - name of this nanodac
-# C - channel name (eg. CH1)
-# PORT - asyn port name for channel data
-# PREC - precision (optional, default=3)
-# ADEL - archive deadband for PV (optional, default=0.1)
+# eurotherm nanodac. 
 #
-# Addresses:
-#  ADDR_VAL - the PV address (32-bit range)
-#  ADDR_STA - the channel status address (16-bit range)
-#  ADDR_AL1 - the channel alarm 1 address (16-bit range)
-#  ADDR_AL2 - the channel alarm 2 address (16-bit range)
-#  ADDR_DES - the channel description & units string (16-bit range)
+# This is for the Channel.Main params.
+# For list of address macros, see nd_channel.template
 #
 # Matt Pearson
 # May 2020
@@ -42,7 +30,7 @@ record(bo, "$(S)$(ND)$(C):PollSlowMain") {
 record(ai, "$(S)$(ND)$(C):PV") {
   field(DESC, "$(C) Process Variable")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT)2w4,$(ADDR_VAL),1)FLOAT32_BE")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_MAIN_PV),1)FLOAT32_BE")
   field(HHSV,"MAJOR")
   field(LLSV,"MAJOR")
   field(HYST,"0.0")
@@ -61,7 +49,7 @@ record(ai, "$(S)$(ND)$(C):PV") {
 record(mbbi, "$(S)$(ND)$(C):Status") {
   field(DESC, "$(C) Status")
   field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT)1w4,$(ADDR_STA),1)UINT16")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_MAIN_STA),1)UINT16")
   field(ZRVL, "0")
   field(ONVL, "1")
   field(TWVL, "2")
@@ -109,7 +97,7 @@ record(mbbi, "$(S)$(ND)$(C):Status") {
 record(waveform, "$(S)$(ND)$(C):DescRaw") {
   field(DESC, "$(C) Desc")
   field(DTYP, "asynInt32ArrayIn")
-  field(INP, "@asyn($(PORT)25w4,$(ADDR_DES),1)UINT16")
+  field(INP, "@asyn($(PORT)25w4,$(ADDR_MAIN_DES),1)UINT16")
   field(FTVL, "LONG")
   field(NELM, "25")
   field(FLNK, "$(S)$(ND)$(C):Desc")

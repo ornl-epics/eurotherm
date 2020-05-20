@@ -34,6 +34,9 @@ drvModbusAsynConfigure("n$(NI)2w4", "n$(NI)ip", 1, 4, -1, 2, 0, 0, 0)
 # 1 char per register, stored in the high order byte.
 drvModbusAsynConfigure("n$(NI)25w4", "n$(NI)ip", 1, 4, -1, 25, 0, 0, 0)
 
+# Port to write 1 modbus word. 
+drvModbusAsynConfigure("n$(NI)1w6", "n$(NI)ip", 1, 6, -1, 1, 0, 0, 0)
+
 epicsThreadSleep(1)
 
 # Turn off autoConnect to force an IOC reboot

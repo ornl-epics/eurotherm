@@ -3,12 +3,11 @@
 # Database template to read and set alarm parameters for a
 # channel on the eurotherm nanodac. 
 #
+# This is for the Channel.Alarm params.
+# For list of address macros, see nd_channel.template
+
 # Macros in addition to nd_channel.template:
 # A - alarm index (1 or 2)
-#
-# Addresses:
-#  ADDR_ALARM     - the channel alarm address (read, 16-bit range)
-#  ADDR_ALARM_ACK - alarm acknowledge address (write, 16-bit range)
 #
 # Matt Pearson
 # May 2020
@@ -27,7 +26,7 @@ record(bo, "$(S)$(ND)$(C):PollSlowAlarm$(A)") {
 }
 
 # ///
-# /// Read the channel alarm status 
+# /// Read the channel alarm $(A) status 
 # ///
 record(mbbi, "$(S)$(ND)$(C):Alarm$(A)") {
   field(DESC, "$(C) Alarm $(A)")
@@ -46,5 +45,14 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A)") {
   field(TWSV, "MINOR")
   field(THSV, "MAJOR")
   info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Write 1 to acknowledge the alarm $(A)
+# ///
+record(bo, "$(S)$(ND)$(C):Alarm$(A)AckSet") {
+  field(DESC, "Alarm Acknowledge")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)1w6,$(ADDR_ALARM_ACK),1)UINT16")
 }
 
