@@ -8,6 +8,8 @@
 # ND - name of this nanodac
 # C - channel name (eg. CH1)
 # PORT - asyn port name for channel data
+# PREC - precision (optional, default=3)
+# ADEL - archive deadband for PV (optional, default=0.1)
 #
 # Addresses:
 #  ADDR_VAL - the PV address (32-bit range)
@@ -49,6 +51,7 @@ record(ai, "$(S)$(ND)$(C):PV") {
   field(HIHI,"10000")
   field(LOLO,"-1")
   field(PREC, "$(PREC=3)")
+  field(ADEL, "$(ADEL=0.1)")
   field(FLNK, "$(S)$(ND)$(C):Status")
   info(autosaveFields, "HIHI LOLO ADEL MDEL HYST")
   info(archive, "Monitor, 00:00:01, VAL")
