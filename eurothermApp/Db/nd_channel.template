@@ -1,0 +1,105 @@
+#############################################################
+#
+# Database template to read a real or virtual channel from the 
+# eurotherm nanodac. This is a new version that uses Modbus
+# absolute addressing and reads floating point data types.
+# 
+# S - base PV name
+# ND - name of this nanodac
+# C - channel name (eg. CH1)
+# PORT - asyn port name for channel data
+# PREC - precision (optional, default=3)
+# ADEL - archive deadband for PV (optional, default=0.1)
+#
+# Addresses:
+#  ADDR_VAL - the PV address (32-bit range)
+#  ADDR_STA - the channel status address (16-bit range)
+#  ADDR_AL1 - the channel alarm 1 address (16-bit range)
+#  ADDR_AL2 - the channel alarm 2 address (16-bit range)
+#  ADDR_DES - the channel description & units string (16-bit range)
+#
+# Matt Pearson
+# May 2020
+#
+############################################################
+
+# ///
+# /// Records to control the fast/slow poll behaviour for this channel
+# ///
+record(dfanout, "$(S)$(ND)$(C):PollFast") {
+  field(SCAN, "1 second")
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)$(C):PollFastMain.PROC PP")
+  field(OUTB, "$(S)$(ND)$(C):PollFastAlarm1.PROC PP")
+  field(OUTC, "$(S)$(ND)$(C):PollFastAlarm2.PROC PP")
+}
+record(dfanout, "$(S)$(ND)$(C):PollSlow") {
+  field(SCAN, "10 second")
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)$(C):PollSlowMain.PROC PP")
+  field(OUTB, "$(S)$(ND)$(C):PollSlowAlarm1.PROC PP")
+  field(OUTC, "$(S)$(ND)$(C):PollSlowAlarm2.PROC PP")
+}
+
+include "nd_channel_main.template"
+
+substitute "A=1"
+substitute "ADDR_ALARM=$(ADDR_AL1)"
+include "nd_channel_alarm.template"
+
+substitute "A=2"
+substitute "ADDR_ALARM=$(ADDR_AL2)"
+include "nd_channel_alarm.template"
+
+
+
+###########################################################
+# Summarize the alarm on a per-channel basis
+
+# ///
+# /// Alarm summary record for channel $(C)
+# /// This is a summary of the PV alarm state, the controller
+# /// alarm fields and the channel status.
+# ///
+record(calc, "$(S)$(ND)$(C):AlarmSummaryCalc") {
+  field(INPA, "$(S)$(ND)$(C):PV CP MS")
+  field(INPB, "$(S)$(ND)$(C):Status CP MS")
+  field(INPC, "$(S)$(ND)$(C):Alarm1 CP MS")
+  field(INPD, "$(S)$(ND)$(C):Alarm2 CP MS")
+  field(CALC, "A")
+  field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc2")  
+}
+record(calcout, "$(S)$(ND)$(C):AlarmSummaryCalc2") {
+  field(INPA, "$(S)$(ND)$(C):AlarmSummaryCalc.STAT")
+  field(INPB, "$(S)$(ND)$(C):AlarmDisable")
+  field(CALC, "!B?(A!=0?1:0):0")
+  field(DOPT, "Use CALC")
+  field(OOPT, "Every Time")
+  field(OUT, "$(S)$(ND)$(C):AlarmSummary PP")
+}
+record(bi, "$(S)$(ND)$(C):AlarmSummary") {
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Alarm")
+  field(OSV, "MAJOR")
+  field(PINI, "YES")
+  field(VAL, "0")  
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Disable alarms for this channel
+# ///
+record(bo, "$(S)$(ND)$(C):AlarmDisable") {
+  field(DESC, "Disable Alarm")
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(OMSL, "supervisory")
+  field(ZNAM, "Alarm Enabled")
+  field(ONAM, "Alarm Disabled")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MINOR")
+  field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc")
+  info(autosaveFields, "VAL")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+

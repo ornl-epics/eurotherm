@@ -20,8 +20,10 @@ DB += pid_set_window.db
 DB += nanodac_loop_adv.db
 
 # New absolute addressing version
-DB += nd.db
-DB += nd_pv.db
+DB += nd.template
+DB += nd_channel.template
+DB += nd_channel_main.template
+DB += nd_channel_alarm.template
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

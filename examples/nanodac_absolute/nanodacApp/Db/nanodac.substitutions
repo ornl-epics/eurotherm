@@ -1,5 +1,5 @@
 
-file nd.db
+file nd.template
 {
 pattern {S, ND, NI}
 	{SECAGE:, SE:ND7B:, 1}

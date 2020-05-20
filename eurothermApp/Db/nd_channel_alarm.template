@@ -1,0 +1,50 @@
+#############################################################
+#
+# Database template to read and set alarm parameters for a
+# channel on the eurotherm nanodac. 
+#
+# Macros in addition to nd_channel.template:
+# A - alarm index (1 or 2)
+#
+# Addresses:
+#  ADDR_ALARM     - the channel alarm address (read, 16-bit range)
+#  ADDR_ALARM_ACK - alarm acknowledge address (write, 16-bit range)
+#
+# Matt Pearson
+# May 2020
+#
+############################################################
+
+# ///
+# /// Records to control the fast/slow poll behaviour for the below records
+# ///
+record(bo, "$(S)$(ND)$(C):PollFastAlarm$(A)") {
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A)")
+}
+record(bo, "$(S)$(ND)$(C):PollSlowAlarm$(A)") {
+  field(SCAN, "10 second")
+#  field(FLNK, "$(S)$(ND)$(C):DescRaw")
+}
+
+# ///
+# /// Read the channel alarm status 
+# ///
+record(mbbi, "$(S)$(ND)$(C):Alarm$(A)") {
+  field(DESC, "$(C) Alarm $(A)")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM),1)UINT16")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "Off")
+  field(ONST, "Active")
+  field(TWST, "Safe Not Ack")
+  field(THST, "Active Not Ack")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "MINOR")
+  field(TWSV, "MINOR")
+  field(THSV, "MAJOR")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
