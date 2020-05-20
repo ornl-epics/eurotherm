@@ -22,7 +22,7 @@ record(bo, "$(S)$(ND)$(C):PollFastAlarm$(A)") {
 }
 record(bo, "$(S)$(ND)$(C):PollSlowAlarm$(A)") {
   field(SCAN, "10 second")
-#  field(FLNK, "$(S)$(ND)$(C):DescRaw")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Type")
 }
 
 # ///
@@ -46,6 +46,60 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A)") {
   field(THSV, "MAJOR")
   info(archive, "Monitor, 00:00:01, VAL")
 }
+
+# /// 
+# /// Read the alarm type  
+# ///
+record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Type") {
+  field(DESC, "Alarm $(A) Type")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM_TYP),1)UINT16")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(SVVL, "7")
+  field(EIVL, "10")
+  field(NIVL, "11")
+  field(TEVL, "12")
+  field(ZRST, "None")
+  field(ONST, "Abs High")
+  field(TWST, "Abs Low")
+  field(THST, "Dev High")
+  field(FRST, "Dev Low")
+  field(FVST, "Dev Band")
+  field(SXST, "ROC Rising")
+  field(SVST, "ROC Faling")
+  field(EIST, "Dig Off")
+  field(NIST, "Dig High")
+  field(TEST, "Dig Low")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Latch")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the alarm latch  
+# ///
+record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Latch") {
+  field(DESC, "Alarm $(A) Latch")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM_LAT),1)UINT16")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "None")
+  field(ONST, "Auto")
+  field(TWST, "Manual")
+  field(THST, "Trigger")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+######################################################################
+# Write records
 
 # /// 
 # /// Write 1 to acknowledge the alarm $(A)
