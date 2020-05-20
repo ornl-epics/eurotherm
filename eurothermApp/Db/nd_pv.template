@@ -198,4 +198,53 @@ record(subArray, "$(S)$(ND)$(C):Units") {
 }
 
 
+###########################################################
+# Summarize the alarm on a per-channel basis
+
+# ///
+# /// Alarm summary record for channel $(C)
+# /// This is a summary of the PV alarm state, the controller
+# /// alarm fields and the channel status.
+# ///
+record(calc, "$(S)$(ND)$(C):AlarmSummaryCalc") {
+  field(INPA, "$(S)$(ND)$(C):PV CP MS")
+  field(INPB, "$(S)$(ND)$(C):Status CP MS")
+  field(INPC, "$(S)$(ND)$(C):Alarm1 CP MS")
+  field(INPD, "$(S)$(ND)$(C):Alarm2 CP MS")
+  field(CALC, "A")
+  field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc2")  
+}
+record(calcout, "$(S)$(ND)$(C):AlarmSummaryCalc2") {
+  field(INPA, "$(S)$(ND)$(C):AlarmSummaryCalc.STAT")
+  field(INPB, "$(S)$(ND)$(C):AlarmDisable")
+  field(CALC, "!B?(A!=0?1:0):0")
+  field(DOPT, "Use CALC")
+  field(OOPT, "Every Time")
+  field(OUT, "$(S)$(ND)$(C):AlarmSummary PP")
+}
+record(bi, "$(S)$(ND)$(C):AlarmSummary") {
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Alarm")
+  field(OSV, "MAJOR")
+  field(PINI, "YES")
+  field(VAL, "0")  
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Disable alarms for this channel
+# ///
+record(bo, "$(S)$(ND)$(C):AlarmDisable") {
+  field(DESC, "Disable Alarm")
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(OMSL, "supervisory")
+  field(ZNAM, "Alarm Enabled")
+  field(ONAM, "Alarm Disabled")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MINOR")
+  field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc")
+  info(autosaveFields, "VAL")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
 
