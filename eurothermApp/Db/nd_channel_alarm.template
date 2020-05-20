@@ -95,6 +95,19 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Latch") {
   field(ONST, "Auto")
   field(TWST, "Manual")
   field(THST, "Trigger")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Inhibit")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the alarm inhibit state
+# ///
+record(bi, "$(S)$(ND)$(C):Alarm$(A):Inhibit") {
+  field(DESC, "Alarm $(A) Inhibit")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM_INH),1)UINT16")
+  field(ZNAM, "Not Inhibited")
+  field(ONAM, "Inhibited")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Threshold")
   info(archive, "Monitor, 00:00:01, VAL")
 }
