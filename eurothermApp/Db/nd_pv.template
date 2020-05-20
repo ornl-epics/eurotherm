@@ -14,7 +14,6 @@
 #  ADDR_STA - the channel status address (16-bit range)
 #  ADDR_AL1 - the channel alarm 1 address (16-bit range)
 #  ADDR_AL2 - the channel alarm 2 address (16-bit range)
-#  ADDR_RES - the channel resolution address (16-bit range)
 #  ADDR_DES - the channel description & units string (16-bit range)
 #
 # Matt Pearson
@@ -31,7 +30,7 @@ record(bo, "$(S)$(ND)$(C):Poll") {
 }
 record(bo, "$(S)$(ND)$(C):PollSlow") {
   field(SCAN, "10 second")
-  field(FLNK, "$(S)$(ND)$(C):PV_Res")
+  field(FLNK, "$(S)$(ND)$(C):DescRaw")
 }
 
 ##############################################################
@@ -146,17 +145,6 @@ record(mbbi, "$(S)$(ND)$(C):Alarm2") {
 
 ##############################################################
 # Slow polled parameters
-
-# ///
-# /// Read the channel resolution
-# ///
-record(ai, "$(S)$(ND)$(C):PV_Res") {
-  field(DESC, "$(C) Resolution")
-  field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT)1w4,$(ADDR_RES),1)UINT16")
-  field(FLNK, "$(S)$(ND)$(C):DescRaw")
-  info(archive, "Monitor, 00:00:01, VAL")
-}
 
 # ///
 # /// Read the channel description (and units string).
