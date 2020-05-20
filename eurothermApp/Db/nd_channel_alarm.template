@@ -132,7 +132,7 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Ref") {
   field(DTYP, "asynFloat64")
   field(INP, "@asyn($(PORT)2w4,$(ADDR_ALARM_REF),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
-  field($(S)$(ND)$(C):Alarm$(A):Dev")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Dev")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -157,7 +157,7 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Dev") {
 record(ai, "$(S)$(ND)$(C):Alarm$(A):Amount") {
   field(DESC, "Alarm $(A) Amount")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn($(PORT)2w4,$(ADDR_MAIN_AMO),1)FLOAT32_BE")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_ALARM_AMO),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
   info(archive, "Monitor, 00:00:01, VAL")
 }
