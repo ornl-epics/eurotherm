@@ -47,14 +47,11 @@ record(dfanout, "$(S)$(ND)$(C):Poll") {
   field(SCAN, "2 second")
   field(VAL, "1")
   field(OUTA, "$(S)$(ND)$(C):PollMain.PROC PP")
-  field(OUTB, "$(S)$(ND)$(C):PollAlarm1.PROC PP")
-  field(OUTC, "$(S)$(ND)$(C):PollAlarm2.PROC PP")
 }
 
 include "nd_channel_main.template"
 
 substitute "A=1"
-substitute "ADDR_ALARM=$(ADDR_ALARM1_STA)"
 substitute "ADDR_ALARM_ACK=$(ADDR_ALARM1_ACK)"
 substitute "ADDR_ALARM_TYP=$(ADDR_ALARM1_TYP)"
 substitute "ADDR_ALARM_LAT=$(ADDR_ALARM1_LAT)"
@@ -67,7 +64,6 @@ substitute "ADDR_ALARM_AMO=$(ADDR_ALARM1_AMO)"
 include "nd_channel_alarm.template"
 
 substitute "A=2"
-substitute "ADDR_ALARM=$(ADDR_ALARM2_STA)"
 substitute "ADDR_ALARM_ACK=$(ADDR_ALARM2_ACK)"
 substitute "ADDR_ALARM_TYP=$(ADDR_ALARM2_TYP)"
 substitute "ADDR_ALARM_LAT=$(ADDR_ALARM2_LAT)"

@@ -3,7 +3,9 @@
 # Database template to read a real or virtual channel from the 
 # eurotherm nanodac. 
 #
-# This is for the Channel.Main params.
+# This is for the Channel.Main params and in addition Alarm1
+# and Alarm2 status.
+#
 # For list of address macros, see nd_channel.template
 #
 # Matt Pearson
@@ -12,7 +14,7 @@
 ############################################################
 
 # ///
-# /// Records to process the fast and slow records in this file
+# /// Process this to trigger a read of the main parameters.
 # ///
 record(bo, "$(S)$(ND)$(C):PollMain") {
   field(FLNK, "$(S)$(ND)$(C):PV")
@@ -26,6 +28,7 @@ record(bo, "$(S)$(ND)$(C):PollMain") {
 # ///
 record(ai, "$(S)$(ND)$(C):PV") {
   field(DESC, "$(C) Process Variable")
+  field(PINI, "YES")
   field(DTYP, "asynFloat64")
   field(INP, "@asyn($(PORT)2w4,$(ADDR_MAIN_PV),1)FLOAT32_BE")
   field(HHSV,"MAJOR")
@@ -35,9 +38,46 @@ record(ai, "$(S)$(ND)$(C):PV") {
   field(LOLO,"-1")
   field(PREC, "$(PREC)")
   field(ADEL, "$(ADEL)")
-  field(FLNK, "$(S)$(ND)$(C):Status")
+  field(FLNK, "$(S)$(ND)$(C):Read")
   info(autosaveFields, "HIHI LOLO ADEL MDEL HYST")
   info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the channel Status, Alarm1 & Alarm 2 all together into a waveform.
+# /// These 3 parameters are always in adjacent registers and we want to 
+# /// poll them frequently. We read them from the 16-bit address range.
+# ///
+record(waveform, "$(S)$(ND)$(C):Read") {
+  field(NELM, "3")
+  field(FTVL, "LONG")
+  field(DTYP, "asynInt32ArrayIn")
+  field(INP, "@asyn($(PORT)3w4,$(ADDR_MAIN_STA),1)UINT16")
+  field(FLNK, "$(S)$(ND)$(C):Read_0")
+}
+record(subArray, "$(S)$(ND)$(C):Read_0") {
+  field(INP, "$(S)$(ND)$(C):Read")
+  field(FTVL, "LONG")
+  field(NELM, "1")
+  field(MALM, "3")
+  field(INDX, "0")
+  field(FLNK, "$(S)$(ND)$(C):Read_1")
+}
+record(subArray, "$(S)$(ND)$(C):Read_1") {
+  field(INP, "$(S)$(ND)$(C):Read")
+  field(FTVL, "LONG")
+  field(NELM, "1")
+  field(MALM, "3")
+  field(INDX, "1")
+  field(FLNK, "$(S)$(ND)$(C):Read_2")
+}
+record(subArray, "$(S)$(ND)$(C):Read_2") {
+  field(INP, "$(S)$(ND)$(C):Read")
+  field(FTVL, "LONG")
+  field(NELM, "1")
+  field(MALM, "3")
+  field(INDX, "2")
+  field(FLNK, "$(S)$(ND)$(C):Status")
 }
 
 # ///
@@ -45,8 +85,9 @@ record(ai, "$(S)$(ND)$(C):PV") {
 # ///
 record(mbbi, "$(S)$(ND)$(C):Status") {
   field(DESC, "$(C) Status")
-  field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT)1w4,$(ADDR_MAIN_STA),1)UINT16")
+#  field(DTYP, "asynInt32")
+#  field(INP, "@asyn($(PORT)1w4,$(ADDR_MAIN_STA),1)UINT16")
+  field(INP, "$(S)$(ND)$(C):Read_0")
   field(ZRVL, "0")
   field(ONVL, "1")
   field(TWVL, "2")
@@ -80,6 +121,54 @@ record(mbbi, "$(S)$(ND)$(C):Status") {
   field(EISV, "MAJOR")
   field(NISV, "MAJOR")
   field(TESV, "MAJOR")
+  field(FLNK, "$(S)$(ND)$(C):Alarm1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the channel alarm 1 status 
+# ///
+record(mbbi, "$(S)$(ND)$(C):Alarm1") {
+  field(DESC, "$(C) Alarm 1")
+#  field(DTYP, "asynInt32")
+#  field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM1_STA),1)UINT16")
+  field(INP, "$(S)$(ND)$(C):Read_1")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "Off")
+  field(ONST, "Active")
+  field(TWST, "Safe Not Ack")
+  field(THST, "Active Not Ack")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "MINOR")
+  field(TWSV, "MINOR")
+  field(THSV, "MAJOR")
+  field(FLNK, "$(S)$(ND)$(C):Alarm2")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the channel alarm 2 status 
+# ///
+record(mbbi, "$(S)$(ND)$(C):Alarm2") {
+  field(DESC, "$(C) Alarm 2")
+#  field(DTYP, "asynInt32")
+#  field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM2_STA),1)UINT16")
+  field(INP, "$(S)$(ND)$(C):Read_2")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "Off")
+  field(ONST, "Active")
+  field(TWST, "Safe Not Ack")
+  field(THST, "Active Not Ack")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "MINOR")
+  field(TWSV, "MINOR")
+  field(THSV, "MAJOR")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 

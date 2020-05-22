@@ -15,11 +15,8 @@
 ############################################################
 
 # ///
-# /// Records to control the fast/slow poll behaviour for the below records
+# /// Process this to manually read the alarms info
 # ///
-record(bo, "$(S)$(ND)$(C):PollAlarm$(A)") {
-  field(FLNK, "$(S)$(ND)$(C):Alarm$(A)")
-}
 record(dfanout, "$(S)$(ND)$(C):ReadAlarm$(A)") {
   field(VAL, "1")
   field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Type.PROC PP")
@@ -30,28 +27,6 @@ record(dfanout, "$(S)$(ND)$(C):ReadAlarm$(A)") {
   field(OUTF, "$(S)$(ND)$(C):Alarm$(A):Ref.PROC PP")
   field(OUTG, "$(S)$(ND)$(C):Alarm$(A):Dev.PROC PP")
   field(OUTH, "$(S)$(ND)$(C):Alarm$(A):Amount.PROC PP")
-}
-
-# ///
-# /// Read the channel alarm $(A) status 
-# ///
-record(mbbi, "$(S)$(ND)$(C):Alarm$(A)") {
-  field(DESC, "$(C) Alarm $(A)")
-  field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM),1)UINT16")
-  field(ZRVL, "0")
-  field(ONVL, "1")
-  field(TWVL, "2")
-  field(THVL, "3")
-  field(ZRST, "Off")
-  field(ONST, "Active")
-  field(TWST, "Safe Not Ack")
-  field(THST, "Active Not Ack")
-  field(ZRSV, "NO_ALARM")
-  field(ONSV, "MINOR")
-  field(TWSV, "MINOR")
-  field(THSV, "MAJOR")
-  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
