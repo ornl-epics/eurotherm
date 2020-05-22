@@ -192,7 +192,7 @@ record(bo, "$(S)$(ND)$(C):Alarm$(A):InhibitSet") {
 record(ao, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet") {
   field(DESC, "Set Alarm $(A) Threshold")
   field(DTYP, "asynFloat64")
-  field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_THR),1)FLOAT32_BE")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_ALARM_THR),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Threshold")
   info(archive, "Monitor, 00:00:01, VAL")
@@ -204,7 +204,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet") {
 record(ao, "$(S)$(ND)$(C):Alarm$(A):HystSet") {
   field(DESC, "Set Alarm $(A) Hyst")
   field(DTYP, "asynFloat64")
-  field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_HYS),1)FLOAT32_BE")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_ALARM_HYS),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Hyst")
   info(archive, "Monitor, 00:00:01, VAL")
@@ -217,7 +217,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):HystSet") {
 record(ao, "$(S)$(ND)$(C):Alarm$(A):RefSet") {
   field(DESC, "Set Alarm $(A) Reference")
   field(DTYP, "asynFloat64")
-  field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_REF),1)FLOAT32_BE")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_ALARM_REF),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Ref")
   info(archive, "Monitor, 00:00:01, VAL")
@@ -231,7 +231,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):RefSet") {
 record(ao, "$(S)$(ND)$(C):Alarm$(A):DevSet") {
   field(DESC, "Set Alarm $(A) Deviation")
   field(DTYP, "asynFloat64")
-  field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_DEV),1)FLOAT32_BE")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_ALARM_DEV),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Dev")
   info(archive, "Monitor, 00:00:01, VAL")
@@ -244,7 +244,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):DevSet") {
 record(ao, "$(S)$(ND)$(C):Alarm$(A):AmountSet") {
   field(DESC, "Set Alarm $(A) Amount")
   field(DTYP, "asynFloat64")
-  field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_AMO),1)FLOAT32_BE")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_ALARM_AMO),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Amount")
   info(archive, "Monitor, 00:00:01, VAL")
