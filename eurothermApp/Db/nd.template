@@ -4,7 +4,10 @@
 #
 # This instantiates the other nanodac templates. This is the new
 # version developed in May 2020 that uses absolute addressing 
-# and floating point readback.
+# and floating point readback. The absolute addressing mode is
+# less efficient so we have to be more careful with polling and we
+# don't always poll everything. Polling can be disabled on a per-channel
+# basis, and the alarm settings are only read when we set them.
 #
 # The modbus addresses listed in the manual are for 16-bit numbers
 # or less (like status bits). To access the 32-bit IEEE floating

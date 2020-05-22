@@ -17,12 +17,19 @@
 # ///
 # /// Records to control the fast/slow poll behaviour for the below records
 # ///
-record(bo, "$(S)$(ND)$(C):PollFastAlarm$(A)") {
+record(bo, "$(S)$(ND)$(C):PollAlarm$(A)") {
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A)")
 }
-record(bo, "$(S)$(ND)$(C):PollSlowAlarm$(A)") {
-  field(SCAN, "10 second")
-  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Type")
+record(dfanout, "$(S)$(ND)$(C):ReadAlarm$(A)") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Type.PROC PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm$(A):Latch.PROC PP")
+  field(OUTC, "$(S)$(ND)$(C):Alarm$(A):Inhibit.PROC PP")
+  field(OUTD, "$(S)$(ND)$(C):Alarm$(A):Threshold.PROC PP")
+  field(OUTE, "$(S)$(ND)$(C):Alarm$(A):Hyst.PROC PP")
+  field(OUTF, "$(S)$(ND)$(C):Alarm$(A):Ref.PROC PP")
+  field(OUTG, "$(S)$(ND)$(C):Alarm$(A):Dev.PROC PP")
+  field(OUTH, "$(S)$(ND)$(C):Alarm$(A):Amount.PROC PP")
 }
 
 # ///
@@ -52,6 +59,7 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A)") {
 # ///
 record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Type") {
   field(DESC, "Alarm $(A) Type")
+  field(PINI, "YES")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM_TYP),1)UINT16")
   field(ZRVL, "0")
@@ -76,7 +84,6 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Type") {
   field(EIST, "Dig Off")
   field(NIST, "Dig High")
   field(TEST, "Dig Low")
-  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Latch")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -85,6 +92,7 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Type") {
 # ///
 record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Latch") {
   field(DESC, "Alarm $(A) Latch")
+  field(PINI, "YES")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM_LAT),1)UINT16")
   field(ZRVL, "0")
@@ -95,7 +103,6 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Latch") {
   field(ONST, "Auto")
   field(TWST, "Manual")
   field(THST, "Trigger")
-  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Inhibit")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -104,11 +111,11 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Latch") {
 # ///
 record(bi, "$(S)$(ND)$(C):Alarm$(A):Inhibit") {
   field(DESC, "Alarm $(A) Inhibit")
+  field(PINI, "YES")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM_INH),1)UINT16")
   field(ZNAM, "Not Inhibited")
   field(ONAM, "Inhibited")
-  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Threshold")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -117,10 +124,10 @@ record(bi, "$(S)$(ND)$(C):Alarm$(A):Inhibit") {
 # ///
 record(ai, "$(S)$(ND)$(C):Alarm$(A):Threshold") {
   field(DESC, "Alarm $(A) Threshold")
+  field(PINI, "YES")
   field(DTYP, "asynFloat64")
   field(INP, "@asyn($(PORT)2w4,$(ADDR_ALARM_THR),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
-  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Hyst")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -129,10 +136,10 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Threshold") {
 # ///
 record(ai, "$(S)$(ND)$(C):Alarm$(A):Hyst") {
   field(DESC, "Alarm $(A) Hyst")
+  field(PINI, "YES")
   field(DTYP, "asynFloat64")
   field(INP, "@asyn($(PORT)2w4,$(ADDR_ALARM_HYS),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
-  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Ref")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -142,10 +149,10 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Hyst") {
 # ///
 record(ai, "$(S)$(ND)$(C):Alarm$(A):Ref") {
   field(DESC, "Alarm $(A) Reference")
+  field(PINI, "YES")
   field(DTYP, "asynFloat64")
   field(INP, "@asyn($(PORT)2w4,$(ADDR_ALARM_REF),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
-  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Dev")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -156,10 +163,10 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Ref") {
 # ///
 record(ai, "$(S)$(ND)$(C):Alarm$(A):Dev") {
   field(DESC, "Alarm $(A) Deviation")
+  field(PINI, "YES")
   field(DTYP, "asynFloat64")
   field(INP, "@asyn($(PORT)2w4,$(ADDR_ALARM_DEV),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
-  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Amount")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -169,6 +176,7 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Dev") {
 # ///
 record(ai, "$(S)$(ND)$(C):Alarm$(A):Amount") {
   field(DESC, "Alarm $(A) Amount")
+  field(PINI, "YES")
   field(DTYP, "asynFloat64")
   field(INP, "@asyn($(PORT)2w4,$(ADDR_ALARM_AMO),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
@@ -199,6 +207,7 @@ record(bo, "$(S)$(ND)$(C):Alarm$(A):InhibitSet") {
   field(OUT, "@asyn($(PORT)1w6,$(ADDR_ALARM_INH),1)UINT16")
   field(ZNAM, "Not Inhibited")
   field(ONAM, "Inhibited")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Inhibit")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -210,6 +219,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet") {
   field(DTYP, "asynFloat64")
   field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_THR),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Threshold")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -221,6 +231,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):HystSet") {
   field(DTYP, "asynFloat64")
   field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_HYS),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Hyst")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -233,6 +244,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):RefSet") {
   field(DTYP, "asynFloat64")
   field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_REF),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Ref")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -246,6 +258,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):DevSet") {
   field(DTYP, "asynFloat64")
   field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_DEV),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Dev")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -258,6 +271,7 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):AmountSet") {
   field(DTYP, "asynFloat64")
   field(OUT, "@asyn($(PORT)2w6,$(ADDR_ALARM_AMO),1)FLOAT32_BE")
   field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Amount")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 

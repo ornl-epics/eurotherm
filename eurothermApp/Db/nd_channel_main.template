@@ -14,11 +14,8 @@
 # ///
 # /// Records to process the fast and slow records in this file
 # ///
-record(bo, "$(S)$(ND)$(C):PollFastMain") {
+record(bo, "$(S)$(ND)$(C):PollMain") {
   field(FLNK, "$(S)$(ND)$(C):PV")
-}
-record(bo, "$(S)$(ND)$(C):PollSlowMain") {
-  field(FLNK, "$(S)$(ND)$(C):DescRaw")
 }
 
 ##############################################################
@@ -87,7 +84,6 @@ record(mbbi, "$(S)$(ND)$(C):Status") {
 }
 
 ##############################################################
-# Slow polled parameters
 
 # ///
 # /// Read the channel description (and units string).
@@ -96,6 +92,7 @@ record(mbbi, "$(S)$(ND)$(C):Status") {
 # ///
 record(waveform, "$(S)$(ND)$(C):DescRaw") {
   field(DESC, "$(C) Desc")
+  field(PINI, "YES")
   field(DTYP, "asynInt32ArrayIn")
   field(INP, "@asyn($(PORT)25w4,$(ADDR_MAIN_DES),1)UINT16")
   field(FTVL, "LONG")

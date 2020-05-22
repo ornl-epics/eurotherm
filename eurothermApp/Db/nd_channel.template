@@ -43,19 +43,12 @@
 # ///
 # /// Records to control the fast/slow poll behaviour for this channel
 # ///
-record(dfanout, "$(S)$(ND)$(C):PollFast") {
-  field(SCAN, "1 second")
+record(dfanout, "$(S)$(ND)$(C):Poll") {
+  field(SCAN, "2 second")
   field(VAL, "1")
-  field(OUTA, "$(S)$(ND)$(C):PollFastMain.PROC PP")
-  field(OUTB, "$(S)$(ND)$(C):PollFastAlarm1.PROC PP")
-  field(OUTC, "$(S)$(ND)$(C):PollFastAlarm2.PROC PP")
-}
-record(dfanout, "$(S)$(ND)$(C):PollSlow") {
-  field(SCAN, "10 second")
-  field(VAL, "1")
-  field(OUTA, "$(S)$(ND)$(C):PollSlowMain.PROC PP")
-  field(OUTB, "$(S)$(ND)$(C):PollSlowAlarm1.PROC PP")
-  field(OUTC, "$(S)$(ND)$(C):PollSlowAlarm2.PROC PP")
+  field(OUTA, "$(S)$(ND)$(C):PollMain.PROC PP")
+  field(OUTB, "$(S)$(ND)$(C):PollAlarm1.PROC PP")
+  field(OUTC, "$(S)$(ND)$(C):PollAlarm2.PROC PP")
 }
 
 include "nd_channel_main.template"
