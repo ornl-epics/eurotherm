@@ -199,6 +199,7 @@ record(bo, "$(S)$(ND)$(C):Alarm$(A):InhibitSet") {
   field(OUT, "@asyn($(PORT)1w6,$(ADDR_ALARM_INH),1)UINT16")
   field(ZNAM, "Not Inhibited")
   field(ONAM, "Inhibited")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 # /// 
