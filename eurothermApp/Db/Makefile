@@ -24,6 +24,7 @@ DB += nd.template
 DB += nd_channel.template
 DB += nd_channel_main.template
 DB += nd_channel_alarm.template
+DB += nd_channel_alarm_limit.template
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

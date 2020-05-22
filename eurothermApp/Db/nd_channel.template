@@ -125,3 +125,16 @@ record(bo, "$(S)$(ND)$(C):AlarmDisable") {
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+#######################################################################
+# Provide new high level PVs for the high and low alarms on the input
+# This will set the PV alarm limits and also the alarm limit on the controller.
+
+substitute "HL=High"
+substitute "HL_FIELD=HIHI"
+include "nd_channel_alarm_limit.template"
+
+substitute "HL=Low"
+substitute "HL_FIELD=LOLO"
+include "nd_channel_alarm_limit.template"
+
+

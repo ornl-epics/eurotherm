@@ -1,0 +1,67 @@
+
+# Used in nd_channel.template
+
+# Macros:
+#  HL - High or Low
+#  HL_FIELD - HIHI or LOLO
+
+record(ao, "$(S)$(ND)$(C):Alarm$(HL)") {
+  field(PINI, "YES")
+  field(VAL, "0.0")
+  field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)$(C):Alarm0$(HL)Calc")
+  info(autosaveFields, "VAL")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+record(mbbo, "$(S)$(ND)$(C):Alarm$(HL)Sync") {
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(ZRST, "No Auto Sync")
+  field(ONST, "Sync To Alarm 1")
+  field(TWST, "Sync To Alarm 2")
+  field(FLNK, "$(S)$(ND)$(C):Alarm0$(HL)Calc")
+  info(autosaveFields, "VAL")
+}
+record(calcout, "$(S)$(ND)$(C):Alarm0$(HL)Calc") {
+  field(INPA, "$(S)$(ND)$(C):Alarm$(HL)")
+  field(INPB, "$(S)$(ND)$(C):Alarm$(HL)Sync")
+  field(CALC, "B==0?A:0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)$(C):Alarm0$(HL)Fan.VAL PP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm1$(HL)Calc")
+}
+record(calcout, "$(S)$(ND)$(C):Alarm1$(HL)Calc") {
+  field(INPA, "$(S)$(ND)$(C):Alarm$(HL)")
+  field(INPB, "$(S)$(ND)$(C):Alarm$(HL)Sync")
+  field(CALC, "B==1?A:0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)$(C):Alarm1$(HL)Fan.VAL PP")
+  field(FLNK, "$(S)$(ND)$(C):Alarm2$(HL)Calc")
+}
+record(calcout, "$(S)$(ND)$(C):Alarm2$(HL)Calc") {
+  field(INPA, "$(S)$(ND)$(C):Alarm$(HL)")
+  field(INPB, "$(S)$(ND)$(C):Alarm$(HL)Sync")
+  field(CALC, "B==2?A:0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)$(C):Alarm2$(HL)Fan.VAL PP")
+}
+record(dfanout, "$(S)$(ND)$(C):Alarm0$(HL)Fan") {
+  field(OMSL, "supervisory")
+  field(OUTA, "$(S)$(ND)$(C):PV.$(HL_FIELD) PP")
+}
+record(dfanout, "$(S)$(ND)$(C):Alarm1$(HL)Fan") {
+  field(OMSL, "supervisory")
+  field(OUTA, "$(S)$(ND)$(C):PV.$(HL_FIELD) PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm1:ThresholdSet PP")
+}
+record(dfanout, "$(S)$(ND)$(C):Alarm2$(HL)Fan") {
+  field(OMSL, "supervisory")
+  field(OUTA, "$(S)$(ND)$(C):PV.$(HL_FIELD) PP")
+  field(OUTB, "$(S)$(ND)$(C):Alarm2:ThresholdSet PP")
+}
+
+
