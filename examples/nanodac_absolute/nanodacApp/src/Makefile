@@ -16,6 +16,8 @@ nanodac_DBD += base.dbd
 nanodac_DBD += asyn.dbd
 nanodac_DBD += drvAsynIPPort.dbd
 nanodac_DBD += modbusSupport.dbd
+nanodac_DBD += asSupport.dbd
+nanodac_DBD += devIocStats.dbd
 
 # nanodac_registerRecordDeviceDriver.cpp derives from nanodac.dbd
 nanodac_SRCS += nanodac_registerRecordDeviceDriver.cpp
@@ -27,6 +29,8 @@ nanodac_SRCS_vxWorks += -nil-
 # Link in the code from the support library
 nanodac_LIBS += asyn
 nanodac_LIBS += modbus
+nanodac_LIBS += autosave
+nanodac_LIBS += devIocStats
 
 # Finally link to the EPICS Base libraries
 nanodac_LIBS += $(EPICS_BASE_IOC_LIBS)
