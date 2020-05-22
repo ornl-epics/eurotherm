@@ -39,6 +39,7 @@ drvModbusAsynConfigure("n$(NI)25w4", "n$(NI)ip", 1, 4, -1, 25, 0, 0, 0)
 # Port to write 1 or 2 modbus words. 
 # For these write functions we specify a non-zero poll time so that we read the
 # register once at IOC startup to initialize the write record values.
+# If we are writing more than register, use modbus function code 16.
 drvModbusAsynConfigure("n$(NI)1w6",  "n$(NI)ip", 1,  6, -1, 1, 0, 1, 0)
 drvModbusAsynConfigure("n$(NI)2w16", "n$(NI)ip", 1, 16, -1, 2, 0, 1, 0)
 
