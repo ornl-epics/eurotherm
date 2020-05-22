@@ -190,6 +190,18 @@ record(bo, "$(S)$(ND)$(C):Alarm$(A)AckSet") {
 }
 
 # /// 
+# /// Enable or disable the alarm inhibit
+# /// NOTE: Doesn't seem to work yet.
+# ///
+record(bo, "$(S)$(ND)$(C):Alarm$(A):InhibitSet") {
+  field(DESC, "Alarm Acknowledge")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)1w6,$(ADDR_ALARM_INH),1)UINT16")
+  field(ZNAM, "Not Inhibited")
+  field(ONAM, "Inhibited")
+}
+
+# /// 
 # /// Set the alarm threshold
 # ///
 record(ao, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet") {
