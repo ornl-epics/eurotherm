@@ -300,6 +300,60 @@ substitute "ADDR_ALARM2_DEV=48590"
 substitute "ADDR_ALARM2_AMO=48592"
 include "nd_channel.template"
 
+##################################################################
+# Global Alarm Summary
+
+# ///
+# /// Alarm summary record for all channels.
+# ///
+record(calc, "$(S)$(ND)AlarmSummaryCalc") {
+  field(INPA, "$(S)$(ND)CH1:AlarmSummary CP MS")
+  field(INPB, "$(S)$(ND)CH2:AlarmSummary CP MS")
+  field(INPC, "$(S)$(ND)CH3:AlarmSummary CP MS")
+  field(INPD, "$(S)$(ND)CH4:AlarmSummary CP MS")
+  field(INPE, "$(S)$(ND)VCH1:AlarmSummary CP MS")
+  field(INPF, "$(S)$(ND)VCH2:AlarmSummary CP MS")
+  field(INPG, "$(S)$(ND)VCH3:AlarmSummary CP MS")
+  field(INPH, "$(S)$(ND)VCH4:AlarmSummary CP MS")
+  field(INPI, "$(S)$(ND)VCH5:AlarmSummary CP MS")
+  field(INPJ, "$(S)$(ND)VCH6:AlarmSummary CP MS")
+  field(CALC, "A")
+  field(SDIS, "$(S)$(ND)AlarmDisable")
+  field(FLNK, "$(S)$(ND)AlarmSummaryCalc2")  
+}
+record(calcout, "$(S)$(ND)AlarmSummaryCalc2") {
+  field(INPA, "$(S)$(ND)AlarmSummaryCalc.STAT")
+  field(INPB, "$(S)$(ND)AlarmDisable")
+  field(CALC, "!B?(A!=0?1:0):0")
+  field(DOPT, "Use CALC")
+  field(OOPT, "Every Time")
+  field(OUT, "$(S)$(ND)AlarmSummary PP")
+}
+record(bi, "$(S)$(ND)AlarmSummary") {
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Alarm")
+  field(OSV, "MAJOR")
+  field(PINI, "YES")
+  field(VAL, "0")  
+}
+# ///
+# /// Disable alarms global alarms
+# ///
+record(bo, "$(S)$(ND)AlarmDisable") {
+  field(DESC, "Disable Alarm")
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(ZNAM, "Alarm Enabled")
+  field(ONAM, "Alarm Disabled")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MINOR")
+  field(ASG, "ALWAYS")
+  field(FLNK, "$(S)$(ND)AlarmSummaryCalc2")
+  info(autosaveFields, "VAL")
+}
+
+################################################################
+
 # ///
 # /// Generic Asyn record.
 # /// Not useful for modbus params, but we can see the 
