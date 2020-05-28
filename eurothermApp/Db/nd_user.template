@@ -10,6 +10,10 @@
 # ADDR_USR_LOL - the user low limit (32-bit range)
 # ADDR_USR_STA - the user status (16-bit range) 
 #
+# The above 32-bit addresses are in adjacent memory addresses
+# so we could read them in a block, but since we aren't polling
+# I have opted to keep them seperate to keep the database simple.
+#
 # Macros in addition to nd.template:
 # U - user index (1,2,...,12)
 #
@@ -21,12 +25,12 @@
 # ///
 # /// Process this to manually read the alarms info
 # ///
-record(dfanout, "$(S)$(ND)$(C):ReadUser$(A)") {
+record(dfanout, "$(S)$(ND)ReadUser$(U)") {
   field(VAL, "1")
-  field(OUTA, "$(S)$(ND)$(C):User$(A):HighLim.PROC PP")
-  field(OUTB, "$(S)$(ND)$(C):User$(A):LowLim.PROC PP")
-  field(OUTC, "$(S)$(ND)$(C):User$(A):Val.PROC PP")
-  field(OUTD, "$(S)$(ND)$(C):User$(A):Status.PROC PP")
+  field(OUTA, "$(S)$(ND)User$(U):HighLim.PROC PP")
+  field(OUTB, "$(S)$(ND)User$(U):LowLim.PROC PP")
+  field(OUTC, "$(S)$(ND)User$(U):Val.PROC PP")
+  field(OUTD, "$(S)$(ND)User$(U):Status.PROC PP")
 }
 
 # /// 
@@ -116,6 +120,5 @@ record(ao, "$(S)$(ND)User$(U):ValSet") {
   field(FLNK, "$(S)$(ND)User$(U):Val")
   info(archive, "Monitor, 00:00:01, VAL")
 }
-
 
 
