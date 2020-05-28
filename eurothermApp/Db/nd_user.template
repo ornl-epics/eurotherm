@@ -1,0 +1,121 @@
+#############################################################
+#
+# Database template to read and set 'user variable' parameters.
+#
+# This is for the UsrVal parameters.
+#
+# Address macros:
+# ADDR_USR_VAL - the user value (32-bit range)
+# ADDR_USR_HIL - the user high limit (32-bit range)
+# ADDR_USR_LOL - the user low limit (32-bit range)
+# ADDR_USR_STA - the user status (16-bit range) 
+#
+# Macros in addition to nd.template:
+# U - user index (1,2,...,12)
+#
+# Matt Pearson
+# May 2020
+#
+############################################################
+
+# ///
+# /// Process this to manually read the alarms info
+# ///
+record(dfanout, "$(S)$(ND)$(C):ReadUser$(A)") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)$(C):User$(A):HighLim.PROC PP")
+  field(OUTB, "$(S)$(ND)$(C):User$(A):LowLim.PROC PP")
+  field(OUTC, "$(S)$(ND)$(C):User$(A):Val.PROC PP")
+  field(OUTD, "$(S)$(ND)$(C):User$(A):Status.PROC PP")
+}
+
+# /// 
+# /// Read the user $(U) high limit
+# ///
+record(ai, "$(S)$(ND)User$(U):HighLim") {
+  field(DESC, "User $(U) High Limit")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_USR_HIL),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the user $(U) low limit
+# ///
+record(ai, "$(S)$(ND)User$(U):LowLim") {
+  field(DESC, "User $(U) Low Limit")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_USR_LOL),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the user $(U) value
+# ///
+record(ai, "$(S)$(ND)User$(U):Val") {
+  field(DESC, "User $(U) Value")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_USR_VAL),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the user $(U) status
+# ///
+record(bi, "$(S)$(ND)User$(U):Status") {
+  field(DESC, "User $(U) Status")
+  field(PINI, "YES")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_USR_STA),1)UINT16")
+  field(ZNAM, "Ok")
+  field(ONAM, "Error")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+######################################################################
+# Write records
+
+# /// 
+# /// Set the user $(U) high limit
+# ///
+record(ao, "$(S)$(ND)User$(U):HighLimSet") {
+  field(DESC, "User $(U) High Limit")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_USR_HIL),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)User$(U):HighLim")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Set the user $(U) low limit
+# ///
+record(ao, "$(S)$(ND)User$(U):LowLimSet") {
+  field(DESC, "User $(U) Low Limit")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_USR_LOL),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)User$(U):LowLim")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Set the user $(U) value
+# ///
+record(ao, "$(S)$(ND)User$(U):ValSet") {
+  field(DESC, "User $(U) Value")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_USR_VAL),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)User$(U):Val")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+
+
