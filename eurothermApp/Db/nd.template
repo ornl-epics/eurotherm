@@ -300,6 +300,17 @@ substitute "ADDR_ALARM2_DEV=48590"
 substitute "ADDR_ALARM2_AMO=48592"
 include "nd_channel.template"
 
+
+##################################################################
+# User Variables 1-12
+
+substitute "U=1"
+substitute "ADDR_USR_HIL=56600"
+substitute "ADDR_USR_LOL=56602"
+substitute "ADDR_USR_VAL=56604"
+substitute "ADDR_USR_STA=11919"
+include "nd_user.template"
+
 ##################################################################
 # Global Alarm Summary
 
