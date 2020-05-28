@@ -46,7 +46,8 @@ record(ai, "$(S)$(ND)$(C):PV") {
 # ///
 # /// Read the channel Status, Alarm1 & Alarm 2 all together into a waveform.
 # /// These 3 parameters are always in adjacent registers and we want to 
-# /// poll them frequently. We read them from the 16-bit address range.
+# /// poll them frequently. We read them from the 16-bit address range, starting
+# /// from the ADDR_MAIN_STA address.
 # ///
 record(waveform, "$(S)$(ND)$(C):Read") {
   field(NELM, "3")
@@ -85,8 +86,6 @@ record(subArray, "$(S)$(ND)$(C):Read_2") {
 # ///
 record(mbbi, "$(S)$(ND)$(C):Status") {
   field(DESC, "$(C) Status")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT)1w4,$(ADDR_MAIN_STA),1)UINT16")
   field(INP, "$(S)$(ND)$(C):Read_0")
   field(ZRVL, "0")
   field(ONVL, "1")
@@ -130,8 +129,6 @@ record(mbbi, "$(S)$(ND)$(C):Status") {
 # ///
 record(mbbi, "$(S)$(ND)$(C):Alarm1") {
   field(DESC, "$(C) Alarm 1")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM1_STA),1)UINT16")
   field(INP, "$(S)$(ND)$(C):Read_1")
   field(ZRVL, "0")
   field(ONVL, "1")
@@ -154,8 +151,6 @@ record(mbbi, "$(S)$(ND)$(C):Alarm1") {
 # ///
 record(mbbi, "$(S)$(ND)$(C):Alarm2") {
   field(DESC, "$(C) Alarm 2")
-#  field(DTYP, "asynInt32")
-#  field(INP, "@asyn($(PORT)1w4,$(ADDR_ALARM2_STA),1)UINT16")
   field(INP, "$(S)$(ND)$(C):Read_2")
   field(ZRVL, "0")
   field(ONVL, "1")
