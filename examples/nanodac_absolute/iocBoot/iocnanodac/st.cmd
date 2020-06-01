@@ -25,9 +25,9 @@ epicsEnvSet("NI","1")
 
 < $(EUROTHERM)/nd.st.cmd.main
 
-asynSetTraceMask(n11w4,0,0xFF)
-asynSetTraceMask(n12w4,0,0xFF)
-asynSetTraceMask(n13w4,0,0xFF)
+#asynSetTraceMask(n11w4,0,0xFF)
+#asynSetTraceMask(n12w4,0,0xFF)
+#asynSetTraceMask(n13w4,0,0xFF)
 
 ####################################################################
 

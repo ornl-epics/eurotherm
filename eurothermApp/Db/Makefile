@@ -26,6 +26,7 @@ DB += nd_channel_main.template
 DB += nd_channel_alarm.template
 DB += nd_channel_alarm_limit.template
 DB += nd_loop_main.template
+DB += nd_loop_setpoint.template
 DB += nd_user.template
 
 #----------------------------------------------------

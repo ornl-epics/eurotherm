@@ -1,0 +1,107 @@
+#############################################################
+#
+# Database template to read and set loop 1 or 2 'setpoint' parameters.
+#
+# Address macros:
+# ADDR_LOOP_SPH - the loop setpoint high limit
+# ADDR_LOOP_SPL - the loop setpoint low limit
+# ADDR_LOOP_SPR - the loop setpoint ramp rate
+#
+# Macros in addition to nd.template:
+# L - loop index (1 or 2)
+#
+# Matt Pearson
+# May 2020
+#
+############################################################
+
+# ///
+# /// Poll the floating point parameters for this loop.main
+# ///
+record(dfanout, "$(S)$(ND)Loop$(L):SP:Poll") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)Loop$(L):SP:HighLimit.PROC PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):SP:LowLimit.PROC PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):SP:Rate.PROC PP")
+}
+
+############################################################
+# Read records
+
+# ///
+# /// Read the high limit on the setpoint
+# ///
+record(ai, "$(S)$(ND)Loop$(L):SP:HighLimit") {
+  field(DESC, "Loop$(L) SP High Limit")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_SPH),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the low limit on the setpoint
+# ///
+record(ai, "$(S)$(ND)Loop$(L):SP:LowLimit") {
+  field(DESC, "Loop$(L) SP Low Limit")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_SPL),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the rate limit on the setpoint change
+# /// This affects how fast the working setpoint can change.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):SP:Rate") {
+  field(DESC, "Loop$(L) SP Rate")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_SPR),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+############################################################
+# Set records
+
+# ///
+# /// Set the high limit on the setpoint
+# ///
+record(ao, "$(S)$(ND)Loop$(L):SP:HighLimitSet") {
+  field(DESC, "Set Loop$(L) SP High Limit")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_LOOP_SPH),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)Loop$(L):SP:HighLimit")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Set the low limit on the setpoint
+# ///
+record(ao, "$(S)$(ND)Loop$(L):SP:LowLimitSet") {
+  field(DESC, "Set Loop$(L) SP Low Limit")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_LOOP_SPL),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)Loop$(L):SP:LowLimit")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Set the rate limit on the setpoint change.
+# /// This affects how fast the working setpoint can change.
+# ///
+record(ao, "$(S)$(ND)Loop$(L):SP:RateSet") {
+  field(DESC, "Set Loop$(L) SP Rate")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_LOOP_SPR),1)FLOAT32_BE")
+  field(PREC, "$(PREC)")
+  field(FLNK, "$(S)$(ND)Loop$(L):SP:Rate")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+

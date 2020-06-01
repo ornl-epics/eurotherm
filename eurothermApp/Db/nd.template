@@ -391,6 +391,7 @@ include "nd_user.template"
 # Loops 1 and 2
 
 substitute "L=1"
+
 substitute "ADDR_LOOP__PV=33792"
 substitute "ADDR_LOOP_TSP=33796"
 substitute "ADDR_LOOP_WSP=33798"
@@ -398,6 +399,11 @@ substitute "ADDR_LOOP__AM=513"
 substitute "ADDR_LOOP_OUT=33800"
 substitute "ADDR_LOOP_INH=517"
 include "nd_loop_main.template"
+
+substitute "ADDR_LOOP_SPH=44220"
+substitute "ADDR_LOOP_SPL=44222"
+substitute "ADDR_LOOP_SPR=44228"
+include "nd_loop_setpoint.template"
 
 ##################################################################
 # Global Alarm Summary
