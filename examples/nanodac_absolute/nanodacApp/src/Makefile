@@ -16,6 +16,7 @@ nanodac_DBD += base.dbd
 nanodac_DBD += asyn.dbd
 nanodac_DBD += drvAsynIPPort.dbd
 nanodac_DBD += modbusSupport.dbd
+nanodac_DBD += busySupport.dbd
 nanodac_DBD += asSupport.dbd
 nanodac_DBD += devIocStats.dbd
 
@@ -29,6 +30,7 @@ nanodac_SRCS_vxWorks += -nil-
 # Link in the code from the support library
 nanodac_LIBS += asyn
 nanodac_LIBS += modbus
+nanodac_LIBS += busy
 nanodac_LIBS += autosave
 nanodac_LIBS += devIocStats
 
