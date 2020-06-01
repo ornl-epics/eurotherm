@@ -396,7 +396,7 @@ substitute "ADDR_LOOP_TSP=33796"
 substitute "ADDR_LOOP_WSP=33798"
 substitute "ADDR_LOOP__AM=513"
 substitute "ADDR_LOOP_OUT=33800"
-substitute "ADDR_LOOP_INH=33802"
+substitute "ADDR_LOOP_INH=517"
 include "nd_loop_main.template"
 
 ##################################################################
