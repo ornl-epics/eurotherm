@@ -1,0 +1,144 @@
+#############################################################
+#
+# Database template to read and set loop 1 or 2 'main' parameters.
+#
+# Address macros:
+# ADDR_LOOP__PV - the loop PV 
+# ADDR_LOOP_TSP - the loop target setpoint
+# ADDR_LOOP_WSP - the loop working setpoint
+# ADDR_LOOP__AM - the loop auto/manual mode
+# ADDR_LOOP_OUT - the loop output %
+# ADDR_LOOP_INH - the loop inhibit status
+#
+# Macros in addition to nd.template:
+# L - loop index (1 or 2)
+#
+# Matt Pearson
+# May 2020
+#
+############################################################
+
+# ///
+# /// Poll the floating point parameters for this loop.main
+# ///
+record(dfanout, "$(S)$(ND)Loop$(L):Poll") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)Loop$(L):PV.PROC PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):SP.PROC PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):WSP.PROC PP")
+  field(OUTD, "$(S)$(ND)Loop$(L):Output.PROC PP")
+}
+record(dfanout, "$(S)$(ND)Loop$(L):Read") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)Loop$(L):Poll.PROC PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):Auto.PROC PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):Inhibit.PROC PP")
+}
+
+# ///
+# /// Read the process variable used in this loop.
+# /// This is usually set up on the controller.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PV") {
+  field(DESC, "Loop$(L) Process Variable")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP__PV),1)FLOAT32_BE")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the setpoint
+# ///
+record(ai, "$(S)$(ND)Loop$(L):SP") {
+  field(DESC, "Loop$(L) Setpoint")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_TSP),1)FLOAT32_BE")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the working setpoint
+# ///
+record(ai, "$(S)$(ND)Loop$(L):WSP") {
+  field(DESC, "Loop$(L) Working Setpoint")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_WSP),1)FLOAT32_BE")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the auto/manual setting
+# ///
+record(bi, "$(S)$(ND)Loop$(L):Auto") {
+  field(DESC, "Loop$(L) Auto/Man")
+  field(PINI, "YES")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_LOOP__AM),1)UINT16")
+  field(ZNAM, "Auto")
+  field(ONAM, "Manual")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the working loop output 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Output") {
+  field(DESC, "Loop$(L) Output")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_OUT),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the loop inhibit status 
+# ///
+record(bi, "$(S)$(ND)Loop$(L):Inhibit") {
+  field(DESC, "Loop$(L) Inhibit")
+  field(PINI, "YES")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_LOOP_INH),1)UINT16")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+#######################################################################
+# Write records & integration with putCallback.template in genericIO
+
+# ///
+# /// This will define the user setpoint $(S)$(ND)Loop$(L):SPSet
+# ///
+substitute "P=$(S)$(ND)Loop$(L)"
+substitute "C=SP"
+substitute "OUT=$(S)$(ND)Loop$(L):SPSetActual"
+substitute "IN=$(S)$(ND)Loop$(L):PV"
+substitute "TOL=1"
+substitute "TO=28800"
+substitute "ST=0"
+substitute "PREC=1"
+include "putCallback.template"
+
+# /// 
+# /// Set the target setpoint. This is set via putCallback.template
+# ///
+record(ao, "$(S)$(ND)Loop$(L):SPSetActual") {
+  field(DESC, "Loop$(L) Setpoint")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_LOOP_TSP),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(FLNK, "$(S)$(ND)Loop$(L):SP")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+
+
+
