@@ -139,6 +139,33 @@ record(ao, "$(S)$(ND)Loop$(L):SPSetActual") {
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Set the loop auto/manual mode 
+# ///
+record(bo, "$(S)$(ND)Loop$(L):AutoSet") {
+  field(DESC, "Loop$(L) Auto/Man")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)1w6,$(ADDR_LOOP__AM),1)UINT16")  
+  field(ZNAM, "Auto")
+  field(ONAM, "Manual")
+  field(FLNK, "$(S)$(ND)Loop$(L):Auto")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Inhibit the loop output 
+# ///
+record(bo, "$(S)$(ND)Loop$(L):InhibitSet") {
+  field(DESC, "Set Loop$(L) Inhibit")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)1w6,$(ADDR_LOOP_INH),1)UINT16")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  field(FLNK, "$(S)$(ND)Loop$(L):Inhibit")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+
 
 
 
