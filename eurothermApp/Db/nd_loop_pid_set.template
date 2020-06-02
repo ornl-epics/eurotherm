@@ -1,0 +1,54 @@
+
+# This is a template to instantiate records for each PID set.
+# Additional macros:
+#   SET - the loop PID set number (1, 2, or 3)
+#
+# See nd_loop_pid.template for details.
+
+# /// 
+# /// The P, I and D, and associated output gain limits for set $(SET)
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:PB$(SET)") {
+  field(DESC, "Loop$(L) PB$(SET)")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_$(SET)PB),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+record(ai, "$(S)$(ND)Loop$(L):PID:Ti$(SET)") {
+  field(DESC, "Loop$(L) Ti$(SET)")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_$(SET)TI),1)FLOAT32_BE") 
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+record(ai, "$(S)$(ND)Loop$(L):PID:Td$(SET)") {
+  field(DESC, "Loop$(L) Td$(SET)")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_$(SET)TD),1)FLOAT32_BE")
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh$(SET)") {
+  field(DESC, "Loop$(L) Output High $(SET)")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_$(SET)OH),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow$(SET)") {
+  field(DESC, "Loop$(L) Output Low $(SET)")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_$(SET)OL),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+

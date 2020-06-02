@@ -414,6 +414,24 @@ substitute "ADDR_LOOP_NUM=5686"
 substitute "ADDR_LOOP_ACT=5688"
 substitute "ADDR_LOOP_B12=44146"
 substitute "ADDR_LOOP_B23=44148"
+
+substitute "ADDR_LOOP_1PB=44150"
+substitute "ADDR_LOOP_1TI=44152"
+substitute "ADDR_LOOP_1TD=44154"
+substitute "ADDR_LOOP_1OH=44198"
+substitute "ADDR_LOOP_1OL=44200"
+
+substitute "ADDR_LOOP_2PB=44166"
+substitute "ADDR_LOOP_2TI=44168"
+substitute "ADDR_LOOP_2TD=44170"
+substitute "ADDR_LOOP_2OH=44202"
+substitute "ADDR_LOOP_2OL=44204"
+
+substitute "ADDR_LOOP_3PB=44182"
+substitute "ADDR_LOOP_3TI=44184"
+substitute "ADDR_LOOP_3TD=44186"
+substitute "ADDR_LOOP_3OH=44206"
+substitute "ADDR_LOOP_3OL=44208"
 include "nd_loop_pid.template"
 
 ##################################################################

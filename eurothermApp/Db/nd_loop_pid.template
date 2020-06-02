@@ -131,6 +131,17 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Boundary23") {
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# /// 
+# /// Instantiate the records specific to each PID set.
+# ///
+substitute "SET=1"
+include "nd_loop_pid_set.template"
+substitute "SET=2"
+include "nd_loop_pid_set.template"
+substitute "SET=3"
+include "nd_loop_pid_set.template"
+
+
 ############################################################
 # Write records
 
