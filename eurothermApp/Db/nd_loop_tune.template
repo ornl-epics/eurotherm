@@ -3,7 +3,7 @@
 # Database template to read and set loop 1 or 2 'tune' parameters.
 #
 # Address macros:
-# ADDR_LOOP_TAU - the loop autotune
+# ADDR_LOOP_TAU - the loop autotune (16-bit range)
 #
 # Macros in addition to nd.template:
 # L - loop index (1 or 2)

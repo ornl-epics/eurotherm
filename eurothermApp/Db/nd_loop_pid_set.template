@@ -5,6 +5,18 @@
 #
 # See nd_loop_pid.template for details.
 
+# ///
+# /// Read the PID for this set $(SET)
+# ///
+record(dfanout, "$(S)$(ND)Loop$(L):PID:Read$(SET)") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)Loop$(L):PID:PB$(SET).PROC PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):PID:Ti$(SET).PROC PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):PID:Td$(SET).PROC PP")
+  field(OUTD, "$(S)$(ND)Loop$(L):PID:OutputHigh$(SET).PROC PP")
+  field(OUTE, "$(S)$(ND)Loop$(L):PID:OutputLow$(SET).PROC PP")
+}
+
 # /// 
 # /// The P, I and D, and associated output gain limits for set $(SET)
 # ///

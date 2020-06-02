@@ -23,9 +23,9 @@
 ############################################################
 
 # ///
-# /// Process this to manually read the alarms info
+# /// Process this to manually read the user params
 # ///
-record(dfanout, "$(S)$(ND)ReadUser$(U)") {
+record(dfanout, "$(S)$(ND)User$(U):Read") {
   field(VAL, "1")
   field(OUTA, "$(S)$(ND)User$(U):HighLim.PROC PP")
   field(OUTB, "$(S)$(ND)User$(U):LowLim.PROC PP")

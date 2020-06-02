@@ -43,9 +43,20 @@
 ############################################################
 
 # ///
-# /// Read the floating point parameters for this loop.pid
+# /// Read/poll the parameters for this loop.pid and loop.diag
 # ///
 record(dfanout, "$(S)$(ND)Loop$(L):PID:Read") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)Loop$(L):PID:Poll.PROC PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):PID:Type.PROC PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):PID:NumSets.PROC PP")
+  field(OUTD, "$(S)$(ND)Loop$(L):PID:Boundary12.PROC PP")
+  field(OUTE, "$(S)$(ND)Loop$(L):PID:Boundary23.PROC PP")
+  field(OUTF, "$(S)$(ND)Loop$(L):PID:Read1.PROC PP")
+  field(OUTG, "$(S)$(ND)Loop$(L):PID:Read2.PROC PP")
+  field(OUTH, "$(S)$(ND)Loop$(L):PID:Read3.PROC PP")
+}
+record(dfanout, "$(S)$(ND)Loop$(L):PID:Poll") {
   field(VAL, "1")
   field(OUTA, "$(S)$(ND)Loop$(L):PID:ActiveSet.PROC PP")
   field(OUTB, "$(S)$(ND)Loop$(L):Diag:SchPB.PROC PP")

@@ -3,13 +3,12 @@
 # Database template to read and set loop 1 or 2 'main' parameters.
 #
 # Address macros:
-# ADDR_LOOP__PV - the loop PV 
-# ADDR_LOOP_TSP - the loop target setpoint
-# ADDR_LOOP_WSP - the loop working setpoint
-# ADDR_LOOP__AM - the loop auto/manual mode
-# ADDR_LOOP_OUT - the loop output %
-# ADDR_LOOP_INH - the loop inhibit status
-# ADDR_LOOP_AUT - the loop autotune
+# ADDR_LOOP__PV - the loop PV (32-bit range)
+# ADDR_LOOP_TSP - the loop target setpoint (32-bit range)
+# ADDR_LOOP_WSP - the loop working setpoint (32-bit range)
+# ADDR_LOOP__AM - the loop auto/manual mode (16-bit range)
+# ADDR_LOOP_OUT - the loop output % (32-bit range)
+# ADDR_LOOP_INH - the loop inhibit status (16-bit range)
 #
 # Macros in addition to nd.template:
 # L - loop index (1 or 2)
@@ -20,20 +19,20 @@
 ############################################################
 
 # ///
-# /// Poll the floating point parameters for this loop.main
+# /// Read/poll the parameters for this loop.main
 # ///
+record(dfanout, "$(S)$(ND)Loop$(L):Read") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)Loop$(L):Poll.PROC PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):Auto.PROC PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):Inhibit.PROC PP")
+}
 record(dfanout, "$(S)$(ND)Loop$(L):Poll") {
   field(VAL, "1")
   field(OUTA, "$(S)$(ND)Loop$(L):PV.PROC PP")
   field(OUTB, "$(S)$(ND)Loop$(L):SP.PROC PP")
   field(OUTC, "$(S)$(ND)Loop$(L):WSP.PROC PP")
   field(OUTD, "$(S)$(ND)Loop$(L):Output.PROC PP")
-}
-record(dfanout, "$(S)$(ND)Loop$(L):Read") {
-  field(VAL, "1")
-  field(OUTA, "$(S)$(ND)Loop$(L):Poll.PROC PP")
-  field(OUTB, "$(S)$(ND)Loop$(L):Auto.PROC PP")
-  field(OUTC, "$(S)$(ND)Loop$(L):Inhibit.PROC PP")
 }
 
 # ///

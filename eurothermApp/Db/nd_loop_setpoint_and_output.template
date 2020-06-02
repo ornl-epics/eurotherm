@@ -33,7 +33,7 @@ record(dfanout, "$(S)$(ND)Loop$(L):SP:Read") {
 # ///
 # /// Read the floating point parameters for this loop.op
 # ///
-record(dfanout, "$(S)$(ND)Loop$(L):Output:Pead") {
+record(dfanout, "$(S)$(ND)Loop$(L):Output:Read") {
   field(VAL, "1")
   field(OUTA, "$(S)$(ND)Loop$(L):Output:High.PROC PP")
   field(OUTB, "$(S)$(ND)Loop$(L):Output:Low.PROC PP")
