@@ -435,6 +435,12 @@ substitute "ADDR_LOOP_3TI=44184"
 substitute "ADDR_LOOP_3TD=44186"
 substitute "ADDR_LOOP_3OH=44206"
 substitute "ADDR_LOOP_3OL=44208"
+
+substitute "ADDR_LOOP_SPB=44324"
+substitute "ADDR_LOOP_STI=44326"
+substitute "ADDR_LOOP_STD=44328"
+substitute "ADDR_LOOP_SOH=44340"
+substitute "ADDR_LOOP_SOL=44342"
 include "nd_loop_pid.template"
 
 ##################################################################

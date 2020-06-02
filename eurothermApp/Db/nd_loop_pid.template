@@ -1,6 +1,7 @@
 #############################################################
 #
-# Database template to read and set loop 1 or 2 'pid' parameters. 
+# Database template to read and set loop 1 or 2 'pid' and 
+# some 'diag' parameters. 
 #
 # Address macros:
 # ADDR_LOOP_TYP - the loop PID type (16-bit range)
@@ -27,6 +28,12 @@
 # ADDR_LOOP_3OH - the loop PID set 3 output high (32-bit range)
 # ADDR_LOOP_3OL - the loop PID set 3 output low (32-bit range)
 #
+# ADDR_LOOP_SPB - the loop PID scheduled P (32-bit range)
+# ADDR_LOOP_STI - the loop PID scheduled I (32-bit range)
+# ADDR_LOOP_STD - the loop PID scheduled D (32-bit range)
+# ADDR_LOOP_SOH - the loop PID scheduled output high (32-bit range)
+# ADDR_LOOP_SOL - the loop PID scheduled output low (32-bit range)
+#
 # Macros in addition to nd.template:
 # L - loop index (1 or 2)
 #
@@ -40,9 +47,12 @@
 # ///
 record(dfanout, "$(S)$(ND)Loop$(L):PID:Read") {
   field(VAL, "1")
-  field(OUTA, "$(S)$(ND)Loop$(L):.PROC PP")
-  field(OUTB, "$(S)$(ND)Loop$(L):.PROC PP")
-  field(OUTC, "$(S)$(ND)Loop$(L):.PROC PP")
+  field(OUTA, "$(S)$(ND)Loop$(L):PID:ActiveSet.PROC PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):Diag:SchPB.PROC PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):Diag:SchTi.PROC PP")
+  field(OUTD, "$(S)$(ND)Loop$(L):Diag:SchTd.PROC PP")
+  field(OUTE, "$(S)$(ND)Loop$(L):Diag:SchOutHigh.PROC PP")
+  field(OUTF, "$(S)$(ND)Loop$(L):Diag:SchOutLow.PROC PP")
 }
 
 ############################################################
@@ -140,6 +150,77 @@ substitute "SET=2"
 include "nd_loop_pid_set.template"
 substitute "SET=3"
 include "nd_loop_pid_set.template"
+
+# ///
+# /// Read the proportional gain parameter used now 
+# /// for the current PID set.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchPB") {
+  field(DESC, "Loop$(L) Sched PB")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_SPB),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the integral gain parameter used now 
+# /// for the current PID set.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchTi") {
+  field(DESC, "Loop$(L) Sched Ti")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_STI),1)FLOAT32_BE")
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the derivative gain parameter used now 
+# /// for the current PID set.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchTd") {
+  field(DESC, "Loop$(L) Sched Td")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_STD),1)FLOAT32_BE")
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the output high limit used now 
+# /// for the current PID set.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutHigh") {
+  field(DESC, "Loop$(L) Sched High Lim")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_SOH),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the output low limit used now 
+# /// for the current PID set.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutLow") {
+  field(DESC, "Loop$(L) Sched Low Lim")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_SOL),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
 
 
 ############################################################
