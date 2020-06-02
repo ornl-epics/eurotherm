@@ -42,6 +42,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh$(SET)") {
   field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_$(SET)OH),1)FLOAT32_BE")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")  
 }
 record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow$(SET)") {
   field(DESC, "Loop$(L) Output Low $(SET)")
@@ -50,5 +51,58 @@ record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow$(SET)") {
   field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_$(SET)OL),1)FLOAT32_BE")
   field(PREC, "1")
   field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")  
 }
+
+# ///
+# /// and the associated write records:
+# ///
+record(ao, "$(S)$(ND)Loop$(L):PID:PB$(SET)Set") {
+  field(DESC, "Set Loop$(L) PB$(SET)")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_LOOP_$(SET)PB),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(EGU, "%")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:PB$(SET)")
+  info(archive, "Monitor, 00:00:01, VAL")  
+}
+record(ao, "$(S)$(ND)Loop$(L):PID:Ti$(SET)Set") {
+  field(DESC, "Set Loop$(L) Ti$(SET)")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_LOOP_$(SET)TI),1)FLOAT32_BE")
+  field(PREC, "0")
+  field(EGU, "sec")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Ti$(SET)")
+  info(archive, "Monitor, 00:00:01, VAL")  
+}
+record(ao, "$(S)$(ND)Loop$(L):PID:Td$(SET)Set") {
+  field(DESC, "Set Loop$(L) Td$(SET)")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_LOOP_$(SET)TD),1)FLOAT32_BE")
+  field(PREC, "0")
+  field(EGU, "sec")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Td$(SET)")
+  info(archive, "Monitor, 00:00:01, VAL")  
+}
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh$(SET)Set") {
+  field(DESC, "Set Loop$(L) Output High $(SET)")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_LOOP_$(SET)OH),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(EGU, "%")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:OutputHigh$(SET)")
+  info(archive, "Monitor, 00:00:01, VAL")  
+}
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow$(SET)Set") {
+  field(DESC, "Set Loop$(L) Output Low $(SET)")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_LOOP_$(SET)OL),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(EGU, "%")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:OutputLow$(SET)")
+  info(archive, "Monitor, 00:00:01, VAL")  
+}
+
+
+
 
