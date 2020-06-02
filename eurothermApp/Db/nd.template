@@ -409,6 +409,13 @@ substitute "ADDR_LOOP_OPR=44256"
 substitute "ADDR_LOOP_OPM=44288"
 include "nd_loop_setpoint_and_output.template"
 
+substitute "ADDR_LOOP_TYP=5685"
+substitute "ADDR_LOOP_NUM=5686"
+substitute "ADDR_LOOP_ACT=5688"
+substitute "ADDR_LOOP_B12=44146"
+substitute "ADDR_LOOP_B23=44148"
+include "nd_loop_pid.template"
+
 ##################################################################
 # Global Alarm Summary
 

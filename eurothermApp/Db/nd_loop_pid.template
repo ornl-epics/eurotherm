@@ -1,0 +1,272 @@
+#############################################################
+#
+# Database template to read and set loop 1 or 2 'pid' parameters. 
+#
+# Address macros:
+# ADDR_LOOP_TYP - the loop PID type (16-bit range)
+# ADDR_LOOP_NUM - the loop PID number of active sets (16-bit range)
+# ADDR_LOOP_ACT - the loop PID active set (16-bit range)
+# ADDR_LOOP_B12 - the loop PID boundary for set 1-2 (32-bit range)
+# ADDR_LOOP_B23 - the loop PID boundary for set 2-3 (32-bit range)
+
+# ADDR_LOOP_1PB - the loop PID set 1 P (32-bit range)
+# ADDR_LOOP_1TI - the loop PID set 1 I (32-bit range)
+# ADDR_LOOP_1TD - the loop PID set 1 D (32-bit range)
+# ADDR_LOOP_1OH - the loop PID set 1 output high (32-bit range)
+# ADDR_LOOP_1OL - the loop PID set 1 output low (32-bit range)
+#
+# ADDR_LOOP_2PB - the loop PID set 2 P (32-bit range)
+# ADDR_LOOP_2TI - the loop PID set 2 I (32-bit range)
+# ADDR_LOOP_2TD - the loop PID set 2 D (32-bit range)
+# ADDR_LOOP_2OH - the loop PID set 2 output high (32-bit range)
+# ADDR_LOOP_2OL - the loop PID set 2 output low (32-bit range)
+#
+# ADDR_LOOP_3PB - the loop PID set 3 P (32-bit range)
+# ADDR_LOOP_3TI - the loop PID set 3 I (32-bit range)
+# ADDR_LOOP_3TD - the loop PID set 3 D (32-bit range)
+# ADDR_LOOP_3OH - the loop PID set 3 output high (32-bit range)
+# ADDR_LOOP_3OL - the loop PID set 3 output low (32-bit range)
+#
+# Macros in addition to nd.template:
+# L - loop index (1 or 2)
+#
+# Matt Pearson
+# May 2020
+#
+############################################################
+
+# ///
+# /// Read the floating point parameters for this loop.pid
+# ///
+record(dfanout, "$(S)$(ND)Loop$(L):PID:Read") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)Loop$(L):.PROC PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):.PROC PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):.PROC PP")
+}
+
+############################################################
+# Read records
+
+# /// 
+# /// Read the PID type  
+# ///
+record(mbbi, "$(S)$(ND)Loop$(L):PID:Type") {
+  field(DESC, "Loop$(L) PID Type")
+  field(PINI, "YES")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_LOOP_TYP),1)UINT16")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(ZRST, "Off")
+  field(ONST, "Set")
+  field(TWST, "Setpoint")
+  field(THST, "PV")
+  field(FRST, "Error")
+  field(FVST, "Output")
+  field(SXST, "Remote")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the number of PID sets in use 
+# ///
+record(mbbi, "$(S)$(ND)Loop$(L):PID:NumSets") {
+  field(DESC, "Loop$(L) PID Num Sets")
+  field(PINI, "YES")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_LOOP_NUM),1)UINT16")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "1 Set")
+  field(ONST, "2 Sets")
+  field(TWST, "3 Sets")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the currently active PID set 
+# ///
+record(mbbi, "$(S)$(ND)Loop$(L):PID:ActiveSet") {
+  field(DESC, "Loop$(L) Output Num Sets")
+  field(PINI, "YES")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_LOOP_ACT),1)UINT16")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "Set 1")
+  field(ONST, "Set 2")
+  field(TWST, "Set 3")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the PV boundary between set 1 and 2 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Boundary12") {
+  field(DESC, "Loop$(L) PID Boundary12")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_B12),1)FLOAT32_BE")
+  field(PREC, "0")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the PV boundary between set 2 and 3 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Boundary23") {
+  field(DESC, "Loop$(L) PID Boundary23")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_LOOP_B23),1)FLOAT32_BE")
+  field(PREC, "0")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+############################################################
+# Write records
+
+# ///
+# /// Set the PID type
+# ///
+record(mbbo, "$(S)$(ND)Loop$(L):PID:TypeSet") {
+  field(DESC, "Set Loop$(L) PID Type")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)1w6,$(ADDR_LOOP_TYP),1)UINT16")  
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(ZRST, "Off")
+  field(ONST, "Set")
+  field(TWST, "Setpoint")
+  field(THST, "PV")
+  field(FRST, "Error")
+  field(FVST, "Output")
+  field(SXST, "Remote")  
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Type")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Menu to select using a software table instead of the 
+# /// 3 controller PID sets. If we enable the software
+# /// table then we set NumSetsSet to "1 set" and set ActiveSetSet
+# /// to 1. The software table will then populate the parameters
+# /// of set 1.
+# ///
+record(bo, "$(S)$(ND)Loop$(L):PID:Source") {
+  field(DESC, "Controller/Software PID")
+  field(PINI, "YES")
+  field(VAL, "1")
+  field(ZNAM, "Controller PID")
+  field(ONAM, "Software PID")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalc")
+  info(autosaveFields, "VAL")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# If we are using the software table, set up the controller
+# appropriately and enable the table.
+record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalc") {
+  field(DESC, "Use 1 Set")
+  field(INPA, "$(S)$(ND)Loop$(L):PID:Source.VAL")
+  field(CALC, "A==1")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)Loop$(L):PID:SourceCalcSet.PROC")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable")
+}
+record(seq, "$(S)$(ND)Loop$(L):PID:SourceCalcSet") {
+  field(DLY1, "0.1")
+  field(DLY2, "0.1")
+  field(DLY3, "0.1")
+  field(DO1, "1")
+  field(LNK1, "$(S)$(ND)Loop$(L):PID:TypeSet.VAL PP")
+  field(DO2, "0")
+  field(LNK2, "$(S)$(ND)Loop$(L):PID:NumSetsSet.VAL PP")
+  field(DO3, "0")
+  field(LNK3, "$(S)$(ND)Loop$(L):PID:ActiveSetSet.VAL PP")
+  field(DO4, "0")
+  field(LNK4, "$(S)$(ND)Loop$(L):PID:TableControl.VAL PP")
+}
+# and if we are not using the software PID table, disable the table
+record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable") {
+  field(INPA, "$(S)$(ND)Loop$(L):PID:Source.VAL")
+  field(CALC, "A==0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)Loop$(L):PID:TableControl.VAL PP")
+}
+
+# /// 
+# /// Set the number of sets in use (1, 2 or 3). 
+# ///
+record(mbbo, "$(S)$(ND)Loop$(L):PID:NumSetsSet") {
+  field(DESC, "Set Loop$(L) PID Num Sets")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)1w6,$(ADDR_LOOP_NUM),1)UINT16")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "1 Set")
+  field(ONST, "2 Sets")
+  field(TWST, "3 Sets")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:NumSets")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Set the PID set to use
+# /// This only works if we are in 'Set' PID Type. 
+# ///
+record(mbbo, "$(S)$(ND)Loop$(L):PID:ActiveSetSet") {
+  field(DESC, "Set Loop$(L) PID Active Set")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)1w6,$(ADDR_LOOP_ACT),1)UINT16")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "Set 1")
+  field(ONST, "Set 2")
+  field(TWST, "Set 3")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:ActiveSet")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Set the PV boundary between set 1 and 2 
+# ///
+record(ao, "$(S)$(ND)Loop$(L):PID:Boundary12Set") {
+  field(DESC, "Set Loop$(L) PID Boundary12")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_LOOP_B12),1)FLOAT32_BE")
+  field(PREC, "0")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Boundary12")
+  info(archive, "Monitor, 00:00:01, VAL")  
+}
+
+# /// 
+# /// Set the PV boundary between set 2 and 3 
+# ///
+record(ao, "$(S)$(ND)Loop$(L):PID:Boundary23Set") {
+  field(DESC, "Set Loop$(L) PID Boundary23")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_LOOP_B23),1)FLOAT32_BE")
+  field(PREC, "0")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Boundary23")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+
