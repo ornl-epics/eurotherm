@@ -400,6 +400,9 @@ substitute "ADDR_LOOP_OUT=33800"
 substitute "ADDR_LOOP_INH=517"
 include "nd_loop_main.template"
 
+substitute "ADDR_LOOP_TAU=5681"
+include "nd_loop_tune.template"
+
 substitute "ADDR_LOOP_SPH=44220"
 substitute "ADDR_LOOP_SPL=44222"
 substitute "ADDR_LOOP_SPR=44228"

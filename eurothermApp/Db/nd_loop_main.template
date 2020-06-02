@@ -9,6 +9,7 @@
 # ADDR_LOOP__AM - the loop auto/manual mode
 # ADDR_LOOP_OUT - the loop output %
 # ADDR_LOOP_INH - the loop inhibit status
+# ADDR_LOOP_AUT - the loop autotune
 #
 # Macros in addition to nd.template:
 # L - loop index (1 or 2)
@@ -163,6 +164,9 @@ record(bo, "$(S)$(ND)Loop$(L):InhibitSet") {
   field(FLNK, "$(S)$(ND)Loop$(L):Inhibit")
   info(archive, "Monitor, 00:00:01, VAL")
 }
+
+
+
 
 
 

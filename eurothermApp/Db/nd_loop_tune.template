@@ -1,0 +1,56 @@
+#############################################################
+#
+# Database template to read and set loop 1 or 2 'tune' parameters.
+#
+# Address macros:
+# ADDR_LOOP_TAU - the loop autotune
+#
+# Macros in addition to nd.template:
+# L - loop index (1 or 2)
+#
+# Matt Pearson
+# May 2020
+#
+############################################################
+
+record(dfanout, "$(S)$(ND)Loop$(L):Tune:Read") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)Loop$(L):Tune:AutoEn.PROC PP")
+}
+
+###########################################################
+# Read records
+
+# ///
+# /// Read the autotune setting
+# ///
+record(bi, "$(S)$(ND)Loop$(L):Tune:AutoEn") {
+  field(DESC, "Loop$(L) Autotune")
+  field(PINI, "YES")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)1w4,$(ADDR_LOOP_TAU),1)UINT16")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+
+###########################################################
+# Write records
+
+# /// 
+# /// Initiate the loop autotune 
+# ///
+record(bo, "$(S)$(ND)Loop$(L):Tune:AutoEnSet") {
+  field(DESC, "Loop$(L) Autotune")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)1w6,$(ADDR_LOOP_TAU),1)UINT16")
+  field(ZNAM, "Disable")
+  field(ONAM, "Enable")
+  field(FLNK, "$(S)$(ND)Loop$(L):Tune:AutoEn")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+
+
+
