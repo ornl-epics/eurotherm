@@ -4,13 +4,13 @@
 # and 'output' parameters.
 #
 # Address macros:
-# ADDR_LOOP_SPH - the loop setpoint high limit
-# ADDR_LOOP_SPL - the loop setpoint low limit
-# ADDR_LOOP_SPR - the loop setpoint ramp rate
-# ADDR_LOOP_OPH - the loop output high limit
-# ADDR_LOOP_OPL - the loop output low limit
-# ADDR_LOOP_OPR - the loop output ramp limit
-# ADDR_LOOP_OPM - the loop output manual setting
+# ADDR_LOOP_SPH - the loop setpoint high limit (32-bit range)
+# ADDR_LOOP_SPL - the loop setpoint low limit (32-bit range)
+# ADDR_LOOP_SPR - the loop setpoint ramp rate (32-bit range)
+# ADDR_LOOP_OPH - the loop output high limit (32-bit range)
+# ADDR_LOOP_OPL - the loop output low limit (32-bit range)
+# ADDR_LOOP_OPR - the loop output ramp limit (32-bit range)
+# ADDR_LOOP_OPM - the loop output manual setting (32-bit range)
 #
 # Macros in addition to nd.template:
 # L - loop index (1 or 2)
@@ -21,9 +21,9 @@
 ############################################################
 
 # ///
-# /// Poll the floating point parameters for this loop.sp
+# /// Read the floating point parameters for this loop.sp
 # ///
-record(dfanout, "$(S)$(ND)Loop$(L):SP:Poll") {
+record(dfanout, "$(S)$(ND)Loop$(L):SP:Read") {
   field(VAL, "1")
   field(OUTA, "$(S)$(ND)Loop$(L):SP:HighLimit.PROC PP")
   field(OUTB, "$(S)$(ND)Loop$(L):SP:LowLimit.PROC PP")
@@ -31,9 +31,9 @@ record(dfanout, "$(S)$(ND)Loop$(L):SP:Poll") {
 }
 
 # ///
-# /// Poll the floating point parameters for this loop.op
+# /// Read the floating point parameters for this loop.op
 # ///
-record(dfanout, "$(S)$(ND)Loop$(L):Output:Poll") {
+record(dfanout, "$(S)$(ND)Loop$(L):Output:Pead") {
   field(VAL, "1")
   field(OUTA, "$(S)$(ND)Loop$(L):Output:High.PROC PP")
   field(OUTB, "$(S)$(ND)Loop$(L):Output:Low.PROC PP")
