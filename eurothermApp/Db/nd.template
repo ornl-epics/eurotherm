@@ -403,7 +403,11 @@ include "nd_loop_main.template"
 substitute "ADDR_LOOP_SPH=44220"
 substitute "ADDR_LOOP_SPL=44222"
 substitute "ADDR_LOOP_SPR=44228"
-include "nd_loop_setpoint.template"
+substitute "ADDR_LOOP_OPH=44250"
+substitute "ADDR_LOOP_OPL=44252"
+substitute "ADDR_LOOP_OPR=44256"
+substitute "ADDR_LOOP_OPM=44288"
+include "nd_loop_setpoint_and_output.template"
 
 ##################################################################
 # Global Alarm Summary
