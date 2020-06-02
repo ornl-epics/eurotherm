@@ -30,6 +30,7 @@ DB += nd_loop_setpoint_and_output.template
 DB += nd_loop_pid.template
 DB += nd_loop_pid_set.template
 DB += nd_user.template
+DB += pid_set_window.template
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

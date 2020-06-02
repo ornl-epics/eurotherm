@@ -184,7 +184,6 @@ record(bo, "$(S)$(ND)Loop$(L):PID:Source") {
   field(ZNAM, "Controller PID")
   field(ONAM, "Software PID")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalc")
-  info(autosaveFields, "VAL")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -279,5 +278,99 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Boundary23Set") {
   field(FLNK, "$(S)$(ND)Loop$(L):PID:Boundary23")
   info(archive, "Monitor, 00:00:01, VAL")
 }
+
+
+#########################################################
+# Instantiate a software PID table for this control loop. 
+# The input PV is set to the Loop input PV, whatever that is
+# on the controller.
+
+substitute "PV=$(S)$(ND)Loop$(L):PV"
+substitute "UNITS=K"
+
+substitute "P_LINK=$(S)$(ND)Loop$(L):PID:PB1Set"
+substitute "I_LINK=$(S)$(ND)Loop$(L):PID:Ti1Set"
+substitute "D_LINK=$(S)$(ND)Loop$(L):PID:Td1Set"
+substitute "PL_LINK=$(S)$(ND)Loop$(L):PID:OutputLow1Set"
+substitute "PH_LINK=$(S)$(ND)Loop$(L):PID:OutputHigh1Set"
+
+substitute "P=0"
+substitute "I=0"
+substitute "D=0"
+
+substitute "W=1"
+include "pid_set_window.template"
+substitute "W=2"
+include "pid_set_window.template"
+substitute "W=3"
+include "pid_set_window.template"
+substitute "W=4"
+include "pid_set_window.template"
+substitute "W=5"
+include "pid_set_window.template"
+substitute "W=6"
+include "pid_set_window.template"
+substitute "W=7"
+include "pid_set_window.template"
+substitute "W=8"
+include "pid_set_window.template"
+substitute "W=9"
+include "pid_set_window.template"
+substitute "W=10"
+include "pid_set_window.template"
+substitute "W=11"
+include "pid_set_window.template"
+substitute "W=12"
+include "pid_set_window.template"
+substitute "W=13"
+include "pid_set_window.template"
+substitute "W=14"
+include "pid_set_window.template"
+substitute "W=15"
+include "pid_set_window.template"
+substitute "W=16"
+include "pid_set_window.template"
+
+# ///
+# /// Record to enable/disable the table
+# ///
+record(bo, "$(S)$(ND)Loop$(L):PID:TableControl") {
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(ZNAM, "Table Enabled")
+  field(ONAM, "Table Disabled")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MAJOR")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:TableControlSet")
+  info(autosaveFields, "VAL")
+}
+
+record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet") {
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)Loop$(L):PID:TableControl")
+  field(OUTA, "$(S)$(ND)Loop$(L):PID:Set1:Disable PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):PID:Set2:Disable PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):PID:Set3:Disable PP")
+  field(OUTD, "$(S)$(ND)Loop$(L):PID:Set4:Disable PP")
+  field(OUTE, "$(S)$(ND)Loop$(L):PID:Set5:Disable PP")
+  field(OUTF, "$(S)$(ND)Loop$(L):PID:Set6:Disable PP")
+  field(OUTG, "$(S)$(ND)Loop$(L):PID:Set7:Disable PP")
+  field(OUTH, "$(S)$(ND)Loop$(L):PID:Set8:Disable PP")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:TableControlSet2")
+}
+
+record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet2") {
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)Loop$(L):PID:TableControl")
+  field(OUTA, "$(S)$(ND)Loop$(L):PID:Set9:Disable PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):PID:Set10:Disable PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):PID:Set11:Disable PP")
+  field(OUTD, "$(S)$(ND)Loop$(L):PID:Set12:Disable PP")
+  field(OUTE, "$(S)$(ND)Loop$(L):PID:Set13:Disable PP")
+  field(OUTF, "$(S)$(ND)Loop$(L):PID:Set14:Disable PP")
+  field(OUTG, "$(S)$(ND)Loop$(L):PID:Set15:Disable PP")
+  field(OUTH, "$(S)$(ND)Loop$(L):PID:Set16:Disable PP")
+}
+
 
 
