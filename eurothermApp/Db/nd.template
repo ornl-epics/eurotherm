@@ -443,6 +443,59 @@ substitute "ADDR_LOOP_SOH=44340"
 substitute "ADDR_LOOP_SOL=44342"
 include "nd_loop_pid.template"
 
+substitute "L=2"
+
+substitute "ADDR_LOOP__PV=34048"
+substitute "ADDR_LOOP_TSP=34052"
+substitute "ADDR_LOOP_WSP=34053"
+substitute "ADDR_LOOP__AM=641"
+substitute "ADDR_LOOP_OUT=34056"
+substitute "ADDR_LOOP_INH=645"
+include "nd_loop_main.template"
+
+substitute "ADDR_LOOP_TAU=5937"
+include "nd_loop_tune.template"
+
+substitute "ADDR_LOOP_SPH=44732"
+substitute "ADDR_LOOP_SPL=44734"
+substitute "ADDR_LOOP_SPR=44740"
+substitute "ADDR_LOOP_OPH=44762"
+substitute "ADDR_LOOP_OPL=44764"
+substitute "ADDR_LOOP_OPR=44768"
+substitute "ADDR_LOOP_OPM=44800"
+include "nd_loop_setpoint_and_output.template"
+
+substitute "ADDR_LOOP_TYP="
+substitute "ADDR_LOOP_NUM="
+substitute "ADDR_LOOP_ACT="
+substitute "ADDR_LOOP_B12="
+substitute "ADDR_LOOP_B23="
+
+substitute "ADDR_LOOP_1PB="
+substitute "ADDR_LOOP_1TI="
+substitute "ADDR_LOOP_1TD="
+substitute "ADDR_LOOP_1OH="
+substitute "ADDR_LOOP_1OL="
+
+substitute "ADDR_LOOP_2PB="
+substitute "ADDR_LOOP_2TI="
+substitute "ADDR_LOOP_2TD="
+substitute "ADDR_LOOP_2OH="
+substitute "ADDR_LOOP_2OL="
+
+substitute "ADDR_LOOP_3PB="
+substitute "ADDR_LOOP_3TI="
+substitute "ADDR_LOOP_3TD="
+substitute "ADDR_LOOP_3OH="
+substitute "ADDR_LOOP_3OL="
+
+substitute "ADDR_LOOP_SPB="
+substitute "ADDR_LOOP_STI="
+substitute "ADDR_LOOP_STD="
+substitute "ADDR_LOOP_SOH="
+substitute "ADDR_LOOP_SOL="
+include "nd_loop_pid.template"
+
 ##################################################################
 # Global Alarm Summary
 
