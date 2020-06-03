@@ -26,3 +26,13 @@
 #
 ############################################################
 
+# ///
+# /// Global poll control
+# ///
+record(bo, "$(S)$(ND)PollCtrl") {
+  field(VAL, "0")
+  field(ZNAM, "Disable Polling")
+  field(ONAM, "Enable Polling")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+

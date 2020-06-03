@@ -41,12 +41,23 @@
 ############################################################
 
 # ///
-# /// Records to control the fast/slow poll behaviour for this channel
+# /// Records to poll the main parameters for this channel
 # ///
-record(dfanout, "$(S)$(ND)$(C):Poll") {
-  field(SCAN, "2 second")
-  field(VAL, "1")
-  field(OUTA, "$(S)$(ND)$(C):PollMain.PROC PP")
+record(calcout, "$(S)$(ND)$(C):Poll") {
+  field(INPA, "$(S)$(ND)PollCtrl")
+  field(INPB, "$(S)$(ND)$(C):PollCtrl")
+  field(CALC, "A&B")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)$(C):PollMain.PROC PP")
+  info(autosaveFields, "SCAN")
+}
+record(bo, "$(S)$(ND)$(C):PollCtrl") {
+  field(VAL, "0")
+  field(ZNAM, "Poll Disabled")
+  field(ONAM, "Poll Enabled")
+  info(autosaveFields, "VAL")
+  info(archive, "Monitor, 00:00:01, VAL")
 }
 
 include "nd_channel_main.template"

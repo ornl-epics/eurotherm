@@ -17,7 +17,7 @@
 # ///
 # /// Process this to manually read the alarms info
 # ///
-record(dfanout, "$(S)$(ND)$(C):ReadAlarm$(A)") {
+record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Read") {
   field(VAL, "1")
   field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Type.PROC PP")
   field(OUTB, "$(S)$(ND)$(C):Alarm$(A):Latch.PROC PP")
