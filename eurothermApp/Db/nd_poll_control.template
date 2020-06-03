@@ -1,0 +1,28 @@
+#############################################################
+#
+# Database template to control the database polling for various
+# sections of the nanodac support:
+#
+#   channels 1-4
+#   virtual channels 1-6
+#   loops 1-2
+#   
+# Many of the parameters don't need to be polled, and the readbacks
+# are just processed once after setting the parameters. The details
+# of which parameters to poll are dealt with the individual 
+# template files for each section. 
+#
+# In this template we defne various preset poll configurations:
+#
+#   1) Default (poll channels 1-4)
+#   2) Furnace (poll channels 1-2,4, virtual channel 3,5,6, loop 1)
+#
+# The Default setting is suitable for gas panels, force meter, etc
+# where the nanodac is just monitoring sensors. The polling speed
+# can also be adjusted. 
+#
+# Matt Pearson
+# May 2020
+#
+############################################################
+
