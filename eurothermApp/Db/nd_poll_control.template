@@ -36,3 +36,47 @@ record(bo, "$(S)$(ND)PollCtrl") {
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Menu to select default polling schemes
+# ///
+record(mbbo, "$(S)$(ND)PollMenu") {
+  field(VAL, "2")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRVL, "No Polling")
+  field(ONVL, "Default (Main Chans Only)")
+  field(TWST, "Furnace")
+  field(OUT, "$(S)$(ND)PollSelect.SELN PP")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+record(seq, "$(S)$(ND)PollSelect") {
+  field(SELM, "Specified")
+  field(DOL1, "1")
+  field(DOL2, "1")
+  field(DOL3, "1")
+  field(LNK1, "$(S)$(ND)PollNothing.PROC PP")
+  field(LNK2, "$(S)$(ND)PollDefault.PROC PP")
+  field(LNK3, "$(S)$(ND)PollFurnace.PROC PP")
+}
+record(seq, "$(S)$(ND)PollNothing") {
+  field(DOL1, "0")
+  field(DOL2, "0")
+  field(DOL2, "0")
+  field(DOL3, "0")
+  field(DOL4, "0")
+  field(DOL5, "0")
+  field(DOL6, "0")
+  field(DOL7, "0")
+  field(DOL8, "0")
+  field(DOL9, "0")
+  field(DOLA, "0")
+  field(LNK1, "$(S)$(ND)PollDefault.PROC PP")
+  field(LNK2, "$(S)$(ND)PollFurnace.PROC PP")
+  
+  
+  
+  
+  
+}
+

@@ -29,20 +29,12 @@ record(dfanout, "$(S)$(ND)Loop$(L):Read") {
 }
 record(calcout, "$(S)$(ND)Loop$(L):Poll") {
   field(INPA, "$(S)$(ND)PollCtrl")
-  field(INPB, "$(S)$(ND)Loop$(L):PollCtrl")
-  field(CALC, "A&B")
+  field(CALC, "A")
   field(OOPT, "When Non-zero")
   field(DOPT, "Use CALC")
   field(OUT, "$(S)$(ND)Loop$(L):PollFan.PROC PP")
   info(autosaveFields, "SCAN")
   info(archive, "Monitor, 00:00:01, SCAN")
-}
-record(bo, "$(S)$(ND)Loop$(L):PollCtrl") {
-  field(VAL, "0")
-  field(ZNAM, "Poll Disabled")
-  field(ONAM, "Poll Enabled")
-  info(autosaveFields, "VAL")
-  info(archive, "Monitor, 00:00:01, VAL")
 }
 record(dfanout, "$(S)$(ND)Loop$(L):PollFan") {
   field(VAL, "1")
