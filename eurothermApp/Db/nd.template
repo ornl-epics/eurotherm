@@ -550,6 +550,11 @@ record(bo, "$(S)$(ND)AlarmDisable") {
 }
 
 ################################################################
+# Poll control
+
+include "nd_poll_control.template"
+
+################################################################
 
 # ///
 # /// Generic Asyn record.

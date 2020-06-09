@@ -31,8 +31,10 @@
 # ///
 record(bo, "$(S)$(ND)PollCtrl") {
   field(VAL, "0")
+  field(PINI, "YES")
   field(ZNAM, "Disable Polling")
   field(ONAM, "Enable Polling")
+  info(autosaveFields, "VAL")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -40,12 +42,13 @@ record(bo, "$(S)$(ND)PollCtrl") {
 # /// Menu to select default polling schemes
 # ///
 record(mbbo, "$(S)$(ND)PollMenu") {
-  field(VAL, "2")
+  field(DTYP, "Raw Soft Channel")
+  field(VAL, "0")
   field(ZRVL, "1")
   field(ONVL, "2")
   field(TWVL, "3")
-  field(ZRVL, "No Polling")
-  field(ONVL, "Default (Main Chans Only)")
+  field(ZRST, "No Polling")
+  field(ONST, "Default (Main Chans Only)")
   field(TWST, "Furnace")
   field(OUT, "$(S)$(ND)PollSelect.SELN PP")
   info(archive, "Monitor, 00:00:01, VAL")
@@ -59,9 +62,11 @@ record(seq, "$(S)$(ND)PollSelect") {
   field(LNK2, "$(S)$(ND)PollDefault.PROC PP")
   field(LNK3, "$(S)$(ND)PollFurnace.PROC PP")
 }
+# ///
+# /// Don't poll anything (just need to set things, or disable device).
+# ///
 record(seq, "$(S)$(ND)PollNothing") {
   field(DOL1, "0")
-  field(DOL2, "0")
   field(DOL2, "0")
   field(DOL3, "0")
   field(DOL4, "0")
@@ -71,12 +76,100 @@ record(seq, "$(S)$(ND)PollNothing") {
   field(DOL8, "0")
   field(DOL9, "0")
   field(DOLA, "0")
-  field(LNK1, "$(S)$(ND)PollDefault.PROC PP")
-  field(LNK2, "$(S)$(ND)PollFurnace.PROC PP")
-  
-  
-  
-  
-  
+  field(LNK1, "$(S)$(ND)CH1:Poll.SCAN PP")
+  field(LNK2, "$(S)$(ND)CH2:Poll.SCAN PP")
+  field(LNK3, "$(S)$(ND)CH3:Poll.SCAN PP")
+  field(LNK4, "$(S)$(ND)CH4:Poll.SCAN PP")
+  field(LNK5, "$(S)$(ND)VCH1:Poll.SCAN PP")
+  field(LNK6, "$(S)$(ND)VCH2:Poll.SCAN PP")
+  field(LNK7, "$(S)$(ND)VCH3:Poll.SCAN PP")
+  field(LNK8, "$(S)$(ND)VCH4:Poll.SCAN PP")
+  field(LNK9, "$(S)$(ND)VCH5:Poll.SCAN PP")
+  field(LNKA, "$(S)$(ND)VCH6:Poll.SCAN PP")
+  field(FLNK, "$(S)$(ND)PollNothing2")
 }
+record(seq, "$(S)$(ND)PollNothing2") {
+  field(DOL1, "0")
+  field(DOL2, "0")
+  field(DOL3, "0")
+  field(DOL4, "0")
+  field(LNK1, "$(S)$(ND)Loop1:Poll.SCAN PP")
+  field(LNK2, "$(S)$(ND)Loop2:Poll.SCAN PP")
+  field(LNK3, "$(S)$(ND)Loop1:PID:Poll.SCAN PP")
+  field(LNK4, "$(S)$(ND)Loop2:PID:Poll.SCAN PP")
+}
+# ///
+# /// Only poll the 4 main channels at 2Hz
+# ///
+record(seq, "$(S)$(ND)PollDefault") {
+  field(DOL1, "6")
+  field(DOL2, "6")
+  field(DOL3, "6")
+  field(DOL4, "6")
+  field(DOL5, "0")
+  field(DOL6, "0")
+  field(DOL7, "0")
+  field(DOL8, "0")
+  field(DOL9, "0")
+  field(DOLA, "0")
+  field(LNK1, "$(S)$(ND)CH1:Poll.SCAN PP")
+  field(LNK2, "$(S)$(ND)CH2:Poll.SCAN PP")
+  field(LNK3, "$(S)$(ND)CH3:Poll.SCAN PP")
+  field(LNK4, "$(S)$(ND)CH4:Poll.SCAN PP")
+  field(LNK5, "$(S)$(ND)VCH1:Poll.SCAN PP")
+  field(LNK6, "$(S)$(ND)VCH2:Poll.SCAN PP")
+  field(LNK7, "$(S)$(ND)VCH3:Poll.SCAN PP")
+  field(LNK8, "$(S)$(ND)VCH4:Poll.SCAN PP")
+  field(LNK9, "$(S)$(ND)VCH5:Poll.SCAN PP")
+  field(LNKA, "$(S)$(ND)VCH6:Poll.SCAN PP")
+  field(FLNK, "$(S)$(ND)PollDefault2")
+}
+record(seq, "$(S)$(ND)PollDefault2") {
+  field(DOL1, "0")
+  field(DOL2, "0")
+  field(DOL3, "0")
+  field(DOL4, "0")
+  field(LNK1, "$(S)$(ND)Loop1:Poll.SCAN PP")
+  field(LNK2, "$(S)$(ND)Loop2:Poll.SCAN PP")
+  field(LNK3, "$(S)$(ND)Loop1:PID:Poll.SCAN PP")
+  field(LNK4, "$(S)$(ND)Loop2:PID:Poll.SCAN PP")
+}
+# ///
+# /// Only poll the things needed for furnace control at 0.5Hz
+# /// (poll channels 1-2,4, virtual channel 3,5,6, loop 1)
+# ///
+record(seq, "$(S)$(ND)PollFurnace") {
+  field(DOL1, "5")
+  field(DOL2, "5")
+  field(DOL3, "0")
+  field(DOL4, "5")
+  field(DOL5, "0")
+  field(DOL6, "0")
+  field(DOL7, "5")
+  field(DOL8, "0")
+  field(DOL9, "5")
+  field(DOLA, "5")
+  field(LNK1, "$(S)$(ND)CH1:Poll.SCAN PP")
+  field(LNK2, "$(S)$(ND)CH2:Poll.SCAN PP")
+  field(LNK3, "$(S)$(ND)CH3:Poll.SCAN PP")
+  field(LNK4, "$(S)$(ND)CH4:Poll.SCAN PP")
+  field(LNK5, "$(S)$(ND)VCH1:Poll.SCAN PP")
+  field(LNK6, "$(S)$(ND)VCH2:Poll.SCAN PP")
+  field(LNK7, "$(S)$(ND)VCH3:Poll.SCAN PP")
+  field(LNK8, "$(S)$(ND)VCH4:Poll.SCAN PP")
+  field(LNK9, "$(S)$(ND)VCH5:Poll.SCAN PP")
+  field(LNKA, "$(S)$(ND)VCH6:Poll.SCAN PP")
+  field(FLNK, "$(S)$(ND)PollFurnace2")
+}
+record(seq, "$(S)$(ND)PollFurnace2") {
+  field(DOL1, "5")
+  field(DOL2, "0")
+  field(DOL3, "5")
+  field(DOL4, "0")
+  field(LNK1, "$(S)$(ND)Loop1:Poll.SCAN PP")
+  field(LNK2, "$(S)$(ND)Loop2:Poll.SCAN PP")
+  field(LNK3, "$(S)$(ND)Loop1:PID:Poll.SCAN PP")
+  field(LNK4, "$(S)$(ND)Loop2:PID:Poll.SCAN PP")
+}
+
 

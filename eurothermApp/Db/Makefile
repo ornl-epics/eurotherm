@@ -21,6 +21,7 @@ DB += nanodac_loop_adv.db
 
 # New absolute addressing version
 DB += nd.template
+DB += nd_poll_control.template
 DB += nd_channel.template
 DB += nd_channel_main.template
 DB += nd_channel_alarm.template
