@@ -135,6 +135,27 @@ substitute "TO=28800"
 substitute "ST=0"
 include "putCallback.template"
 
+# ///
+# /// Calculate if we are in the window and not 'busy' in the callback logic
+# /// This is just to provide a visual LED feedback for the user
+# ///
+record(calcout, "$(S)$(ND)Loop$(L):InWindowCalc") {
+  field(PINI, "YES")
+  field(INPA, "$(S)$(ND)Loop$(L):SPSetActual CP")
+  field(INPB, "$(S)$(ND)Loop$(L):PV CP")
+  field(INPC, "$(S)$(ND)Loop$(L):SPTolerance CP")
+  field(INPD, "$(S)$(ND)Loop$(L):SPBusy CP")
+  field(CALC, "(!D)&(ABS(A-B)<C)")
+  field(OOPT, "Every Time")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)Loop$(L):InWindow PP")
+}
+record(bo, "$(S)$(ND)Loop$(L):InWindow") {
+  field(ZNAM, "Not In Window")
+  field(ONAM, "In Window")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
 # /// 
 # /// Set the target setpoint. This is set via putCallback.template
 # ///
