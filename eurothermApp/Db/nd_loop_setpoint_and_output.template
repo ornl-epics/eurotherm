@@ -41,6 +41,15 @@ record(dfanout, "$(S)$(ND)Loop$(L):Output:Read") {
   field(OUTD, "$(S)$(ND)Loop$(L):Output:Manual.PROC PP")
 }
 
+# ///
+# /// Trigger both the above records
+# ///
+record(dfanout, "$(S)$(ND)Loop$(L):SO:Read") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)Loop$(L):SP:Read.PROC PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):Output:Read.PROC PP")
+}
+
 ############################################################
 # Read records
 
