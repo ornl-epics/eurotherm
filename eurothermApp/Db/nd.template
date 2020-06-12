@@ -496,6 +496,11 @@ substitute "ADDR_LOOP_SOH=44852"
 substitute "ADDR_LOOP_SOL=44854"
 include "nd_loop_pid.template"
 
+##################################################################
+# Advanced Loop
+
+substitute "ADDR_ADV_TSP=34306"
+include "nd_adv_loop.template"
 
 ##################################################################
 # Global Alarm Summary

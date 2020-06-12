@@ -1,0 +1,46 @@
+#############################################################
+#
+# Database template to read and set advanced loop parameters.
+#
+# Address macros:
+# ADDR_ADV_TSP - the advanced loop target setpoint PV (32-bit range)
+#
+# Matt Pearson
+# May 2020
+#
+############################################################
+
+# ///
+# /// Read the parameters for this advanced loop
+# ///
+record(dfanout, "$(S)$(ND)LoopAdv:Read") {
+  field(VAL, "1")
+  field(OUTA, "$(S)$(ND)LoopAdv:SP.PROC PP")
+}
+
+# /// 
+# /// Read the setpoint
+# ///
+record(ai, "$(S)$(ND)LoopAdv:SP") {
+  field(DESC, "Loop Adv Setpoint")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_ADV_TSP),1)FLOAT32_BE")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Set the target setpoint.
+# ///
+record(ao, "$(S)$(ND)LoopAdv:SPSet") {
+  field(DESC, "Loop Adv Setpoint")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn($(PORT)2w16,$(ADDR_ADV_TSP),1)FLOAT32_BE")
+  field(PREC, "1")
+  field(FLNK, "$(S)$(ND)LoopAdv:SP")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+
+

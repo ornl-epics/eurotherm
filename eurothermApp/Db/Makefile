@@ -31,6 +31,7 @@ DB += nd_loop_tune.template
 DB += nd_loop_setpoint_and_output.template
 DB += nd_loop_pid.template
 DB += nd_loop_pid_set.template
+DB += nd_adv_loop.template
 DB += nd_user.template
 DB += pid_set_window.template
 
