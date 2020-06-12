@@ -400,6 +400,8 @@ substitute "ADDR_LOOP_OUT=33800"
 substitute "ADDR_LOOP_INH=517"
 include "nd_loop_main.template"
 
+substitute "PREC=$(RESOLUTION=3)"
+
 substitute "ADDR_LOOP_TAU=5681"
 include "nd_loop_tune.template"
 
@@ -452,6 +454,8 @@ substitute "ADDR_LOOP__AM=641"
 substitute "ADDR_LOOP_OUT=34056"
 substitute "ADDR_LOOP_INH=645"
 include "nd_loop_main.template"
+
+substitute "PREC=$(RESOLUTION=3)"
 
 substitute "ADDR_LOOP_TAU=5937"
 include "nd_loop_tune.template"

@@ -133,6 +133,7 @@ substitute "IN=$(S)$(ND)Loop$(L):PV"
 substitute "TOL=1"
 substitute "TO=28800"
 substitute "ST=0"
+substitute "PREC=1"
 include "putCallback.template"
 
 # ///
