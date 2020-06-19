@@ -157,6 +157,19 @@ record(bo, "$(S)$(ND)Loop$(L):InWindow") {
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
+# ///
+# /// Provide a PV called 'Tolerance' which is the old PV name
+# /// we used before. This just sets SPTolerance.
+# ///
+record(ao, "$(S)$(ND)Loop$(L):Tolerance") {
+  field(PINI, "YES")
+  field(VAL, "1")
+  field(PREC, "1")
+  field(OUT, "$(S)$(ND)Loop$(L):SPTolerance PP")
+  info(autosaveFields, "VAL")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
 # /// 
 # /// Set the target setpoint. This is set via putCallback.template
 # ///
