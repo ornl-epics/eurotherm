@@ -1,0 +1,36 @@
+#############################################################
+#
+# Database template to read a real  channel measured values from the 
+# eurotherm nanodac as virtual channels do not have htis parameter and 
+# thus cannot be added to nd_channel_main.template
+#
+#
+# Substituitions to be included in the IOC. It is not part of this module
+# like other templates. Since this is standalone and created for 
+# force meter, the scan is set to 1 second. 
+#
+# Original code : Matt Pearson, below record added by Bhargavi Krishna
+# June 2020
+#
+############################################################
+
+
+##############################################################
+# Fast polled parameters
+
+record(ai, "$(S)$(ND)$(C):MeasuredValue") {
+  field(DESC, "$(C) Process Variable")
+  field(PINI, "YES")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)2w4,$(ADDR_MAIN_MV),1)FLOAT32_BE")
+  field(SCAN, "1 second")
+  field(HHSV,"MAJOR")
+  field(LLSV,"MAJOR")
+  field(HYST,"0.0")
+  field(HIHI,"10000")
+  field(LOLO,"-1")
+  field(PREC, "$(PREC)")
+  field(ADEL, "$(ADEL)")
+  info(autosaveFields, "HIHI LOLO ADEL MDEL HYST")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
