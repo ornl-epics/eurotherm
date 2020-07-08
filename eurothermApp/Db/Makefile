@@ -34,6 +34,7 @@ DB += nd_loop_pid_set.template
 DB += nd_adv_loop.template
 DB += nd_user.template
 DB += pid_set_window.template
+DB += nd_channel_measured_value.template
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add
