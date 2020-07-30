@@ -45,9 +45,6 @@ drvModbusAsynConfigure("n$(NI)2w16", "n$(NI)ip", 1, 16, -1, 2, 0, 1, 0)
 
 epicsThreadSleep(1)
 
-# Turn off autoConnect to force an IOC reboot
-asynAutoConnect n$(NI)ip,0,0
-
 
 
 
