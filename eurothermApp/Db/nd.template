@@ -554,7 +554,7 @@ record(bo, "$(S)$(ND)AlarmDisable") {
   field(ZSV, "NO_ALARM")
   field(OSV, "MINOR")
   field(ASG, "ALWAYS")
-  field(FLNK, "$(S)$(ND)AlarmSummaryCalc2")
+  field(FLNK, "$(S)$(ND)AlarmSummaryCalc")
   info(autosaveFields, "VAL")
 }
 
